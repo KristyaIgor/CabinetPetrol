@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         fgManager = getSupportFragmentManager();
         context = this;
 
+        //create branch
+
         List<View> list = new ArrayList<>();
         list.add(layoutContracts);
         list.add(layoutQR);
