@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         //create branch 2 dcdzfsdfdsafgasasgfdsgdsfg
-        // fgfdsgdfghdhgfjhcgnjcvfgfd
-        // zcvxzcdfdasfsdfvbxcbxvbsg
+
 
         List<View> list = new ArrayList<>();
         list.add(layoutContracts);
