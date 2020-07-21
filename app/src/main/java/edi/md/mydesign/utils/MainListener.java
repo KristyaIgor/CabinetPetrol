@@ -1,4 +1,4 @@
-package edi.md.mydesign;
+package edi.md.mydesign.utils;
 
 
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import edi.md.mydesign.MainActivity;
+import edi.md.mydesign.R;
+import edi.md.mydesign.fragments.FragmentCompanies;
 import edi.md.mydesign.fragments.FragmentContracts;
 import edi.md.mydesign.fragments.FragmentNews;
 
@@ -20,7 +23,7 @@ import edi.md.mydesign.fragments.FragmentNews;
  * Created by Igor on 24.06.2020
  */
 
-public class ListenerView implements View.OnClickListener {
+public class MainListener implements View.OnClickListener {
     Context context;
     List<View> viewList;
 
@@ -28,20 +31,14 @@ public class ListenerView implements View.OnClickListener {
 
     final int idNews = R.id.textView_news;
     static final int idContracts = R.id.textView_contracts;
-    final int idQR = R.id.textView_qr;
 
     final int idNewsImg = R.id.imageView_news;
     static final int idContractsImg = R.id.imageView_contracts;
-    final int idQRImg = R.id.imageView_qr;
 
     final int id_News = R.id.layout_news;
-    final int id_Contracts = R.id.layout_contracts;
-    final int id_QR = R.id.layout_qr;
+    final int id_Contracts = R.id.layout_companies;
 
-    final static int news = 101, contracts = 99, qr = 100;
-
-
-    public ListenerView(Context context, List<View> views, View title) {
+    public MainListener(Context context, List<View> views, View title) {
         this.context = context;
         this.viewList = views;
         this.title = (TextView) title;
@@ -63,11 +60,8 @@ public class ListenerView implements View.OnClickListener {
                         MainActivity.replaceFragment(new FragmentNews());
                     }break;
                     case id_Contracts: {
-                        setActiveLayout(view1,idContracts, idContractsImg, "Contracts");
-                        MainActivity.replaceFragment(new FragmentContracts());
-                    }break;
-                    case id_QR: {
-                        setActiveLayout(view1,idQR, idQRImg, "QR-code");
+                        setActiveLayout(view1,idContracts, idContractsImg, "Companies");
+                        MainActivity.replaceFragment(new FragmentCompanies());
                     }break;
                 }
             }
@@ -79,9 +73,6 @@ public class ListenerView implements View.OnClickListener {
                     }break;
                     case id_Contracts: {
                         setInActiveLayout(view1,idContracts, idContractsImg);
-                    }break;
-                    case id_QR: {
-                        setInActiveLayout(view1,idQR, idQRImg);
                     }break;
                 }
             }
@@ -113,8 +104,8 @@ public class ListenerView implements View.OnClickListener {
 
         text.setTypeface(Typeface.DEFAULT_BOLD);
         image.setColorFilter(Color.rgb(255, 255, 255));
-        title.setText("Contracts");
+        title.setText("Companies");
 
-        MainActivity.replaceFragment(new FragmentContracts());
+        MainActivity.replaceFragment(new FragmentCompanies());
     }
 }

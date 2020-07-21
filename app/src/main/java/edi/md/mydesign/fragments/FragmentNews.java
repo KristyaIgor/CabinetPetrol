@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edi.md.mydesign.R;
-import edi.md.mydesign.adapters.ContractsAdapter;
+import edi.md.mydesign.adapters.NewsAdapter;
 import edi.md.mydesign.models.ContractItem;
 
 /**
@@ -43,7 +43,7 @@ public class FragmentNews extends Fragment {
             list.add(item);
         }
 
-        ContractsAdapter adapter = new ContractsAdapter(getContext(),R.layout.item_list_contract,list);
+        NewsAdapter adapter = new NewsAdapter(getContext(),R.layout.item_list_news,list);
         list_contracts.setAdapter(adapter);
 
 

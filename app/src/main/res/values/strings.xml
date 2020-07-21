@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyDesign</string>
+
+    <string-array name="planets_array">
+        <item>Mer</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 </resources>

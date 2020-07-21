@@ -7,51 +7,54 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 import edi.md.mydesign.R;
-import edi.md.mydesign.models.ContractItem;
+import edi.md.mydesign.realm.objects.ClientRealm;
+import edi.md.mydesign.remote.client.Client;
+import edi.md.mydesign.remote.client.ContractInClient;
+import io.realm.OrderedRealmCollection;
+import io.realm.RealmBaseAdapter;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Igor on 30.06.2020
  */
 
-public class ContractsAdapter extends ArrayAdapter<ContractItem> {
-    Context context;
-    List<ContractItem> mList;
+public class ClientsRealmAdapter extends RealmBaseAdapter<ClientRealm> implements ListAdapter {
 
-    // View lookup cache
+    Context context;
+
     private static class ViewHolder {
         TextView txtName;
         TextView txtNr;
     }
 
-    public ContractsAdapter(@NonNull Context context, int resource, @NonNull List<ContractItem> objects) {
-        super(context, resource, objects);
+    public ClientsRealmAdapter(Context context, @Nullable OrderedRealmCollection<ClientRealm> data) {
+        super(data);
         this.context = context;
-        this.mList = objects;
     }
 
     @Override
-    public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
-        ViewHolder viewHolder; // view lookup cache stored in tag
-
-        ContractItem dataModel = getItem(position);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        ClientRealm dataModel = getItem(position);
 
         if (convertView == null) {
 
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.item_list_contract, viewGroup, false);
+            convertView = inflater.inflate(R.layout.item_list_contract, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.text_clientname_contract);
             viewHolder.txtNr = (TextView) convertView.findViewById(R.id.nr_item_contract);
             convertView.setTag(viewHolder);
@@ -61,9 +64,8 @@ public class ContractsAdapter extends ArrayAdapter<ContractItem> {
         }
 
         viewHolder.txtName.setText(dataModel.getName());
-        viewHolder.txtNr.setText(dataModel.getNr());
-
-        // Return the completed view to render on screen
+        ContractInClient contract = dataModel.getContracts().get(0);
+        viewHolder.txtNr.setText(contract.getCode());
         return convertView;
     }
 }

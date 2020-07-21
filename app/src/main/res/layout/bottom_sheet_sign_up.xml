@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mstb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_sign_up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_backgound_bottom_sheet"
+    android:orientation="vertical"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/image_company_logo_auth"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_state_contract_active" />
+
+    <TextView
+        android:id="@+id/title_auth_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins"
+        android:text="SIGN-UP to company"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_company_logo_auth" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:background="#D1D1D1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_auth_user" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignInFizic3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="Card code"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="Email address"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="First Name"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName4"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="Last Name"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName5"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="IDNP"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName6"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="Password"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName7"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_edit_text_elements"
+                android:ems="10"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                android:textColorHint="#A5A3A3"
+                android:paddingStart="16dp"
+                android:hint="Phone number"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/buttonSignInFizic3"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/round_buttons_elements"
+        android:fontFamily="@font/poppins"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        mstb:layout_constraintEnd_toEndOf="parent"
+        mstb:layout_constraintHorizontal_bias="0.0"
+        mstb:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

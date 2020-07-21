@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="52dp"
+    android:background="#F2F4F3">
+
+    <!-- подключение основного контента -->
+    <include layout="@layout/fragment_contracts" />
+
+    <!-- подключение нижнего экрана -->
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
