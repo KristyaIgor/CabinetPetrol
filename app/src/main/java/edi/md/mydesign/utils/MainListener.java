@@ -56,11 +56,11 @@ public class MainListener implements View.OnClickListener {
                 view1.setSelected(true);
                 switch (view1.getId()){
                     case id_News : {
-                        setActiveLayout(view1,idNews, idNewsImg, "News");
+                        setActiveLayout(view1,idNews, idNewsImg, "Noutati");
                         MainActivity.replaceFragment(new FragmentNews());
                     }break;
                     case id_Contracts: {
-                        setActiveLayout(view1,idContracts, idContractsImg, "Companies");
+                        setActiveLayout(view1,idContracts, idContractsImg, "Companii");
                         MainActivity.replaceFragment(new FragmentCompanies());
                     }break;
                 }
@@ -104,7 +104,7 @@ public class MainListener implements View.OnClickListener {
 
         text.setTypeface(Typeface.DEFAULT_BOLD);
         image.setColorFilter(Color.rgb(255, 255, 255));
-        title.setText("Companies");
+        title.setText("Companii");
 
         MainActivity.replaceFragment(new FragmentCompanies());
     }

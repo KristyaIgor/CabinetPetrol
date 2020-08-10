@@ -9,4 +9,5 @@
     <color name="radio_button_unselected_color">#e0e0e0</color>
 
     <color name="green" >#00C569</color>
+    <color name="red" >#ed0909</color>
 </resources>

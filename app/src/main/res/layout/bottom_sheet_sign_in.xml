@@ -25,10 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins"
-        android:text="SIGN-IN to company"
+        android:fontFamily="serif"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_company_logo_auth" />
@@ -65,7 +65,7 @@
             android:layout_marginBottom="15dp"
             android:checked="true"
             android:fontFamily="@font/poppins"
-            android:text="FIZIC"
+            android:text="@string/fizic_tab"
             android:textSize="18sp" />
 
         <RadioButton
@@ -74,7 +74,7 @@
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:fontFamily="@font/poppins"
-            android:text="JURIDIC"
+            android:text="@string/juridic_tab"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </edi.md.mydesign.models.SegmentedGroup>

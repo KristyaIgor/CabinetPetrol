@@ -29,6 +29,7 @@ import edi.md.mydesign.realm.RealmMigrations;
 import edi.md.mydesign.remote.client.Client;
 import edi.md.mydesign.remote.contract.Contract;
 import edi.md.mydesign.remote.petrolStation.PetrolStation;
+import edi.md.mydesign.remote.transaction.Transaction;
 import edi.md.mydesign.utils.CompaniesHelper;
 import edi.md.mydesign.utils.RemoteCompanies;
 import io.realm.Realm;
@@ -46,6 +47,7 @@ public class BaseApp extends Application {
     private ClientRealm clientClicked;
     private Contract clickedClientContract;
     private List<PetrolStation> petrolStations;
+    private List<Transaction> transactions;
 
     private String matros;
 
@@ -130,5 +132,13 @@ public class BaseApp extends Application {
 
     public void setPetrolStations(List<PetrolStation> petrolStations) {
         this.petrolStations = petrolStations;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

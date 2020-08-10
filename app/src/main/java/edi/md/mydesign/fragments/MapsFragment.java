@@ -91,6 +91,7 @@ public class MapsFragment extends Fragment {
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
                 layoutParams.setMargins(0, 0, 45, 45);
                 locationButton.setImageResource(R.drawable.ic_location);
+                locationButton.setElevation(5);
             }
         }
     };

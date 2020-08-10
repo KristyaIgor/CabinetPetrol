@@ -64,8 +64,8 @@ public class ClientsRealmAdapter extends RealmBaseAdapter<ClientRealm> implement
         }
 
         viewHolder.txtName.setText(dataModel.getName());
-        ContractInClient contract = dataModel.getContracts().get(0);
-        viewHolder.txtNr.setText(contract.getCode());
+        viewHolder.txtNr.setText("Disponibil " + dataModel.getBalance());
+
         return convertView;
     }
 }

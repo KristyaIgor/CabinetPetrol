@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import org.w3c.dom.Text;
+
 import edi.md.mydesign.R;
 
 
@@ -15,23 +17,26 @@ import edi.md.mydesign.R;
  * Created by Igor on 21.07.2020
  */
 
-public class FragmentTotalBalance extends Fragment {
+public class FragmentBalanceInfo extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
-    private double mParam1;
-    private String mParam2;
+    private String mParam1;
+    private double mParam2;
+    private String mParam3;
 
-    public FragmentTotalBalance() {
+    public FragmentBalanceInfo() {
         // Required empty public constructor
     }
 
-    public static FragmentTotalBalance newInstance(String param1,double param2) {
-        FragmentTotalBalance fragment = new FragmentTotalBalance();
+    public static FragmentBalanceInfo newInstance(String param1, double param2, String param3) {
+        FragmentBalanceInfo fragment = new FragmentBalanceInfo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putDouble(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,8 +45,9 @@ public class FragmentTotalBalance extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getDouble(ARG_PARAM2);
-            mParam2 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getDouble(ARG_PARAM2);
+            mParam3 = getArguments().getString(ARG_PARAM3);
         }
     }
 
@@ -51,8 +57,11 @@ public class FragmentTotalBalance extends Fragment {
 
         TextView totalBAlance = rootView.findViewById(R.id.text_total_balance);
         TextView titleBalance = rootView.findViewById(R.id.title_balance);
-        totalBAlance.setText(String.valueOf(mParam1) + " MDL");
-        titleBalance.setText(mParam2);
+        TextView info = rootView.findViewById(R.id.text_info);
+
+        totalBAlance.setText(String.valueOf(mParam2) + " MDL");
+        titleBalance.setText(mParam1);
+        info.setText(mParam3);
 
         return rootView;
     }

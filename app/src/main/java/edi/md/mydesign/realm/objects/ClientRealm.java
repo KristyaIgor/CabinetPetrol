@@ -1,11 +1,6 @@
 package edi.md.mydesign.realm.objects;
 
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
 import edi.md.mydesign.remote.client.ContractInClient;
 import edi.md.mydesign.remote.client.UnpaidDocument;
 import io.realm.RealmList;

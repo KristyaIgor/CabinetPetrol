@@ -23,7 +23,7 @@ public class MyPageIndicator implements ViewPager.OnPageChangeListener {
     private int mPageCount;
     private int mInitialPage = 0;
 
-    private int defaultSizeInDp = 12;
+    private int defaultSizeInDp = 10;
     private int defaultSpacingInDp = 12;
 
     public MyPageIndicator(@NonNull Context context, @NonNull LinearLayout containerView, @NonNull ViewPager viewPager, @DrawableRes int drawableRes) {

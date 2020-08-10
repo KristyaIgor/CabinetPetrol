@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Prices"
+                android:text="Preturi"
                 android:textColor="#9F1C1C1C"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Contracts"
+                android:text="Conturi"
                 android:textColor="#9F1C1C1C"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Maps"
+                android:text="Harta"
                 android:textColor="#9F1C1C1C"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -183,8 +183,10 @@
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import edi.md.mydesign.remote.contract.GetContractInfoResponse;
 import edi.md.mydesign.remote.petrolStation.GetPetrolStationResult;
 import edi.md.mydesign.remote.prices.GetPriceResult;
 import edi.md.mydesign.remote.response.SIDResponse;
+import edi.md.mydesign.remote.transaction.GetTransactionList;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -30,4 +31,7 @@ public interface CommandServices {
 
     @GET("/PetrolCabinetWebService/json/GetPetrolStation")
     Call<GetPetrolStationResult> getPetrolStation ();
+
+    @GET("/PetrolCabinetWebService/json/GetTransactionList")
+    Call<GetTransactionList> getTransactionList (@Query("SID") String sid);
 }

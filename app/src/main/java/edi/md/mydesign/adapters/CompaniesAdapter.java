@@ -50,7 +50,7 @@ public class CompaniesAdapter  extends RealmBaseAdapter<Company> implements List
         }
 
         name.setText(item.getName());
-        info.setText("Added user: " + item.getNumberContracts());
+        info.setText("Conturi adaugate: " + item.getNumberContracts());
 
        try {
            byte[] decodedString = Base64.decode(item.getLogo(), Base64.DEFAULT);

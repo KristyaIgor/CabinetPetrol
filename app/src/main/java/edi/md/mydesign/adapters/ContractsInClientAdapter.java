@@ -22,7 +22,7 @@ import edi.md.mydesign.remote.client.ContractInClient;
 
 public class ContractsInClientAdapter extends RecyclerView.Adapter<ContractsInClientAdapter.ViewHolder> {
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "TransactionListAdapter";
 
     List<ContractInClient> mData;
     private Context mContext;

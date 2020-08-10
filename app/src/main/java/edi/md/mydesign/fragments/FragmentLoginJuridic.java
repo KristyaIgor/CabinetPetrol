@@ -1,6 +1,7 @@
 package edi.md.mydesign.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import edi.md.mydesign.R;
 import edi.md.mydesign.realm.objects.ClientRealm;
 import edi.md.mydesign.remote.ApiUtils;
 import edi.md.mydesign.remote.CommandServices;
+import edi.md.mydesign.remote.RemoteException;
 import edi.md.mydesign.remote.authenticate.AuthenticateUserBody;
 import edi.md.mydesign.remote.client.Client;
 import edi.md.mydesign.remote.client.GetClientInfoResponse;
@@ -48,6 +50,9 @@ public class FragmentLoginJuridic extends Fragment {
 
     Realm mRealm;
 
+    String idno,user, password, sId;
+    ProgressDialog progressDialog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class FragmentLoginJuridic extends Fragment {
         signIn = rootViewAdmin.findViewById(R.id.buttonSignInJuridic);
         signUp = rootViewAdmin.findViewById(R.id.buttonSignUpJuridic);
         mRealm = Realm.getDefaultInstance();
+        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,20 +77,25 @@ public class FragmentLoginJuridic extends Fragment {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idno = idnp.getText().toString();
-                String user = userName.getText().toString();
-                String password = passwords.getText().toString();
+                idno = idnp.getText().toString();
+                user = userName.getText().toString();
+                password = passwords.getText().toString();
 
                 RealmResults<ClientRealm> realmResults = mRealm.where(ClientRealm.class).equalTo("iDNP",idno).and().equalTo("companyId", BaseApp.getAppInstance().getCompanyClicked().getId()).findAll();
                 if(realmResults.isEmpty()){
+                    progressDialog.setIndeterminate(false);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setMessage("autentificare...");
+                    progressDialog.show();
+
                     auth(user,idno, password);
                 }
                 else{
                     for(ClientRealm clientRealm: realmResults){
                         if(clientRealm.getIDNP().equals(idno)){
-                            new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                            new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
                                     .setTitle("Oops!")
-                                    .setMessage("Client with same IDNP already exist!")
+                                    .setMessage("Clientul cu același IDNP există deja!")
                                     .setCancelable(false)
                                     .setPositiveButton("OK", (dialogInterface, i) -> {
                                         dialogInterface.dismiss();
@@ -103,14 +114,14 @@ public class FragmentLoginJuridic extends Fragment {
         return rootViewAdmin;
     }
     private void auth (String login, String idno, String pass){
-        AuthenticateUserBody user = new AuthenticateUserBody();
-        user.setUser(login);
-        user.setPassword(pass);
-        user.setIDNO(idno);
-        user.setAuthType(1);
+        AuthenticateUserBody authenticateUserBody = new AuthenticateUserBody();
+        authenticateUserBody.setUser(login);
+        authenticateUserBody.setPassword(pass);
+        authenticateUserBody.setIDNO(idno);
+        authenticateUserBody.setAuthType(1);
 
         CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getAddress());
-        Call<SIDResponse> call = commandServices.authenticateUser(user);
+        Call<SIDResponse> call = commandServices.authenticateUser(authenticateUserBody);
 
         call.enqueue(new Callback<SIDResponse>() {
             @Override
@@ -119,17 +130,47 @@ public class FragmentLoginJuridic extends Fragment {
                 if(sidResponse != null){
                     if(sidResponse.getErrorCode() == 0){
 //                        Toast.makeText(getContext(), "sidResponse.getSID(): " + sidResponse.getSID(), Toast.LENGTH_SHORT).show();
-                        String sId = sidResponse.getSID();
-                        call.cancel();
+                        sId = sidResponse.getSID();
+                        progressDialog.setMessage("obținerea informației despre client...");
                         getClientInfo(sId,login,pass);
                     }
-                }
+                    else{
+                        String msg = RemoteException.getServiceException(sidResponse.getErrorCode());
+                        //progressDialog dismiss
+                        progressDialog.dismiss();
 
+                        new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                                .setTitle("Oops!")
+                                .setMessage(msg)
+                                .setCancelable(false)
+                                .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                    dialogInterface.dismiss();
+                                })
+                                .show();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<SIDResponse> call, Throwable t) {
-//                Toast.makeText(getContext(), "Failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //progressDialog dismiss
+                progressDialog.dismiss();
+
+                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                        .setTitle("Oops!")
+                        .setMessage("Operația a eșuat!\nEroare: " + t.getMessage())
+                        .setCancelable(false)
+                        .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        })
+                        .setNegativeButton("Reîncercați", ((dialogInterface, i) -> {
+                            progressDialog.setIndeterminate(false);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("autentificare...");
+                            progressDialog.show();
+                            auth(user,idno, password);
+                        }))
+                        .show();
             }
         });
     }
@@ -155,17 +196,49 @@ public class FragmentLoginJuridic extends Fragment {
                         client.setTypeClient(1);
 
 //                        Toast.makeText(getContext(), "client.getSID(): " + client.getName() ,Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
                         FragmentContracts.addedNewClient(client,1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+
+                else{
+                    String msg = RemoteException.getServiceException(clientInfoResponse.getErrorCode());
+                    //progressDialog dismiss
+                    progressDialog.dismiss();
+
+                    new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                            .setTitle("Oops!")
+                            .setMessage(msg)
+                            .setCancelable(false)
+                            .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                dialogInterface.dismiss();
+                            })
+                            .show();
+                }
             }
 
             @Override
             public void onFailure(Call<GetClientInfoResponse> call, Throwable t) {
-//                Toast.makeText(getContext(), "Failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                //progressDialog dismiss
+                progressDialog.dismiss();
+
+                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                        .setTitle("Oops!")
+                        .setMessage("Operația a eșuat!\nEroare: " + t.getMessage())
+                        .setCancelable(false)
+                        .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        })
+                        .setNegativeButton("Reîncercați", ((dialogInterface, i) -> {
+                            progressDialog.setIndeterminate(false);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("obținerea informații despre client...");
+                            progressDialog.show();
+                            getClientInfo(sId,user,password);
+                        }))
+                        .show();
             }
         });
     }

@@ -27,11 +27,11 @@
             android:clickable="true"
             android:drawableLeft="@drawable/ic_add_circle_outline_black_18dp"
             android:elevation="2dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="Add another account"
+            android:text="Adaugă un alt cont"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutAdd"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/round_item_list_container"
@@ -68,30 +68,96 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.39">
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Add contract"
-            android:textColor="@color/green"
-            android:textSize="24sp"
+        <Button
+            android:id="@+id/buttonAddFuelCard"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/round_buttons_elements"
+            android:fontFamily="serif"
+            android:text="@string/card_de_combustibil"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/attach_company_to_cabinet" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-        <ImageButton
-            android:id="@+id/attach_company_to_cabinet"
-            android:layout_width="149dp"
-            android:layout_height="149dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+        <Button
+            android:id="@+id/buttonAddCabinetPersonal"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/round_button_elements_white"
+            android:fontFamily="serif"
+            android:text="@string/cabinet_personal"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddFuelCard" />
+
+        <ImageView
+            android:id="@+id/image_company_logon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.39"
-            app:srcCompat="@drawable/add_circle_outline_24" />
+            app:srcCompat="@drawable/bemol_logo" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:background="#D1D1D1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_message_welcome" />
+
+        <TextView
+            android:id="@+id/text_message_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="serif"
+            android:text="Bine ați venit la Companie"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_company_logon" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/poppins"
+            android:text="Un serviciu dedicat oamenilor pentru oameni."
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
