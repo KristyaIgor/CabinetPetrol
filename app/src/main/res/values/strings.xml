@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">MyDesign</string>
+    <string name="app_name">Cabinets &amp; Cards</string>
+    <string name="are_you_new_user">Sunteți utilizator nou?</string>
+    <string name="sign_up">ÎNSCRIE-TE</string>
+    <string name="sign_in">CONECTAȚI-VĂ</string>
+    <string name="idnp_login_juridic">IDNP</string>
+    <string name="username_login_juridic">Nume de utilizator</string>
+    <string name="password_login_form">Parolă</string>
+    <string name="phone_number">Numărul de telefon</string>
+    <string name="message_dialog_login">Bine ați venit la&#160;</string>
+    <string name="card_de_combustibil">Card de combustibil</string>
+    <string name="cabinet_personal">Cabinet personal</string>
+    <string name="fizic_tab">FIZIC</string>
+    <string name="juridic_tab">JURIDIC</string>
+    <string name="welcome_message_comapny">Bine ați venit la&#160;</string>
+    <string name="title_add_card">Adaugă card&#160;</string>
+    <string name="am_cabinet_personal">Aveți cabinet personal?</string>
+    <string name="urm_torul_pas_add_card">URMĂTORUL PAS</string>
+    <string name="todo">TODO</string>
+    <string name="numarul_cardului_add_card">Numărul cardului</string>
+    <string name="verificare_cod_add_card">Confirmare PIN</string>
+    <string name="pin_info_messages">Ți-a fost trimis un cod PIN pe telefon.\nIntrodu-l mai jos pentru a continua.</string>
+
+    <string name="info_card_detail_account">Acest card aparține clientului <b>%1$s.</b> cu numărul contractului:%2$s  valabil pe perioada: %3$s. \nAcest card, %4$s , poate fi folosit pentru alimentare la orice stație PECO al companiei <b> %5$s</b> conform condițiilor contractului. </string>
 </resources>
