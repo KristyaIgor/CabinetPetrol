@@ -1,5 +1,6 @@
 package edi.md.mydesign;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -7,14 +8,19 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,9 +32,16 @@ import edi.md.mydesign.fragments.slidePage.FragmentBalanceInfo;
 import edi.md.mydesign.realm.objects.ClientRealm;
 import edi.md.mydesign.remote.ApiUtils;
 import edi.md.mydesign.remote.CommandServices;
+import edi.md.mydesign.remote.client.ContractInClient;
 import edi.md.mydesign.remote.contract.Contract;
+import edi.md.mydesign.remote.contract.GetContractInfoResponse;
+import edi.md.mydesign.remote.notification.GetNotificationSettings;
+import edi.md.mydesign.remote.notification.NotificationSettings;
+import edi.md.mydesign.remote.notification.UpdateNotificationSettingsBody;
+import edi.md.mydesign.remote.response.SimpleResponse;
 import edi.md.mydesign.remote.transaction.GetTransactionList;
 import edi.md.mydesign.remote.transaction.Transaction;
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,8 +50,7 @@ public class JuridicAccountActivity extends AppCompatActivity {
 
     public static int NUM_PAGES = 0;
     ClientRealm client;
-    Contract contract;
-    TextView titleContract, facturInfo, nefacturInfo, delayInfo,textState, paymentDelay;
+    TextView titleContract, facturInfo, nefacturInfo, delayInfo,textState;
     ImageButton btnBack, btnRight, btnLeft;
     MaterialButton openCardList, openProdusList, openHistoryList, btnSuply, openNotification, openInformation;
     ImageView imageState;
@@ -49,8 +61,13 @@ public class JuridicAccountActivity extends AppCompatActivity {
     CustomPagerAdapter2 mAdapter;
     MyPageIndicator mIndicator;
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    TimeZone timeZone = TimeZone.getTimeZone("Europe/Chisinau");
+    static FragmentManager fragmentManager;
+
+    List<Contract> contractListClient = new ArrayList<>();
+
+    CommandServices commandServices;
+
+    Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,35 +91,16 @@ public class JuridicAccountActivity extends AppCompatActivity {
         btnSuply = findViewById(R.id.btn_juridic_suplinire);
         openNotification = findViewById(R.id.btn_juridic_notification);
         openInformation = findViewById(R.id.btn_juridic_information);
-        paymentDelay = findViewById(R.id.text_payment_delay);
+
+        fragmentManager = getSupportFragmentManager();
+
+        mRealm = Realm.getDefaultInstance();
 
         client = BaseApp.getAppInstance().getClientClicked();
-        contract = BaseApp.getAppInstance().getClickedClientContract();
-
-        simpleDateFormat.setTimeZone(timeZone);
+        commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());
+        String tokenF = getSharedPreferences("firebase",MODE_PRIVATE).getString("token",null);
 
         titleContract.setText(client.getName());
-
-        String fr = contract.getDateValidFrom();
-        fr = fr.replace("/Date(", "");
-        fr = fr.replace("+0300)/", "");
-        fr = fr.replace("+0200)/", "");
-        fr = fr.replace(")/", "");
-
-        long timeFr = Long.parseLong(fr);
-
-        String validFrom = simpleDateFormat.format(timeFr);
-        String to = contract.getDateValidTo();
-        to = to.replace("/Date(", "");
-        to = to.replace("+0300)/", "");
-        to = to.replace("+0200)/", "");
-        to = to.replace(")/", "");
-
-        long timeTo = Long.parseLong(to);
-
-        String validTo = simpleDateFormat.format(timeTo);
-
-        paymentDelay.setText("Întârziere de plată permis(zile): " + contract.getPaymentDelay());
 
         if(client.getStatus() != 0){
             textState.setVisibility(View.VISIBLE);
@@ -128,28 +126,11 @@ public class JuridicAccountActivity extends AppCompatActivity {
         mIndicator.setPageCount(fragments.size());
         mIndicator.show();
 
-        CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getAddress());
-        Call<GetTransactionList> call = commandServices.getTransactionList(client.getSid());
+        Call<GetTransactionList> call = commandServices.getTransactionList(BaseApp.getAppInstance().getCompanyClicked().getServiceName(), client.getSid());
+        Call<GetNotificationSettings> callUpdateNotification = commandServices.getNotificationSettings(BaseApp.getAppInstance().getCompanyClicked().getServiceName(), client.getSid(), tokenF);
 
-        call.enqueue(new Callback<GetTransactionList>() {
-            @Override
-            public void onResponse(Call<GetTransactionList> call, Response<GetTransactionList> response) {
-                if(response.isSuccessful()){
-                    GetTransactionList transactionList = response.body();
-                    if(transactionList != null && transactionList.getErrorCode() == 0){
-                        List<Transaction> listOfTransaction = new ArrayList<>();
-
-                        List<Transaction> listOfTransactionR = transactionList.getTransactions();
-                        BaseApp.getAppInstance().setTransactions(listOfTransactionR);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetTransactionList> call, Throwable t) {
-
-            }
-        });
+        enqeueCallTransaction(call);
+        enqeueCallNotification(callUpdateNotification);
 
         btnBack.setOnClickListener(view -> {
             finish();
@@ -172,29 +153,118 @@ public class JuridicAccountActivity extends AppCompatActivity {
         openCardList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(JuridicAccountActivity.this,CardListActivity.class));
+                Intent hist = new Intent(JuridicAccountActivity.this, CardListActivity.class);
+                hist.putExtra("CardAccount",false);
+                startActivity(hist);
             }
         });
 
         openHistoryList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(JuridicAccountActivity.this,HistoryActivity.class));
+                Intent hist = new Intent(JuridicAccountActivity.this,HistoryActivity.class);
+                hist.putExtra("CardAccount", false);
+                startActivity(hist);
             }
         });
 
         openProdusList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(JuridicAccountActivity.this,AssortmentActivity.class));
+                Intent product = new Intent(JuridicAccountActivity.this, AssortmentActivity.class);
+                product.putExtra("CardAccount",false);
+                startActivityForResult(product, 897);
             }
         });
 
+        btnSuply.setOnClickListener(view -> {
+            new MaterialAlertDialogBuilder(JuridicAccountActivity.this,R.style.MaterialAlertDialogCustom)
+                    .setTitle("Oops!")
+                    .setMessage("La moment aceasta optiune nu este disponibila.\nCurind va fi disponibila")
+                    .setCancelable(false)
+                    .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .show();
+        });
+        openInformation.setOnClickListener(view -> {
+            Intent hist = new Intent(JuridicAccountActivity.this, InformationActivity.class);
+            hist.putExtra("JuridicAccount", true);
+            startActivityForResult(hist,1564);
+        });
+
+        openNotification.setOnClickListener(view -> {
+            Intent hist = new Intent(JuridicAccountActivity.this, NotificationCardActivity.class);
+            hist.putExtra("JuridicAccount",true);
+            startActivity(hist);
+        });
+
     }
+
+    private void enqeueCallNotification(Call<GetNotificationSettings> call) {
+        call.enqueue(new Callback<GetNotificationSettings>() {
+            @Override
+            public void onResponse(Call<GetNotificationSettings> call, Response<GetNotificationSettings> response) {
+                GetNotificationSettings simpleResponse = response.body();
+                if(simpleResponse != null && simpleResponse.getErrorCode() == 0){
+                    NotificationSettings notification = simpleResponse.getNotificationSettings();
+                    SharedPreferences sPref = getSharedPreferences(client.getIDNP(),MODE_PRIVATE);
+
+                    sPref.edit().putBoolean("Filling",notification.getFillingAccount()).apply();
+                    sPref.edit().putBoolean("PayByAccount",notification.getPayByAccount()).apply();
+                    sPref.edit().putBoolean("News",notification.getNews()).apply();
+                    sPref.edit().putBoolean("NewDiscount",notification.getNewDiscount()).apply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetNotificationSettings> call, Throwable t) {
+                Log.d("TAG", "onFailure update notifications: " + t.getMessage());
+            }
+        });
+    }
+
+    private void enqeueCallTransaction(Call<GetTransactionList> call) {
+        call.enqueue(new Callback<GetTransactionList>() {
+            @Override
+            public void onResponse(Call<GetTransactionList> call, Response<GetTransactionList> response) {
+                if(response.isSuccessful()){
+                    GetTransactionList transactionList = response.body();
+                    if(transactionList != null && transactionList.getErrorCode() == 0){
+
+                        List<Transaction> listOfTransactionR = transactionList.getTransactions();
+                        BaseApp.getAppInstance().setTransactions(listOfTransactionR);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetTransactionList> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mIndicator.cleanup();
+        if(mIndicator != null)
+            mIndicator.cleanup();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1564){
+            if(resultCode == 159753){
+                finish();
+            }
+        }
+        else if(requestCode == 897){
+            if(resultCode == RESULT_CANCELED){
+                finish();
+            }
+        }
     }
 
     static class CustomPagerAdapter2 extends FragmentStatePagerAdapter {

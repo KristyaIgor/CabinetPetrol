@@ -15,6 +15,7 @@ import java.util.List;
 import edi.md.mydesign.R;
 import edi.md.mydesign.remote.client.ContractInClient;
 import edi.md.mydesign.remote.contract.CardsList;
+import edi.md.mydesign.utils.BaseEnum;
 
 /**
  * Created by Igor on 20.07.2020
@@ -49,7 +50,7 @@ public class CardsInContractClientAdapter extends RecyclerView.Adapter<CardsInCo
             holder.balance.setVisibility(View.GONE);
         }
 
-        if(item.getLimitType() == 0){
+        if(item.getLimitType() == BaseEnum.LimitBani){
             holder.limitDay.setText(item.getDailyLimit() + " MDL");
             holder.limitWeek.setText(item.getWeeklyLimit() + " MDL");
             holder.limitMonth.setText(item.getMonthlyLimit() + " MDL");
@@ -68,11 +69,18 @@ public class CardsInContractClientAdapter extends RecyclerView.Adapter<CardsInCo
         else{
             holder.cardState.setImageResource(R.drawable.ic_state_contract_inactive);
         }
+
     }
+
+
 
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public CardsList getItem (int position) {
+        return mData.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -6,12 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -37,6 +40,10 @@ public class FragmentPrices extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     SwipeRefreshLayout swipeRefreshLayout;
+    ImageButton imageRetry;
+    ConstraintLayout layoutError;
+    ImageButton imageRetryLoadList;
+    ConstraintLayout layoutListEmpty;
 
     @Nullable
     @Override
@@ -46,25 +53,48 @@ public class FragmentPrices extends Fragment {
         listView = rootViewAdmin.findViewById(R.id.list_prices);
         swipeRefreshLayout = rootViewAdmin.findViewById(R.id.swiperefresh);
         progressBar = rootViewAdmin.findViewById(R.id.progressBar_prices);
+        imageRetry = rootViewAdmin.findViewById(R.id.img_retry_image);
+        layoutError = rootViewAdmin.findViewById(R.id.cl_error_image);
+        imageRetryLoadList = rootViewAdmin.findViewById(R.id.img_retry_load_list);
+        layoutListEmpty = rootViewAdmin.findViewById(R.id.cl_empty_image);
 
-        CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getAddress());
+        String baseUrl = BaseApp.getAppInstance().getCompanyClicked().getIp();
+
+        CommandServices commandServices = ApiUtils.getCommandServices(baseUrl);
 
         getPrices(commandServices,false);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
-                CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getAddress());
+                CommandServices commandServices = ApiUtils.getCommandServices(baseUrl);
 
                 getPrices(commandServices,true);
             }
         });
 
+        imageRetryLoadList.setOnClickListener(view -> {
+            swipeRefreshLayout.setVisibility(View.GONE);
+            layoutListEmpty.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+
+            getPrices(commandServices,false);
+        });
+
+        imageRetry.setOnClickListener(view -> {
+            swipeRefreshLayout.setVisibility(View.GONE);
+            layoutError.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+
+            getPrices(commandServices,false);
+        });
+
+
         return rootViewAdmin;
     }
 
     private void getPrices(CommandServices commandServices,boolean onRefresh){
-        Call<GetPriceResult> call = commandServices.getPrices();
+        Call<GetPriceResult> call = commandServices.getPrices(BaseApp.getAppInstance().getCompanyClicked().getServiceName());
         call.enqueue(new Callback<GetPriceResult>() {
             @Override
             public void onResponse(Call<GetPriceResult> call, Response<GetPriceResult> response) {
@@ -73,28 +103,37 @@ public class FragmentPrices extends Fragment {
                     GetPriceResult priceResult = response.body();
                     if (priceResult != null && priceResult.getErrorCode() == 0) {
                         List<Price> prices = priceResult.getPrices();
-                        PricesAdapter adapter = new PricesAdapter(getLayoutInflater(), prices);
+                        if(prices.size() > 0){
+                            PricesAdapter adapter = new PricesAdapter(getLayoutInflater(), prices);
 
-                        listView.setAdapter(adapter);
-                        if(onRefresh)
-                            swipeRefreshLayout.setRefreshing(false);
+                            if(onRefresh)
+                                swipeRefreshLayout.setRefreshing(false);
+                            else{
+                                progressBar.setVisibility(View.GONE);
+                            }
+
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            listView.setAdapter(adapter);
+                        }
                         else{
                             progressBar.setVisibility(View.GONE);
-                            listView.setVisibility(View.VISIBLE);
-                            call.cancel();
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            layoutListEmpty.setVisibility(View.VISIBLE);
                         }
                     }
                     else{
                         progressBar.setVisibility(View.GONE);
-
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                        layoutError.setVisibility(View.VISIBLE);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<GetPriceResult> call, Throwable t) {
-                Log.w("TAG retrofit", "Call is canceled: " + call.isCanceled());
                 progressBar.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
+                layoutError.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Transaction {
-
     @SerializedName("Amount")
     @Expose
     private Double amount;

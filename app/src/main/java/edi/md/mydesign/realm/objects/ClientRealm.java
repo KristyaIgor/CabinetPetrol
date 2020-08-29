@@ -33,6 +33,17 @@ public class ClientRealm extends RealmObject {
     private int typeClient;
     private String sid;
 
+    //forCard
+    private byte[] pin;
+    private String code;
+    private String cardId;
+
+    //notification
+    private boolean fillingAccount;
+    private boolean newDiscount;
+    private boolean news;
+    private boolean payAccount;
+
     public Double getAmount() {
         return amount;
     }
@@ -191,5 +202,61 @@ public class ClientRealm extends RealmObject {
 
     public void setTypeClient(int typeClient) {
         this.typeClient = typeClient;
+    }
+
+    public byte[] getPin() {
+        return pin;
+    }
+
+    public void setPin(byte[] pin) {
+        this.pin = pin;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public boolean isFillingAccount() {
+        return fillingAccount;
+    }
+
+    public void setFillingAccount(boolean fillingAccount) {
+        this.fillingAccount = fillingAccount;
+    }
+
+    public boolean isNewDiscount() {
+        return newDiscount;
+    }
+
+    public void setNewDiscount(boolean newDiscount) {
+        this.newDiscount = newDiscount;
+    }
+
+    public boolean isNews() {
+        return news;
+    }
+
+    public void setNews(boolean news) {
+        this.news = news;
+    }
+
+    public boolean isPayAccount() {
+        return payAccount;
+    }
+
+    public void setPayAccount(boolean payAccount) {
+        this.payAccount = payAccount;
     }
 }

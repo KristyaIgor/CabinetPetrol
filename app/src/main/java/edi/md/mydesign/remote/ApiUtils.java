@@ -5,9 +5,9 @@ package edi.md.mydesign.remote;
  */
 
 public class ApiUtils {
-    private static final String BaseURL_ConnectionBroker = "http://217.12.125.222:3333/";
+    private static final String BaseURL_ConnectionBroker = "https://dev.edi.md/";
 
-    public static CommandServices getCommandServices(String url){
-        return RetrofitClient.getRetrofitClient(url).create(CommandServices.class);
+    public static CommandServices getCommandServices(String baseUrl){
+        return RetrofitClient.getRetrofitClient(baseUrl).create(CommandServices.class);
     }
 }

@@ -83,7 +83,9 @@ public class RemoteException {
             case 35:
                 return "Înregistrarea există deja!";
             case 36:
-                return "Cardul din contract nu există";
+                return "Cardul din contract nu există!";
+            case 37:
+                return "PIN codul nu este valabil!";
             default:
                 return "Eroare necunoscută";
         }

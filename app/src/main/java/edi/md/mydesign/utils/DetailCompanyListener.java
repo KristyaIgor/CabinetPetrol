@@ -11,13 +11,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import edi.md.mydesign.DetailCompanyActivity;
-import edi.md.mydesign.MainActivity;
 import edi.md.mydesign.R;
-import edi.md.mydesign.fragments.FragmentCompanies;
-import edi.md.mydesign.fragments.FragmentContracts;
-import edi.md.mydesign.fragments.FragmentNews;
+import edi.md.mydesign.fragments.FragmentCabinetsAndCards;
 import edi.md.mydesign.fragments.FragmentPrices;
-import edi.md.mydesign.fragments.MapsFragment;
+import edi.md.mydesign.fragments.FragmentMaps;
 
 
 /**
@@ -59,7 +56,7 @@ public class DetailCompanyListener implements View.OnClickListener {
                 switch (view1.getId()){
                     case idLayoutContracts : {
                         setActiveLayout(view1,idTextContracts, idImgContracts);
-                        DetailCompanyActivity.replaceFragment(new FragmentContracts());
+                        DetailCompanyActivity.replaceFragment(new FragmentCabinetsAndCards());
                     }break;
                     case idLayoutPrices: {
                         setActiveLayout(view1,idTextPrices, idImgPrices);
@@ -67,7 +64,7 @@ public class DetailCompanyListener implements View.OnClickListener {
                     }break;
                     case idLayoutMaps: {
                         setActiveLayout(view1,idTextMaps, idImgMaps);
-                        DetailCompanyActivity.replaceFragment(new MapsFragment());
+                        DetailCompanyActivity.replaceFragment(new FragmentMaps());
                     }break;
                 }
             }
@@ -113,6 +110,6 @@ public class DetailCompanyListener implements View.OnClickListener {
         text.setTypeface(Typeface.DEFAULT_BOLD);
         image.setColorFilter(Color.rgb(255, 255, 255));
 
-        DetailCompanyActivity.replaceFragment(new FragmentContracts());
+        DetailCompanyActivity.replaceFragment(new FragmentCabinetsAndCards());
     }
 }

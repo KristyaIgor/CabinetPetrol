@@ -1,7 +1,10 @@
 package edi.md.mydesign.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import java.util.List;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -23,23 +26,21 @@ import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.mydesign.BaseApp;
 import edi.md.mydesign.R;
+import edi.md.mydesign.bottomsheet.SignUpBottomSheetDialog;
 import edi.md.mydesign.realm.objects.ClientRealm;
 import edi.md.mydesign.remote.ApiUtils;
 import edi.md.mydesign.remote.CommandServices;
+import edi.md.mydesign.remote.RemoteException;
 import edi.md.mydesign.remote.authenticate.AuthenticateUserBody;
 import edi.md.mydesign.remote.client.Client;
-import edi.md.mydesign.remote.client.ContractInClient;
 import edi.md.mydesign.remote.client.GetClientInfoResponse;
-import edi.md.mydesign.remote.client.UnpaidDocument;
 import edi.md.mydesign.remote.response.SIDResponse;
+import edi.md.mydesign.utils.BaseEnum;
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static edi.md.mydesign.fragments.FragmentContracts.addedNewClient;
 
 /**
  * Created by Igor on 03.07.2020
@@ -47,11 +48,13 @@ import static edi.md.mydesign.fragments.FragmentContracts.addedNewClient;
 
 public class FragmentLoginFizic extends Fragment {
 
-    EditText password, phone;
+    TextInputEditText password, phone;
+    TextInputLayout passwordLayout, phoneLayout;
     Button signIn;
     TextView signUp;
 
     Realm mRealm;
+    ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -62,8 +65,11 @@ public class FragmentLoginFizic extends Fragment {
         password = rootViewAdmin.findViewById(R.id.editTextTextPasswordLogin);
         signIn = rootViewAdmin.findViewById(R.id.buttonSignInFizic);
         signUp = rootViewAdmin.findViewById(R.id.buttonSignUpFizic);
+        passwordLayout = rootViewAdmin.findViewById(R.id.editTextTextPasswordLoginLayout);
+        phoneLayout = rootViewAdmin.findViewById(R.id.editTextPhoneLoginPLayout);
 
         mRealm = Realm.getDefaultInstance();
+        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,38 +84,101 @@ public class FragmentLoginFizic extends Fragment {
             public void onClick(View view) {
                 String phoneNumber = phone.getText().toString();
                 String passwords = password.getText().toString();
-                byte[] terfs = new byte[0];
-                try {
-                    terfs = encrypt(phoneNumber.getBytes(),BaseApp.getAppInstance().getHuyYou());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-                RealmResults<ClientRealm> realmResults = mRealm.where(ClientRealm.class).equalTo("phone",terfs).and().equalTo("companyId", BaseApp.getAppInstance().getCompanyClicked().getId()).findAll();
-                if(realmResults.isEmpty()){
-                    auth(phoneNumber, passwords);
+
+                if(phoneNumber.equals("") && passwords.equals("")){
+                    phoneLayout.setError("Introduceți numărul de telefon!");
+                    passwordLayout.setError("Introduceți parola!");
                 }
                 else{
-                    for(ClientRealm clientRealm: realmResults){
-                        String realmPhone = decrypt(clientRealm.getPhone(),BaseApp.getAppInstance().getHuyYou());
-                        if(realmPhone.equals(phoneNumber)){
-                            new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
-                                    .setTitle("Oops!")
-                                    .setMessage("Client with same phone already exist!")
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", (dialogInterface, i) -> {
-                                        dialogInterface.dismiss();
-                                    })
-                                    .show();
+                    if(phoneNumber.equals("") || passwords.equals("")){
+                        if(phoneNumber.equals("")){
+                            passwordLayout.setError("Introduceți numărul de telefon!");
+                        }
+                        if (passwords.equals("")){
+                            passwordLayout.setError("Introduceți parola!");
+                        }
+                    }
+                    else{
+                        byte[] byePhone = new byte[0];
+                        byte[] bytePass = new byte[0];
+                        try {
+                            byePhone = encrypt(phoneNumber.getBytes(),BaseApp.getAppInstance().getHuyYou());
+                            bytePass = encrypt(passwords.getBytes(),BaseApp.getAppInstance().getHuyYou());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                            break;
+                        RealmResults<ClientRealm> realmResults = mRealm.where(ClientRealm.class)
+                                .equalTo("phone",byePhone)
+                                .and()
+                                .equalTo("password",bytePass)
+                                .and()
+                                .equalTo("companyId", BaseApp.getAppInstance().getCompanyClicked().getId())
+                                .findAll();
+                        if(realmResults.isEmpty()){
+                            progressDialog.setIndeterminate(false);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("autentificare...");
+                            progressDialog.show();
+
+                            auth(phoneNumber, passwords);
+                        }
+                        else{
+                            for(ClientRealm clientRealm: realmResults){
+                                String realmPhone = decrypt(clientRealm.getPhone(),BaseApp.getAppInstance().getHuyYou());
+                                if(realmPhone.equals(phoneNumber)){
+                                    new MaterialAlertDialogBuilder(getContext(), R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+                                            .setTitle("Oops!")
+                                            .setMessage("Client with same phone already exist!")
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", (dialogInterface, i) -> {
+                                                dialogInterface.dismiss();
+                                            })
+                                            .show();
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
-
             }
         });
 
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.equals(""))
+                    phoneLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.equals(""))
+                    passwordLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return rootViewAdmin;
     }
@@ -120,9 +189,9 @@ public class FragmentLoginFizic extends Fragment {
         user.setPhone(phones);
         user.setAuthType(0);
 
-        String url = BaseApp.getAppInstance().getCompanyClicked().getAddress();
+        String url = BaseApp.getAppInstance().getCompanyClicked().getIp();
         CommandServices commandServices = ApiUtils.getCommandServices(url);
-        Call<SIDResponse> call = commandServices.authenticateUser(user);
+        Call<SIDResponse> call = commandServices.authenticateUser(BaseApp.getAppInstance().getCompanyClicked().getServiceName(), user);
 
         call.enqueue(new Callback<SIDResponse>() {
             @Override
@@ -131,22 +200,79 @@ public class FragmentLoginFizic extends Fragment {
                 if(sidResponse != null){
                     if(sidResponse.getErrorCode() == 0){
                         String sId = sidResponse.getSID();
-                        getClientInfo(sId,phones,pass);
+
+                        if(sId == null){
+                            progressDialog.dismiss();
+                            new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                                    .setTitle("Oops!")
+                                    .setMessage(sidResponse.getErrorMessage())
+                                    .setCancelable(false)
+                                    .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                        dialogInterface.dismiss();
+                                    })
+                                    .show();
+                        }
+                        else{
+                            progressDialog.setMessage("obținerea informației despre client...");
+                            getClientInfo(sId,phones,pass);
+                        }
+
                     }
+                    else{
+                        String msg = RemoteException.getServiceException(sidResponse.getErrorCode());
+                        progressDialog.dismiss();
+
+                        new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                                .setTitle("Oops!")
+                                .setMessage(msg)
+                                .setCancelable(false)
+                                .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                    dialogInterface.dismiss();
+                                })
+                                .show();
+                    }
+                }
+                else{
+                    progressDialog.dismiss();
+
+                    new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                            .setTitle("Oops!")
+                            .setMessage("Răspunsul de la serviciu este gol!")
+                            .setCancelable(false)
+                            .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                dialogInterface.dismiss();
+                            })
+                            .show();
                 }
             }
 
             @Override
             public void onFailure(Call<SIDResponse> call, Throwable t) {
+                progressDialog.dismiss();
 
+                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                        .setTitle("Oops!")
+                        .setMessage("Operația a eșuat!\nEroare: " + t.getMessage())
+                        .setCancelable(false)
+                        .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        })
+                        .setNegativeButton("Reîncercați", ((dialogInterface, i) -> {
+                            progressDialog.setIndeterminate(false);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("autentificare...");
+                            progressDialog.show();
+                            auth(phones, pass);
+                        }))
+                        .show();
             }
         });
     }
 
     private void getClientInfo(String sid, String phon, String pass){
 
-        CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getAddress());
-        Call<GetClientInfoResponse> call = commandServices.getClientInfo(sid);
+        CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());
+        Call<GetClientInfoResponse> call = commandServices.getClientInfo(BaseApp.getAppInstance().getCompanyClicked().getServiceName(), sid);
 
         call.enqueue(new Callback<GetClientInfoResponse>() {
             @Override
@@ -161,18 +287,49 @@ public class FragmentLoginFizic extends Fragment {
                         client.setPassword(secPa);
                         client.setPhone(secPh);
                         client.setSid(sid);
-                        client.setTypeClient(0);
+                        client.setTypeClient(BaseEnum.PersoanaFizica);
 
-                        FragmentContracts.addedNewClient(client,0);
+                        progressDialog.dismiss();
+                        FragmentCabinetsAndCards.addedNewClient(client);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                else{
+                    String msg = RemoteException.getServiceException(clientInfoResponse.getErrorCode());
+                    //progressDialog dismiss
+                    progressDialog.dismiss();
+
+                    new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                            .setTitle("Oops!")
+                            .setMessage(msg)
+                            .setCancelable(false)
+                            .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                                dialogInterface.dismiss();
+                            })
+                            .show();
                 }
             }
 
             @Override
             public void onFailure(Call<GetClientInfoResponse> call, Throwable t) {
+                progressDialog.dismiss();
 
+                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                        .setTitle("Oops!")
+                        .setMessage("Operația a eșuat!\nEroare: " + t.getMessage())
+                        .setCancelable(false)
+                        .setPositiveButton("Am înţeles", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        })
+                        .setNegativeButton("Reîncercați", ((dialogInterface, i) -> {
+                            progressDialog.setIndeterminate(false);
+                            progressDialog.setCancelable(false);
+                            progressDialog.setMessage("obținerea informații despre client...");
+                            progressDialog.show();
+                            getClientInfo(sid,phon,pass);
+                        }))
+                        .show();
             }
         });
     }

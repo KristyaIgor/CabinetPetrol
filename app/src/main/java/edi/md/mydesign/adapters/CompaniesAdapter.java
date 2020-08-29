@@ -41,6 +41,9 @@ public class CompaniesAdapter  extends RealmBaseAdapter<Company> implements List
         TextView info = root.findViewById(R.id.text_company_info);
         ImageView image = root.findViewById(R.id.image_company);
         ImageView state = root.findViewById(R.id.image_company_state);
+        ImageView isActive = root.findViewById(R.id.imageView_state_company);
+
+
 
         if(item.isExistContracts()){
             state.setImageResource(R.drawable.ic_state_contract_active);
@@ -58,6 +61,13 @@ public class CompaniesAdapter  extends RealmBaseAdapter<Company> implements List
            image.setImageBitmap(decodedByte);
        }catch (Exception e0){
            name.setText(item.getName());
+       }
+
+       if(item.isActive()){
+           isActive.setVisibility(View.GONE);
+       }
+       else{
+           isActive.setVisibility(View.VISIBLE);
        }
 
         return root;

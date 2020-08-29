@@ -22,15 +22,14 @@
 
         <ImageView
             android:id="@+id/image_contract_item"
-            android:layout_width="53dp"
-            android:layout_height="53dp"
+            android:layout_width="71dp"
+            android:layout_height="70dp"
             android:layout_marginStart="15dp"
-            android:background="@drawable/item_nav_selector"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_state_contract_active" />
+            app:srcCompat="@drawable/persoana_fizica" />
 
         <TextView
             android:id="@+id/text_clientname_contract"
@@ -38,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/poppins_semibold"
             android:text="Client name"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/nr_item_contract"
             app:layout_constraintStart_toEndOf="@+id/image_contract_item"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/poppins"
             android:text="disponibil"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -31,7 +31,7 @@ public class RetrofitClient {
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(getOkHttpClient())
+                .client(getUnsafeOkHttpClient())
                 .build();
         return retrofit;
     }
@@ -71,18 +71,18 @@ public class RetrofitClient {
                 }
             });
 
-            builder.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request originalRequest = chain.request();
-
-                    Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                            Credentials.basic("sales", "frj933e9c6epae29"));
-
-                    Request newRequest = builder.build();
-                    return chain.proceed(newRequest);
-                }
-            });
+//            builder.addInterceptor(new Interceptor() {
+//                @Override
+//                public Response intercept(Chain chain) throws IOException {
+//                    Request originalRequest = chain.request();
+//
+//                    Request.Builder builder = originalRequest.newBuilder().header("Authorization",
+//                            Credentials.basic("sales", "frj933e9c6epae29"));
+//
+//                    Request newRequest = builder.build();
+//                    return chain.proceed(newRequest);
+//                }
+//            });
 
             OkHttpClient okHttpClient = builder.build();
             return okHttpClient;
@@ -93,8 +93,8 @@ public class RetrofitClient {
 
     private static OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
-                .connectTimeout(8, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(8, TimeUnit.SECONDS)
                 .build();
     }

@@ -3,22 +3,9 @@ package edi.md.mydesign;
 
 import android.app.Application;
 import android.util.Base64;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.gson.Gson;
-
-import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.prefs.Preferences;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -26,12 +13,11 @@ import javax.crypto.SecretKey;
 import edi.md.mydesign.realm.objects.ClientRealm;
 import edi.md.mydesign.realm.objects.Company;
 import edi.md.mydesign.realm.RealmMigrations;
-import edi.md.mydesign.remote.client.Client;
+import edi.md.mydesign.remote.cardDetailInfo.CardItem;
+import edi.md.mydesign.remote.contract.CardsList;
 import edi.md.mydesign.remote.contract.Contract;
 import edi.md.mydesign.remote.petrolStation.PetrolStation;
 import edi.md.mydesign.remote.transaction.Transaction;
-import edi.md.mydesign.utils.CompaniesHelper;
-import edi.md.mydesign.utils.RemoteCompanies;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -45,11 +31,21 @@ public class BaseApp extends Application {
 
     private Company companyClicked;
     private ClientRealm clientClicked;
-    private Contract clickedClientContract;
+    private List<Contract> listContractClickedClient;
     private List<PetrolStation> petrolStations;
     private List<Transaction> transactions;
+    private CardsList clickedCard;
+    private Transaction clickedTransaction;
 
     private String matros;
+
+    //data from authenticate card
+    String sid;
+    String cardId;
+    String numberCod;
+    String numberPhone;
+    private boolean passExpired;
+    private CardItem cardAccount;
 
     @Override
     public void onCreate() {
@@ -118,14 +114,6 @@ public class BaseApp extends Application {
         return derfun(matros);
     }
 
-    public Contract getClickedClientContract() {
-        return clickedClientContract;
-    }
-
-    public void setClickedClientContract(Contract clickedClientContract) {
-        this.clickedClientContract = clickedClientContract;
-    }
-
     public List<PetrolStation> getPetrolStations() {
         return petrolStations;
     }
@@ -140,5 +128,77 @@ public class BaseApp extends Application {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public CardsList getClickedCard() {
+        return clickedCard;
+    }
+
+    public void setClickedCard(CardsList clickedCard) {
+        this.clickedCard = clickedCard;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public String getNumberCod() {
+        return numberCod;
+    }
+
+    public void setNumberCod(String numberCod) {
+        this.numberCod = numberCod;
+    }
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public CardItem getCardAccount() {
+        return cardAccount;
+    }
+
+    public void setCardAccount(CardItem cardAccount) {
+        this.cardAccount = cardAccount;
+    }
+
+    public boolean isPassExpired() {
+        return passExpired;
+    }
+
+    public void setPassExpired(boolean passExpired) {
+        this.passExpired = passExpired;
+    }
+
+    public List<Contract> getListContractClickedClient() {
+        return listContractClickedClient;
+    }
+
+    public void setListContractClickedClient(List<Contract> listContractClickedClient) {
+        this.listContractClickedClient = listContractClickedClient;
+    }
+
+    public Transaction getClickedTransaction() {
+        return clickedTransaction;
+    }
+
+    public void setClickedTransaction(Transaction clickedTransaction) {
+        this.clickedTransaction = clickedTransaction;
     }
 }

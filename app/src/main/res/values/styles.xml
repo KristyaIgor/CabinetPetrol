@@ -2,15 +2,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
-
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
-
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorAccent</item>
@@ -39,10 +37,10 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
-
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
         <item name="contentInsetRight">16dp</item>
         <item name="android:contentInsetRight">16dp</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"
@@ -55,7 +53,10 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/green</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+    </style>
 
     <style name="RadioButton">
         <item name="android:textColor">@drawable/button_text_color</item>
@@ -88,6 +89,22 @@
         <item name="rippleColor">@color/mtrl_btn_ripple_color</item>
         <item name="backgroundTint">@color/mtrl_btn_selector_gray</item>
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+    </style>
+
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipIconTint">@color/green</item>
+        <item name="chipBackgroundColor">@color/background_color_chip_state_list</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStrokeColor">@color/stroke_tint</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="android:textColor">@color/chip_textcolor_tint</item>
+        <item name="android:textSize">18sp</item>
+        <item name="chipStartPadding">5dp</item>
+        <item name="chipEndPadding">10dp</item>
+    </style>
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/green</item>
     </style>
 
 </resources>

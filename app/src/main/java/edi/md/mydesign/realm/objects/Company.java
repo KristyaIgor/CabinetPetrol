@@ -14,15 +14,21 @@ public class Company extends RealmObject {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("active")
+    @Expose
+    private Boolean active;
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("ip")
+    @Expose
+    private String ip;
+    @SerializedName("serviceName")
+    @Expose
+    private String serviceName;
     @SerializedName("logo")
     @Expose
     private String logo;
-    @SerializedName("address")
-    @Expose
-    private String address;
 
     boolean preparingToDelete;
 
@@ -70,19 +76,35 @@ public class Company extends RealmObject {
         this.existContracts = existContracts;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public int getNumberContracts() {
         return numberContracts;
     }
 
     public void setNumberContracts(int numberContracts) {
         this.numberContracts = numberContracts;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

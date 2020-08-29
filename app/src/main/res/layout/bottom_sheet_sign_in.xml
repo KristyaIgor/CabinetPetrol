@@ -14,7 +14,7 @@
         android:id="@+id/image_company_logo_auth"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,10 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="serif"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_company_logo_auth" />
@@ -75,7 +74,6 @@
             android:layout_height="50dp"
             android:fontFamily="@font/poppins"
             android:text="@string/juridic_tab"
-            android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </edi.md.mydesign.models.SegmentedGroup>
 

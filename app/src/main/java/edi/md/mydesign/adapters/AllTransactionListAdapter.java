@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,8 +25,9 @@ public class AllTransactionListAdapter extends RecyclerView.Adapter<AllTransacti
     private static final String TAG = "TransactionListAdapter";
 
     //vars
-    private List<Transaction>  mNames = new ArrayList<>();
+    private static List<Transaction>  mNames = new ArrayList<>();
     private Context mContext;
+
 
     public AllTransactionListAdapter(Context context, List<Transaction> names){
         this.mNames = names;
@@ -38,41 +40,42 @@ public class AllTransactionListAdapter extends RecyclerView.Adapter<AllTransacti
         return new ViewHolder(view);
     }
 
+    public Transaction getItem (int position){
+        return mNames.get(position);
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Transaction item = mNames.get(position);
 
+        holder.date.setText(item.getDocumentDate());
+
         if(item.getAmount() > 0){
-            holder.type.setText("Income");
-            holder.amount.setText("+" + item.getAmount());
+            holder.amount.setText("+" + item.getAmount() + " MDL");
             holder.amount.setTextColor(mContext.getResources().getColor(R.color.green));
-            holder.cardName.setVisibility(View.INVISIBLE);
-            holder.assortment.setVisibility(View.INVISIBLE);
-            holder.quantity.setVisibility(View.INVISIBLE);
-            holder.assortmentTitle.setVisibility(View.INVISIBLE);
-            holder.quantityTitle.setVisibility(View.INVISIBLE);
-            holder.location.setVisibility(View.INVISIBLE);
-            holder.cardNameTitle.setVisibility(View.INVISIBLE);
-            holder.date.setText(item.getDocumentDate());
+            holder.cardName.setText("Suplinire");
+
+            if(item.getStation() != null){
+                holder.location.setVisibility(View.VISIBLE);
+                holder.location.setText(item.getStation());
+            }
+            else{
+                holder.location.setVisibility(View.GONE);
+            }
         }
         else{
-            holder.type.setText("Spent");
-            holder.amount.setText(String.valueOf(item.getAmount()));
+            holder.amount.setText(item.getAmount() + " MDL");
             holder.amount.setTextColor(mContext.getResources().getColor(R.color.red));
-            holder.cardName.setText(item.getCardCode() + " " + item.getCardName());
-            holder.location.setText(item.getStation());
-            holder.assortment.setText(item.getAssortment());
-            holder.date.setText(item.getDocumentDate());
-            holder.quantity.setText(item.getQuantity() + " L");
+            holder.cardName.setText(item.getCardCode() + " / " + item.getCardName());
 
-            holder.cardName.setVisibility(View.VISIBLE);
-            holder.assortment.setVisibility(View.VISIBLE);
-            holder.quantity.setVisibility(View.VISIBLE);
-            holder.assortmentTitle.setVisibility(View.VISIBLE);
-            holder.quantityTitle.setVisibility(View.VISIBLE);
-            holder.location.setVisibility(View.VISIBLE);
-            holder.cardNameTitle.setVisibility(View.VISIBLE);
+            if(item.getStation() != null){
+                holder.location.setVisibility(View.VISIBLE);
+                holder.location.setText(item.getStation());
+            }
+            else{
+                holder.location.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -83,20 +86,17 @@ public class AllTransactionListAdapter extends RecyclerView.Adapter<AllTransacti
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView cardName,type,amount, assortment, quantity, assortmentTitle, quantityTitle, date, location, cardNameTitle;
+        TextView cardName,amount, location, date;
+
+        ImageView imageTrans;
 
         public ViewHolder(View itemView) {
             super(itemView);
             cardName = itemView.findViewById(R.id.text_card_name);
-            type = itemView.findViewById(R.id.text_type_tr);
+            imageTrans = itemView.findViewById(R.id.image_type_transaction);
             amount = itemView.findViewById(R.id.amount_transaction);
-            assortment = itemView.findViewById(R.id.text_assortment);
-            assortmentTitle = itemView.findViewById(R.id.name_code);
-            quantity = itemView.findViewById(R.id.text_quantity);
-            quantityTitle = itemView.findViewById(R.id.textView8);
-            date = itemView.findViewById(R.id.text_date_transaction);
             location = itemView.findViewById(R.id.text_location);
-            cardNameTitle = itemView.findViewById(R.id.textView12);
+            date = itemView.findViewById(R.id.text_date_transaction);
         }
     }
 

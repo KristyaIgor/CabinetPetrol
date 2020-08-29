@@ -47,9 +47,35 @@ public class FragmentCompanies extends Fragment {
 
         mRealm = Realm.getDefaultInstance();
 
+        listCompanies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Company item = adapter.getItem(i);
+
+                if(item.isActive()){
+                    BaseApp.getAppInstance().setCompanyClicked(item);
+
+                    Intent detail = new Intent(getContext(), DetailCompanyActivity.class);
+                    startActivity(detail);
+                }
+                else{
+                    Toast.makeText(getContext(), "Aceasta companie inca nu s-a alaturat aplicatiei!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return rootViewAdmin;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateListCompanies();
+    }
+
+    private void updateListCompanies() {
         RealmResults<Company> result = mRealm.where(Company.class).findAll();
         if(!result.isEmpty()){
-
             for(Company item: result){
                 RealmResults<ClientRealm> clientRealms = mRealm.where(ClientRealm.class).equalTo("companyId", item.getId()).findAll();
                 if(!clientRealms.isEmpty()){
@@ -58,24 +84,17 @@ public class FragmentCompanies extends Fragment {
                         item.setNumberContracts(clientRealms.size());
                     });
                 }
+                else{
+                    mRealm.executeTransaction(realm -> {
+                        item.setExistContracts(false);
+                        item.setNumberContracts(0);
+                    });
+                }
             }
             result = result.sort("numberContracts", Sort.DESCENDING);
+            result = result.sort("active", Sort.DESCENDING);
             adapter = new CompaniesAdapter(result);
             listCompanies.setAdapter(adapter);
         }
-
-        listCompanies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Company item = adapter.getItem(i);
-
-                BaseApp.getAppInstance().setCompanyClicked(item);
-
-                Intent detail = new Intent(getContext(), DetailCompanyActivity.class);
-                startActivity(detail);
-            }
-        });
-
-        return rootViewAdmin;
     }
 }

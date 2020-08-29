@@ -44,7 +44,7 @@ public class SegmentedGroup extends RadioGroup {
             this.mMarginDp = (int)typedArray.getDimension(R.styleable.SegmentedGroup_sc_border_width, 0);
             this.mCornerRadius = typedArray.getDimension(R.styleable.SegmentedGroup_sc_corner_radius, this.getResources().getDimension(R.dimen.radio_button_conner_radius));
             this.mTintColor = typedArray.getColor(R.styleable.SegmentedGroup_sc_tint_color, this.getResources().getColor(R.color.green));
-            this.mCheckedTextColor = typedArray.getColor(R.styleable.SegmentedGroup_sc_checked_text_color, this.getResources().getColor(R.color.colorPrimary));
+            this.mCheckedTextColor = typedArray.getColor(R.styleable.SegmentedGroup_sc_checked_text_color, this.getResources().getColor(R.color.white));
         } finally {
             typedArray.recycle();
         }

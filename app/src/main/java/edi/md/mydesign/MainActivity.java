@@ -1,6 +1,7 @@
 package edi.md.mydesign;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -9,20 +10,28 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.remoteconfig.BuildConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.gson.Gson;
@@ -33,11 +42,13 @@ import java.util.List;
 import java.util.Map;
 
 import edi.md.mydesign.realm.objects.Company;
+import edi.md.mydesign.services.UninstallIntentReceiver;
 import edi.md.mydesign.utils.CompaniesHelper;
 import edi.md.mydesign.utils.MainListener;
 import edi.md.mydesign.utils.RemoteCompanies;
 import io.realm.Realm;
 import io.realm.RealmResults;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
         layoutCompanies.setOnClickListener(listener);
 
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                Object value = getIntent().getExtras().get(key);
+                Log.d("TAG", "Key: " + key + " Value: " + value);
+            }
+        }
+
         openQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 ApplicationInfo packageQR = null;
 
                 for (ApplicationInfo packageInfo : packages) {
-                    if(packageInfo.packageName.equals("com.example.guid_gen")){
+                    if(packageInfo.packageName.equals("com.edi.md.android.guid_gen")){
                         packageQR = packageInfo;
                         Log.d("TAG", "Installed package :" + packageInfo.packageName);
                         Log.d("TAG", "Source dir : " + packageInfo.sourceDir);
@@ -99,27 +118,55 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(findApp){
-                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.example.guid_gen");
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.edi.md.android.guid_gen");
                     if (launchIntent != null) {
                         startActivity(launchIntent);//null pointer check in case package name was not found
                     }
                 }
                 else{
-                    openPlayMarket("com.example.guid_gen");
+                    openPlayMarket("com.edi.md.android.guid_gen");
                 }
             }
         });
 
         AskForPermissions();
         layoutNews.setOnClickListener(listener);
+
+//        registerReceiver(UninstallIntentReceiver.class, )
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        getSharedPreferences("firebase",MODE_PRIVATE).edit().putString("token",token).apply();
+
+                        Log.d("TAG", token );
+//                        Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void AskForPermissions() {
         List<String> listPermissionsNeeded = new ArrayList<>();
         int READ_PHONEpermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int read_storage_permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int write_storage_permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (READ_PHONEpermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (read_storage_permission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (write_storage_permission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
 
         if (!listPermissionsNeeded.isEmpty()) {
@@ -197,7 +244,8 @@ public class MainActivity extends AppCompatActivity {
                             intoDbCompany.setId(company.getId());
                             intoDbCompany.setName(company.getName());
                             intoDbCompany.setLogo(company.getLogo());
-                            intoDbCompany.setAddress(company.getAddress());
+                            intoDbCompany.setIp(company.getIp());
+                            intoDbCompany.setServiceName(company.getServiceName());
                         });
                     }
                 }

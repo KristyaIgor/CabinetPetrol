@@ -2,10 +2,8 @@ package edi.md.mydesign.utils;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import java.util.List;
 import edi.md.mydesign.MainActivity;
 import edi.md.mydesign.R;
 import edi.md.mydesign.fragments.FragmentCompanies;
-import edi.md.mydesign.fragments.FragmentContracts;
 import edi.md.mydesign.fragments.FragmentNews;
 
 
@@ -56,7 +53,7 @@ public class MainListener implements View.OnClickListener {
                 view1.setSelected(true);
                 switch (view1.getId()){
                     case id_News : {
-                        setActiveLayout(view1,idNews, idNewsImg, "Noutati");
+                        setActiveLayout(view1,idNews, idNewsImg, "Noutăți");
                         MainActivity.replaceFragment(new FragmentNews());
                     }break;
                     case id_Contracts: {

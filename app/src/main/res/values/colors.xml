@@ -10,4 +10,11 @@
 
     <color name="green" >#00C569</color>
     <color name="red" >#ed0909</color>
+    <color name="white" >#ffffff</color>
+
+    <color name="indicator_selected">#000000</color>
+    <color name="indicator_unselected">#80000000</color>
+
+    <color name="remain_chart">#79D2DE</color>
+    <color name="consum_chart">#1940D9</color>
 </resources>
