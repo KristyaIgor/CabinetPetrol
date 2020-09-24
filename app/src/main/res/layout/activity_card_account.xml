@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text="Titlu"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/text_20_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/text_balance_card"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:text="2000 MDL"
                         android:textColor="@color/white"
-                        android:textSize="24sp"
+                        android:textSize="24dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -114,10 +114,10 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Astăzi"
+                android:text="@string/today_limit_time"
                 android:textAlignment="center"
                 android:textColor="#607D8B"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_20_size"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,8 +146,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Limită"
-                        android:textSize="14sp"
+                        android:text="@string/limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,7 +159,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -187,8 +187,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Rămas"
-                        android:textSize="14sp"
+                        android:text="@string/remain_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +200,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +232,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -246,8 +246,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Consum"
-                        android:textSize="14sp"
+                        android:text="@string/consum_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -258,10 +258,10 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Săptămînă"
+                android:text="@string/week_limit_time"
                 android:textAlignment="center"
                 android:textColor="#607D8B"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_20_size"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -292,8 +292,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Limită"
-                        android:textSize="14sp"
+                        android:text="@string/limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -305,7 +305,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -334,8 +334,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Rămas"
-                        android:textSize="14sp"
+                        android:text="@string/remain_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -347,7 +347,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -376,8 +376,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Consum"
-                        android:textSize="14sp"
+                        android:text="@string/consum_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -389,7 +389,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -403,10 +403,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lună"
+                android:text="@string/month_limit_type"
                 android:textAlignment="center"
                 android:textColor="#607D8B"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_20_size"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -435,8 +435,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Limită"
-                        android:textSize="14sp"
+                        android:text="@string/limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -448,7 +448,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -477,8 +477,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Rămas"
-                        android:textSize="14sp"
+                        android:text="@string/remain_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -490,7 +490,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -520,8 +520,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:text="Consum"
-                        android:textSize="14sp"
+                        android:text="@string/consum_limit_text"
+                        android:textSize="@dimen/text_14_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -533,7 +533,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="200,00 MDL"
                         android:textColor="@color/green"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_16_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -589,10 +589,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:singleLine="true"
-            android:text="Title"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_20_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image_state_card_account"

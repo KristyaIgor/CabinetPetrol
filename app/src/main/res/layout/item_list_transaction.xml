@@ -18,34 +18,43 @@
         android:layout_marginEnd="16dp"
         android:text="+5,432.00 MDL"
         android:textColor="@color/green"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_card_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="2dp"
+        android:singleLine="true"
         android:text="NUX 4658"
         android:textColor="#383838"
+        android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/text_location"
+        app:layout_constraintEnd_toStartOf="@+id/amount_transaction"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/image_type_transaction"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/text_location"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:singleLine="true"
         android:text="SAC 42"
         android:textColor="#80000000"
-        android:textSize="12sp"
+        android:textSize="14dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/amount_transaction"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/image_type_transaction"
         app:layout_constraintTop_toBottomOf="@+id/text_card_name" />
 
@@ -74,7 +83,7 @@
         android:layout_height="wrap_content"
         android:text="10.12.2020"
         android:textColor="#80000000"
-        android:textSize="12sp"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@+id/amount_transaction"
         app:layout_constraintTop_toBottomOf="@+id/amount_transaction" />
 

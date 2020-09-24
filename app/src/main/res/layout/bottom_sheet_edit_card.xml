@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/round_backgound_bottom_sheet"
-    android:orientation="vertical"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/button_set_limit_for_card"
@@ -18,10 +15,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/round_buttons_elements"
-        android:text="Aplică"
+        android:text="@string/salveaza_btn_edit_card"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Schimbați limitele"
+        android:text="@string/change_limit_card"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +50,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
+    <LinearLayout
+        android:id="@+id/id_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dailyLayout"
         style="@style/LoginTextInputLayoutStyle"
@@ -61,16 +67,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:hint="Limita pe zi"
-        app:endIconMode="none"
-        app:errorEnabled="false"
-        app:errorTextColor="@color/red"
+        android:hint="@string/limita_pe_zi_edit_card"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5">
+        app:hintTextColor="@android:color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/daily_limit"
@@ -79,7 +79,8 @@
             android:ems="10"
             android:inputType="number"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -90,16 +91,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Limita pe săptămînă"
-        app:endIconMode="none"
-        app:errorEnabled="false"
-        app:errorTextColor="@color/red"
+        android:hint="@string/limita_pe_week_edit_card"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyLayout">
+        app:hintTextColor="@android:color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/week_limit"
@@ -109,7 +104,7 @@
             android:inputType="number"
             android:paddingStart="16dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@drawable/cursor_color" />
+            android:textSize="16dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,16 +116,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Limita pe lună"
-        app:endIconMode="none"
-        app:errorEnabled="false"
-        app:errorTextColor="@color/red"
+        android:hint="@string/limita_pe_month_edit_card"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekLayout">
+        app:hintTextColor="@android:color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/month_limit"
@@ -139,8 +128,11 @@
             android:ems="10"
             android:inputType="number"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView46"
@@ -148,8 +140,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="* Pentru cîmpurile goale va fi atribuită limita 0"
+        android:text="@string/empty_field_set_limit_0"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/id_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:mstb="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/round_backgound_bottom_sheet"
-    android:orientation="vertical"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <ImageView
@@ -26,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_auth_user" />
 
-    <edi.md.mydesign.models.SegmentedGroup
+    <edi.md.petrolcabinet.models.SegmentedGroup
         android:id="@+id/segmented2"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -65,7 +63,7 @@
             android:checked="true"
             android:fontFamily="@font/poppins"
             android:text="@string/fizic_tab"
-            android:textSize="18sp" />
+            android:textSize="18dp" />
 
         <RadioButton
             android:id="@+id/rbtnJuridic"
@@ -74,8 +72,8 @@
             android:layout_height="50dp"
             android:fontFamily="@font/poppins"
             android:text="@string/juridic_tab"
-            android:textSize="18sp" />
-    </edi.md.mydesign.models.SegmentedGroup>
+            android:textSize="18dp" />
+    </edi.md.petrolcabinet.models.SegmentedGroup>
 
     <FrameLayout
         android:id="@+id/container_login"
@@ -88,5 +86,4 @@
         app:layout_constraintTop_toBottomOf="@+id/segmented2">
 
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

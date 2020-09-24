@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_height="500dp"
         android:background="@drawable/sground"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="@dimen/height_toolbar60"
             android:orientation="vertical">
 
             <TextView
@@ -41,9 +41,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#CA0404"
+                android:textSize="@dimen/text_14_size"
                 android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,7 +80,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_icon_arrow_left"
-                    tools:srcCompat="@drawable/ic_icon_arrow_left" />
+                    tools:srcCompat="@drawable/ic_icon_arrow_left"
+                    android:contentDescription="@string/todo" />
 
                 <ImageButton
                     android:id="@+id/btn_left_swipe_fizic"
@@ -94,7 +96,8 @@
                     app:layout_constraintStart_toStartOf="@+id/screen_slide_fizic_contracts"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_icon_arrow_left"
-                    tools:srcCompat="@drawable/ic_icon_arrow_left" />
+                    tools:srcCompat="@drawable/ic_icon_arrow_left"
+                    android:contentDescription="@string/todo" />
 
                 <LinearLayout
                     android:id="@+id/pagesContainer_fizic"
@@ -131,15 +134,14 @@
                     android:gravity="center"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
-                    android:text="Carduri"
+                    android:text="@string/account_menu_btn_cards"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_open_history_list"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizic_open_assortment_list"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <com.google.android.material.button.MaterialButton
@@ -155,15 +157,14 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Reducere produse"
+                    android:text="@string/account_menu_btn_products"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizicsuplinire"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_fizic_open_card_list"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <com.google.android.material.button.MaterialButton
@@ -179,10 +180,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Suplinire"
+                    android:text="@string/account_menu_btn_suply"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_information"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_fizic_open_history_list"
@@ -198,15 +199,15 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/round_container"
-                    android:drawableTop="@drawable/ic_info_24px"
+                    android:drawableTop="@drawable/ic_admin_panel_settings_black_36dp"
                     android:gravity="center"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Informații"
+                    android:text="@string/account_menu_btn_profil"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -228,10 +229,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Istoria"
+                    android:text="@string/account_menu_btn_history"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_notification"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizicsuplinire"
                     app:layout_constraintStart_toStartOf="parent"
@@ -252,10 +253,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Notificări"
+                    android:text="@string/account_menu_btn_notify"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizic_information"
                     app:layout_constraintStart_toStartOf="parent"
@@ -270,7 +271,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="@dimen/height_toolbar"
+        android:layout_height="@dimen/height_toolbar60"
         android:background="@drawable/round_toolbar"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -311,9 +312,9 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="Title account"
+            android:text=""
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_20_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image_state_account"

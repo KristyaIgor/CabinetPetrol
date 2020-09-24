@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edi.md.mydesign">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="edi.md.petrolcabinet">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -12,25 +13,32 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
 
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/logo_v4"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@drawable/logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NotificationCardActivity"></activity>
+        <activity android:name=".AboutAppActivity"/>
+        <activity android:name=".SettingsCardAccountActivity" />
+        <activity android:name=".InfoAccountActivity" />
+        <activity android:name=".NotificationListActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".SettingsApplicationActivity" />
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".HistoryDetailActivity" />
         <activity android:name=".InformationCardAccountActivity" />
-        <activity android:name=".InformationActivity" />
+        <activity android:name=".SettingsAccountActivity" />
         <activity android:name=".CardDetailActivity" />
-        <activity android:name=".CardAccountActivity"
-            android:noHistory="false"/>
+        <activity android:name=".CardAccountActivity" />
         <activity android:name=".AssortmentActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".CardListActivity" />
@@ -57,15 +65,39 @@
 
         <service
             android:name=".services.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
+            android:exported="true"
+            android:permission="android.permission.WAKE_LOCK">
+            <intent-filter android:priority="10">
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:directBootAware="true"
+            android:exported="false" >
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="edi.md.petrolcabinet" />
+            </intent-filter>
+        </receiver>
+
+
+
         <receiver android:name=".services.UninstallIntentReceiver">
             <intent-filter android:priority="0">
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -79,6 +111,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
-
     </application>
+
 </manifest>
