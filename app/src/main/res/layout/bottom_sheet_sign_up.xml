@@ -11,28 +11,26 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <ImageView
-        android:id="@+id/image_company_logo_auth"
+        android:id="@+id/image_company_logo_sign_up"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_state_contract_active" />
 
     <TextView
-        android:id="@+id/title_auth_user"
+        android:id="@+id/title_user_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="serif"
-        android:text="SIGN-UP to company"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_company_logo_auth" />
+        app:layout_constraintTop_toBottomOf="@+id/image_company_logo_sign_up" />
 
     <View
         android:id="@+id/divider5"
@@ -44,7 +42,7 @@
         android:background="#D1D1D1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_auth_user" />
+        app:layout_constraintTop_toBottomOf="@+id/title_user_sign_up" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -54,7 +52,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignInFizic3"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider5">
@@ -64,102 +62,181 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_card_code_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="Card code"
-                android:inputType="number"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                android:layout_height="wrap_content"
+                android:hint="@string/numarul_cardului_add_card"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="Email address"
-                android:inputType="textEmailAddress"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_card_code_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_email_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="First Name"
-                android:inputType="text"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/adresa_e_mail"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName4"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="Last Name"
-                android:inputType="text"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editTextTextPersonName5"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_firts_name_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="IDNP"
-                android:inputType="number"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/first_name_sign_up"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName6"
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_firts_name_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editTextTextPersonName7"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_last_name_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/round_edit_text_elements"
-                android:ems="10"
-                android:hint="Phone number"
-                android:inputType="phone"
-                android:paddingStart="16dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="#A5A3A3" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/last_name_sign_up"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_last_name_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_idnp_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/idnp_login_juridic"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_idnp_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_phone_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/phone_number"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_password_sign_up_Layout"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/password_login_form"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="false"
+                app:errorTextColor="@color/red"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <Button
-        android:id="@+id/buttonSignInFizic3"
+        android:id="@+id/buttonSignUp"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -167,7 +244,7 @@
         android:text="@string/sign_up"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         mstb:layout_constraintEnd_toEndOf="parent"

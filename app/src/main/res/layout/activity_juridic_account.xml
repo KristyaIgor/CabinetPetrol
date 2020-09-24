@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_height="400dp"
         android:background="@drawable/sground"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="@dimen/height_toolbar60"
             android:orientation="vertical">
 
             <TextView
@@ -40,9 +40,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#CA0404"
+                android:textSize="14dp"
                 android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,10 +115,10 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Datorii"
+                android:text="@string/datorii_juridic"
                 android:textAlignment="center"
-                android:textColor="#252525"
-                android:textSize="18sp"
+                android:textColor="#607D8B"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,9 +136,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Facturate"
+                    android:text="@string/juric_doc_facturate"
                     android:textColor="#CC000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,7 +150,7 @@
                     android:layout_marginEnd="24dp"
                     android:text="00,000.00"
                     android:textColor="#37C96A"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -171,9 +172,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="10dp"
-                    android:text="Ne facturate"
+                    android:text="@string/juric_doc_ne_facturate"
                     android:textColor="#CC000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
@@ -185,7 +186,7 @@
                     android:layout_marginEnd="24dp"
                     android:text="00,000.00"
                     android:textColor="#37C96A"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
@@ -208,9 +209,9 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Întârziere"
+                    android:text="@string/juric_doc_datorii"
                     android:textColor="#CC000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider3" />
@@ -223,7 +224,7 @@
                     android:layout_marginEnd="24dp"
                     android:text="00,000.00"
                     android:textColor="#CA0404"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
@@ -248,10 +249,10 @@
                     android:gravity="center"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
-                    android:text="Carduri"
+                    android:text="@string/account_menu_btn_cards"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toStartOf="@+id/btn_juridic_open_assortment_list"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -269,10 +270,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Reducere produse"
+                    android:text="@string/account_menu_btn_products"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_juridic_open_card_list"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -290,10 +291,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Suplinire"
+                    android:text="@string/account_menu_btn_suply"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_juridic_open_history_list"
                     app:layout_constraintTop_toBottomOf="@+id/btn_juridic_open_assortment_list" />
@@ -307,15 +308,15 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/round_container"
-                    android:drawableTop="@drawable/ic_info_24px"
+                    android:drawableTop="@drawable/ic_admin_panel_settings_black_36dp"
                     android:gravity="center"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Informații"
+                    android:text="@string/account_menu_btn_profil"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -336,10 +337,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Istoria"
+                    android:text="@string/account_menu_btn_history"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toStartOf="@+id/btn_juridic_suplinire"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_juridic_open_assortment_list" />
@@ -359,10 +360,10 @@
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:singleLine="true"
-                    android:text="Notificări"
+                    android:text="@string/account_menu_btn_notify"
                     android:textAllCaps="false"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_juridic_information"
                     app:layout_constraintStart_toStartOf="parent"
@@ -376,7 +377,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="@dimen/height_toolbar"
+        android:layout_height="@dimen/height_toolbar60"
         android:background="@drawable/round_toolbar"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -419,7 +420,7 @@
             android:singleLine="true"
             android:text="Title account"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image_state_account"

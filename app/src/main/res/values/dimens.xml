@@ -12,4 +12,9 @@
     <dimen name="height_toolbar60">60dp</dimen>
     <dimen name="padding_top">40dp</dimen>
     <dimen name="margin_top">40dp</dimen>
+
+    <dimen name="text_14_size">14dp</dimen>
+    <dimen name="text_16_size">16dp</dimen>
+    <dimen name="text_18_size">18dp</dimen>
+    <dimen name="text_20_size">20dp</dimen>
 </resources>

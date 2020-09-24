@@ -1,0 +1,235 @@
+package edi.md.petrolcabinet.bottomsheet;
+
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import edi.md.petrolcabinet.BaseApp;
+import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.R;
+import edi.md.petrolcabinet.realm.objects.Company;
+import edi.md.petrolcabinet.remote.ApiUtils;
+import edi.md.petrolcabinet.remote.CommandServices;
+import edi.md.petrolcabinet.remote.RemoteException;
+import edi.md.petrolcabinet.remote.resetPassword.ResetPasswordResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+/**
+ * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
+ * <p>You can show this modal bottom sheet from your activity like this:</p>
+ * <pre>
+ *     SignInBottomSheetDialog.newInstance(30).show(getSupportFragmentManager(), "dialog");
+ * </pre>
+ */
+public class ResetPasswordFizicBottomSheetDialog extends BottomSheetDialogFragment {
+;
+    public static final String TAG = "ActionBottomDialogResetFizic";
+    Company company;
+    ImageView logo;
+    TextInputEditText emailET, phoneET;
+    TextInputLayout emailLayout, phoneLayout;
+    Button recuperareBtn;
+
+    ProgressDialog progressDialog;
+    Dialog dialog;
+
+    public static ResetPasswordFizicBottomSheetDialog newInstance() {
+        return new ResetPasswordFizicBottomSheetDialog();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root =  inflater.inflate(R.layout.bottom_sheet_reset_password_fizic, container, false);
+
+        logo = root.findViewById(R.id.image_company_logo_reset_fizic);
+        emailET = root.findViewById(R.id.editTextEmailFizicReset);
+        phoneET = root.findViewById(R.id.editTextPhoneReset);
+        emailLayout = root.findViewById(R.id.emailLayoutFizicReset);
+        phoneLayout = root.findViewById(R.id.editTextPhoneLayoutReset);
+        recuperareBtn = root.findViewById(R.id.btn_reset_password_fizic);
+        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+
+        company = BaseApp.getAppInstance().getCompanyClicked();
+
+        byte[] decodedString = Base64.decode(company.getLogo(), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        logo.setImageBitmap(decodedByte);
+
+        recuperareBtn.setOnClickListener(view -> {
+            String email = emailET.getText().toString();
+            String phone = phoneET.getText().toString();
+
+            if(email.equals("") && phone.equals("")){
+                emailLayout.setError(getString(R.string.error_input_email));
+                phoneLayout.setError(getString(R.string.error_input_number_phone));
+            }
+            else{
+                if(email.equals("") || phone.equals("")){
+                    if (email.equals(""))
+                        emailLayout.setError(getString(R.string.error_input_email));
+                    if (phone.equals(""))
+                        phoneLayout.setError(getString(R.string.error_input_number_phone));
+                }
+                else{
+                    progressDialog.setIndeterminate(false);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setMessage("Recuperarea parolei...");
+                    progressDialog.show();
+
+                    CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());
+                    Call<ResetPasswordResponse>  call = commandServices.resetPassword(BaseApp.getAppInstance().getCompanyClicked().getServiceName(),email,phone,0);
+
+                    enqueueCall(call);
+                }
+            }
+        });
+
+        emailET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.equals(""))
+                    emailLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        phoneET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.equals(""))
+                    phoneLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        return root;
+    }
+
+    private void enqueueCall(Call<ResetPasswordResponse> call) {
+        call.enqueue(new Callback<ResetPasswordResponse>() {
+            @Override
+            public void onResponse(Call<ResetPasswordResponse> call, Response<ResetPasswordResponse> response) {
+                ResetPasswordResponse resetPasswordResponse = response.body();
+
+                if(resetPasswordResponse != null){
+                    if(resetPasswordResponse.getErrorCode() == 0){
+                        progressDialog.dismiss();
+                        new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                                .setTitle(getString(R.string.dialog_title_succes))
+                                .setMessage(getString(R.string.dialog_msg_send_new_password))
+                                .setCancelable(false)
+                                .setPositiveButton(getString(R.string.dialog_button_understand), (dialogInterface, i) -> {
+                                    dialogInterface.dismiss();
+                                    dialog.dismiss();
+                                })
+                                .show();
+                    }
+                    else{
+                        String msg = RemoteException.getServiceException(resetPasswordResponse.getErrorCode());
+                        progressDialog.dismiss();
+
+                        new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                                .setTitle(getString(R.string.oops_text))
+                                .setMessage(msg)
+                                .setCancelable(false)
+                                .setPositiveButton(getString(R.string.dialog_button_understand), (dialogInterface, i) -> {
+                                    dialogInterface.dismiss();
+                                })
+                                .show();
+                    }
+                }
+                else{
+                    progressDialog.dismiss();
+
+                    new MaterialAlertDialogBuilder(getContext(),R.style.MaterialAlertDialogCustom)
+                            .setTitle(getString(R.string.oops_text))
+                            .setMessage(getString(R.string.dialog_msg_response_from_service_null))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.dialog_button_understand), (dialogInterface, i) -> {
+                                dialogInterface.dismiss();
+                            })
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResetPasswordResponse> call, Throwable t) {
+                progressDialog.dismiss();
+
+                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+                        .setTitle(getString(R.string.oops_text))
+                        .setMessage(getString(R.string.dialog_failure_service) + t.getMessage())
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.dialog_button_understand), (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        })
+                        .show();
+            }
+        });
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        dialog = getDialog();
+
+        if (dialog != null) {
+            View bottomSheet = dialog.findViewById(R.id.bottom_sheet_reset_fizic);
+            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int dialogWindowHeight = (int) (displayHeight * 0.7f);
+            int dialogWrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
+            bottomSheet.getLayoutParams().height = dialogWindowHeight;
+        }
+        View view = getView();
+        view.post(() -> {
+            View parent = (View) view.getParent();
+            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) (parent).getLayoutParams();
+            CoordinatorLayout.Behavior behavior = params.getBehavior();
+            BottomSheetBehavior bottomSheetBehavior = (BottomSheetBehavior) behavior;
+            bottomSheetBehavior.setPeekHeight(view.getMeasuredHeight());
+//            ((View) .getParent()).setBackgroundColor(Color.TRANSPARENT);
+
+        });
+    }
+}

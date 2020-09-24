@@ -6,60 +6,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText_number_phone"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextnumberPoneLayout"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/round_edit_text_elements"
-        android:ems="10"
         android:hint="@string/phone_number"
-        android:inputType="phone"
-        android:paddingStart="16dp"
-        android:text="069858838"
-        android:textColor="@android:color/black"
-        android:textColorHint="#A5A3A3"
+        app:errorEnabled="false"
+        app:errorTextColor="@color/red"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:hintTextColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editText_number_card"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_number_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="phone"
+            android:paddingStart="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextpasswordsLayout"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/round_edit_text_elements"
-        android:ems="10"
         android:hint="@string/numarul_cardului_add_card"
-        android:inputType="number"
-        android:paddingStart="16dp"
-        android:textColor="@android:color/black"
-        android:textColorHint="#A5A3A3"
+        app:errorEnabled="false"
+        app:errorTextColor="@color/red"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        app:hintTextColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_number_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextnumberPoneLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_number_card"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:paddingStart="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button_nextStepAddCard"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/round_buttons_elements"
-        android:fontFamily="serif"
         android:text="@string/urm_torul_pas_add_card"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -79,14 +98,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/am_cabinet_personal"
         android:textColor="#3B3B3B"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonSignInCabinetForCard"
         app:layout_constraintEnd_toStartOf="@+id/buttonSignInCabinetForCard"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonSignInCabinetForCard" />
 
     <TextView
         android:id="@+id/buttonSignInCabinetForCard"
@@ -96,11 +115,10 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="serif"
         android:text="@string/sign_in"
         android:textAllCaps="true"
         android:textColor="#00C569"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

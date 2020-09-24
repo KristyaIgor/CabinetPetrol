@@ -28,8 +28,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
-            android:text="Astăzi"
+            android:text="@string/today_limit_time"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/textView27"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,8 +43,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
-            android:text="Săptămînă"
+            android:text="@string/week_limit_time"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/textView28"
             app:layout_constraintStart_toEndOf="@+id/textView26"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,8 +57,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
-            android:text="Lună"
+            android:text="@string/month_limit_type"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView27"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,6 +71,7 @@
             android:layout_marginTop="4dp"
             android:text="0 MDL"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/textView26"
             app:layout_constraintStart_toStartOf="@+id/textView26"
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -79,6 +83,7 @@
             android:layout_marginTop="4dp"
             android:text="0 MDL"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/textView27"
             app:layout_constraintStart_toStartOf="@+id/textView27"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -90,6 +95,7 @@
             android:layout_marginTop="4dp"
             android:text="0 MDL"
             android:textColor="#607D8B"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/textView28"
             app:layout_constraintStart_toStartOf="@+id/textView28"
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
@@ -100,9 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="8dp"
-            android:text="Limită adițională:"
+            android:text="@string/limit_aditional"
             android:textColor="#607D8B"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -114,7 +120,7 @@
             android:layout_marginBottom="8dp"
             android:text="0 MDL"
             android:textColor="#607D8B"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView33" />
 
@@ -127,7 +133,7 @@
             android:text="21.02.2020 15:24"
             android:textAllCaps="true"
             android:textColor="#607D8B"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -136,23 +142,23 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:background="#DDDDDD"
             app:layout_constraintBottom_toTopOf="@+id/product_additional_limit_money"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_remain_day" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/product_chard_day_limit"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="@+id/textView26"
             app:layout_constraintStart_toStartOf="@+id/textView26"
-            app:layout_constraintTop_toBottomOf="@+id/product_limit_day" >
+            app:layout_constraintTop_toBottomOf="@+id/product_limit_day">
         </com.github.mikephil.charting.charts.PieChart>
 
         <com.github.mikephil.charting.charts.PieChart
@@ -160,8 +166,6 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="@+id/textView27"
             app:layout_constraintStart_toStartOf="@+id/textView27"
             app:layout_constraintTop_toBottomOf="@+id/product_limit_day" />
@@ -171,11 +175,45 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="@+id/textView28"
             app:layout_constraintStart_toStartOf="@+id/textView28"
             app:layout_constraintTop_toBottomOf="@+id/product_limit_day" />
+
+        <TextView
+            android:id="@+id/text_remain_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0 MDL"
+            android:textColor="#607D8B"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/product_chard_day_limit"
+            app:layout_constraintStart_toStartOf="@+id/product_chard_day_limit"
+            app:layout_constraintTop_toBottomOf="@+id/product_chard_day_limit" />
+
+        <TextView
+            android:id="@+id/text_remain_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0 MDL"
+            android:textColor="#607D8B"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/product_chard_week_limit"
+            app:layout_constraintStart_toStartOf="@+id/product_chard_week_limit"
+            app:layout_constraintTop_toBottomOf="@+id/product_chard_week_limit" />
+
+        <TextView
+            android:id="@+id/text_remain_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0 MDL"
+            android:textColor="#607D8B"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/product_chard_month_limit"
+            app:layout_constraintStart_toStartOf="@+id/product_chard_month_limit"
+            app:layout_constraintTop_toBottomOf="@+id/product_chard_month_limit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -216,7 +254,7 @@
             android:singleLine="true"
             android:text="A95"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

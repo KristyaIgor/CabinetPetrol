@@ -16,7 +16,7 @@
         android:text="@string/sign_in"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text_forgot_password_juridic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:paddingRight="2dp"
         android:text="@string/are_you_new_user"
         android:textColor="#3B3B3B"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSignUpJuridic"
         app:layout_constraintEnd_toStartOf="@id/buttonSignUpJuridic"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -45,7 +45,7 @@
         android:clickable="true"
         android:text="@string/sign_up"
         android:textColor="@color/green"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +103,8 @@
                     android:ems="10"
                     android:inputType="number"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -114,8 +115,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/username_login_juridic"
-                app:counterOverflowTextColor="@color/colorAccent"
+                android:hint="@string/nume_de_utilizator_telefon_sau_e_mail"
                 app:errorEnabled="false"
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
@@ -127,10 +127,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="text|textEmailAddress"
                     android:paddingStart="16dp"
                     android:textColor="@android:color/black"
-                    android:textCursorDrawable="@drawable/cursor_color" />
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="16dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,14 +144,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/password_login_form"
-                app:boxBackgroundMode="outline"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="false"
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black"
-                app:passwordToggleContentDescription="Show password">
+                app:hintTextColor="@android:color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTextPassword"
@@ -159,7 +158,9 @@
                     android:ems="10"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -170,9 +171,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Ați uitat parola?"
+        android:clickable="true"
+        android:text="@string/forgot_password"
         android:textColor="@color/green"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/divider7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

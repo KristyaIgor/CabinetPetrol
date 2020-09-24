@@ -38,6 +38,57 @@
             {
               "client_id": "1015339862171-a7p2uu76il0q70fjukvk2ccie6aa9s0h.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1015339862171-eiqaabcdimf4f4m1rvmr95lqt1fob19p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dzerjitchii.MyCabinet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015339862171:android:209ddc1666c19306f19e3e",
+        "android_client_info": {
+          "package_name": "edi.md.petrolcabinet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015339862171-0t7fu7p5ablod8d3rt6g050vaomavs60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edi.md.petrolcabinet",
+            "certificate_hash": "4bc24929c14ea5fbbbd8e7f96f55899aa208cd9e"
+          }
+        },
+        {
+          "client_id": "1015339862171-a7p2uu76il0q70fjukvk2ccie6aa9s0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmOYavGW5or9UWx7UIszMueBeWAnyY75Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015339862171-a7p2uu76il0q70fjukvk2ccie6aa9s0h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015339862171-eiqaabcdimf4f4m1rvmr95lqt1fob19p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dzerjitchii.MyCabinet"
+              }
             }
           ]
         }

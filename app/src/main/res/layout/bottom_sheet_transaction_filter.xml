@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="FILTRU"
+        android:text="@string/filtru_transaction"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,9 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Tipul tranzacțiilor"
+        android:text="@string/tipul_tranzaction_filter"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
@@ -79,8 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Toate"
-            android:textSize="18sp"
+            android:text="@string/toate_type_filter"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:chipEndPadding="10dp"
             app:closeIconVisible="false" />
@@ -90,8 +90,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alimentare"
-            android:textSize="18sp"
+            android:text="@string/alimentare_type_filter"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -100,8 +100,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suplinire"
-            android:textSize="18sp"
+            android:text="@string/suplinire_type_filter"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -128,8 +128,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Astazi"
-            android:textSize="18sp"
+            android:text="@string/today_limit_time"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:chipEndPadding="10dp"
             app:closeIconVisible="false" />
@@ -139,8 +139,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saptamina"
-            android:textSize="18sp"
+            android:text="@string/week_limit_time"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -149,8 +149,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Luna"
-            android:textSize="18sp"
+            android:text="@string/month_limit_type"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -159,8 +159,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2020"
-            android:textSize="18sp"
+            android:text="@string/year_limit_time"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -169,8 +169,8 @@
             style="@style/Widget.App.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toată perioada"
-            android:textSize="18sp"
+            android:text="@string/toat_perioada_filter"
+            android:textSize="18dp"
             app:checkedIconVisible="false"
             app:closeIconVisible="false" />
 
@@ -183,9 +183,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Perioada"
+        android:text="@string/perioada_filter_transaction"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup2" />
 
@@ -197,9 +197,9 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="Șterge toate filtrele"
+        android:text="@string/sterge_toate_filtrele"
         android:textColor="@color/green"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
