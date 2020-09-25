@@ -34,9 +34,9 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
-import edi.md.petrolcabinet.remote.RemoteException;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.changePassword.ChangePasswordBody;
 import edi.md.petrolcabinet.remote.response.SIDResponse;

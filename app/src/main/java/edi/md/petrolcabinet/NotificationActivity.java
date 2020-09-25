@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.notification.GetNotificationSettings;
 import edi.md.petrolcabinet.remote.notification.NotificationSettings;
 import edi.md.petrolcabinet.remote.notification.UpdateNotificationSettingsBody;

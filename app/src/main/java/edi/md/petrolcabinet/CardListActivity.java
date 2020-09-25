@@ -38,8 +38,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.petrolcabinet.adapters.CardsInContractClientAdapter;
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.client.ContractInClient;
 import edi.md.petrolcabinet.remote.contract.CardsList;

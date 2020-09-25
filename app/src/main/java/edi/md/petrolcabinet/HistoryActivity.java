@@ -27,8 +27,8 @@ import java.util.TimeZone;
 
 import edi.md.petrolcabinet.adapters.AllTransactionListAdapter;
 import edi.md.petrolcabinet.bottomsheet.FilterTransactionBottomSheetDialog;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.transaction.GetTransactionList;
 import edi.md.petrolcabinet.remote.transaction.Transaction;
 import edi.md.petrolcabinet.utils.BaseEnum;

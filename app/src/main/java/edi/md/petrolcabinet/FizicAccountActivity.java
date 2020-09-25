@@ -28,8 +28,8 @@ import javax.crypto.spec.SecretKeySpec;
 import edi.md.petrolcabinet.customindicator.MyPageIndicator;
 import edi.md.petrolcabinet.fragments.slidePage.FragmentBalanceInfo;
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.contract.Contract;
 import io.realm.Realm;
 

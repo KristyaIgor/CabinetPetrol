@@ -21,10 +21,10 @@ import java.util.List;
 import edi.md.petrolcabinet.BaseApp;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.adapters.PricesAdapter;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
 import edi.md.petrolcabinet.remote.prices.GetPriceResult;
 import edi.md.petrolcabinet.remote.prices.Price;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,8 +65,6 @@ public class FragmentPrices extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
-                CommandServices commandServices = ApiUtils.getCommandServices(baseUrl);
-
                 getPrices(commandServices,true);
             }
         });
@@ -92,7 +90,53 @@ public class FragmentPrices extends Fragment {
     }
 
     private void getPrices(CommandServices commandServices,boolean onRefresh){
+//        commandServices.getPrices(BaseApp.getAppInstance().getCompanyClicked().getServiceName())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Subscriber<GetPriceResult>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        progressBar.setVisibility(View.GONE);
+//                        swipeRefreshLayout.setVisibility(View.GONE);
+//                        layoutError.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    @Override
+//                    public void onNext(GetPriceResult priceResult) {
+//                        if (priceResult != null && priceResult.getErrorCode() == 0) {
+//                            List<Price> prices = priceResult.getPrices();
+//                            if(prices.size() > 0){
+//                                PricesAdapter adapter = new PricesAdapter(getContext(), prices);
+//
+//                                if(onRefresh)
+//                                    swipeRefreshLayout.setRefreshing(false);
+//                                else{
+//                                    progressBar.setVisibility(View.GONE);
+//                                }
+//
+//                                swipeRefreshLayout.setVisibility(View.VISIBLE);
+//                                listView.setAdapter(adapter);
+//                            }
+//                            else{
+//                                progressBar.setVisibility(View.GONE);
+//                                swipeRefreshLayout.setVisibility(View.GONE);
+//                                layoutListEmpty.setVisibility(View.VISIBLE);
+//                            }
+//                        }
+//                        else{
+//                            progressBar.setVisibility(View.GONE);
+//                            swipeRefreshLayout.setVisibility(View.GONE);
+//                            layoutError.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                });
+
         Call<GetPriceResult> call = commandServices.getPrices(BaseApp.getAppInstance().getCompanyClicked().getServiceName());
+
         call.enqueue(new Callback<GetPriceResult>() {
             @Override
             public void onResponse(Call<GetPriceResult> call, Response<GetPriceResult> response) {
