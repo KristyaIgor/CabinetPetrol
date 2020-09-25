@@ -24,7 +24,7 @@ public class AllTransactionListAdapter extends RecyclerView.Adapter<AllTransacti
 
     private static final String TAG = "TransactionListAdapter";
 
-    //vars
+    //vars byjgkyugf
     private static List<Transaction>  mNames = new ArrayList<>();
     private Context mContext;
 
