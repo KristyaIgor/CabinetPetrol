@@ -16,7 +16,7 @@ public class GetPriceResult {
     private Integer errorCode;
     @SerializedName("ErrorMessage")
     @Expose
-    private Object errorMessage;
+    private String errorMessage;
     @SerializedName("Prices")
     @Expose
     private List<Price> prices = null;
@@ -29,11 +29,11 @@ public class GetPriceResult {
         this.errorCode = errorCode;
     }
 
-    public Object getErrorMessage() {
+    public String getErrorMessage() {
         return errorMessage;
     }
 
-    public void setErrorMessage(Object errorMessage) {
+    public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

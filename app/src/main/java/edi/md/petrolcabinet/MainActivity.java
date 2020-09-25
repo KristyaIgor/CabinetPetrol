@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                             intoDbCompany.setName(company.getName());
                             intoDbCompany.setLogo(company.getLogo());
                             intoDbCompany.setIp(company.getIp());
-//                            intoDbCompany.setIdPress(-1);
+                            intoDbCompany.setActive(company.isActive());
                             intoDbCompany.setServiceName(company.getServiceName());
                         });
                     }

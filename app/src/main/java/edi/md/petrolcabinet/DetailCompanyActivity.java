@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edi.md.petrolcabinet.realm.objects.Company;
-import edi.md.petrolcabinet.remote.ApiUtils;
-import edi.md.petrolcabinet.remote.CommandServices;
 import edi.md.petrolcabinet.remote.petrolStation.GetPetrolStationResult;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.utils.DetailCompanyListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,19 +61,14 @@ public class DetailCompanyActivity extends AppCompatActivity {
 
         titleCompany.setText(companySelected.getName());
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(view -> finish());
 
         List<View> list = new ArrayList<>();
         list.add(layoutContract);
         list.add(layoutPrices);
         list.add(layoutMaps);
 
-        DetailCompanyListener listener = new DetailCompanyListener(this, list);
+        DetailCompanyListener listener = new DetailCompanyListener(DetailCompanyActivity.this, list);
 
         layoutContract.setOnClickListener(listener);
         layoutPrices.setOnClickListener(listener);
@@ -84,13 +79,43 @@ public class DetailCompanyActivity extends AppCompatActivity {
         CommandServices commandServices = ApiUtils.getCommandServices(companySelected.getIp());
         Call<GetPetrolStationResult> call = commandServices.getPetrolStation(companySelected.getServiceName());
 
+        enqueueCall(call);
+    }
+
+    private void enqueueCall(Call<GetPetrolStationResult> call) {
+//        Log.d("TAG", "enqueueCall company ip: " + companySelected.getIp());
+//        Log.d("TAG", "enqueueCall company ip: " + companySelected.getServiceName());
+//
+//        CommandServices commandServices = ApiUtils.getCommandServices(companySelected.getIp());
+//        commandServices.getPetrolStation(companySelected.getServiceName())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Subscriber<GetPetrolStationResult>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.d("TAG","onCompleted");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.d("TAG","onError get petrol Stations: " + e.getMessage() );
+//                    }
+//
+//                    @Override
+//                    public void onNext(GetPetrolStationResult getPetrolStationResult) {
+//                        if(getPetrolStationResult != null && getPetrolStationResult.getErrorCode() == 0 ){
+//                            BaseApp.getAppInstance().setPetrolStations(getPetrolStationResult.getPetrolStations());
+//                        }
+//                    }
+//                });
+
+
         call.enqueue(new Callback<GetPetrolStationResult>() {
             @Override
             public void onResponse(Call<GetPetrolStationResult> call, Response<GetPetrolStationResult> response) {
                 if(response.isSuccessful()){
                     GetPetrolStationResult stationResult = response.body();
 
-                    if(stationResult.getErrorCode() == 0 ){
+                    if(stationResult != null && stationResult.getErrorCode() == 0 ){
                         BaseApp.getAppInstance().setPetrolStations(stationResult.getPetrolStations());
                     }
                 }
