@@ -80,7 +80,6 @@ public class SettingsApplicationActivity extends AppCompatActivity {
 
                         }
                     })
-                    .setCancelable(false)
                     .setPositiveButton(getString(R.string.renunt_btn), (dialogInterface, i) -> {
                         dialogInterface.dismiss();
                     })

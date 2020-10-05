@@ -8,6 +8,18 @@
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <!-- if using android.support.v7.widget.PopupMenu -->
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+    </style>
+
+    <style name="PopupMenuTheme" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="PopupMenu" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:popupBackground">@android:color/transparent</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">

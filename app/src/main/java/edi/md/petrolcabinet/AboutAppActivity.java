@@ -1,8 +1,10 @@
 package edi.md.petrolcabinet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,7 +18,7 @@ import androidx.core.content.ContextCompat;
 public class AboutAppActivity extends AppCompatActivity {
 
     ImageButton btnBack;
-    TextView textVersion;
+    TextView textVersion, textPrivacy;
     Context context;
 
     @Override
@@ -33,6 +35,7 @@ public class AboutAppActivity extends AppCompatActivity {
 
         btnBack = findViewById(R.id.image_back_from_about);
         textVersion = findViewById(R.id.text_version_cabinet);
+        textPrivacy = findViewById(R.id.privacy_policy_app);
 
         context = this;
 
@@ -43,11 +46,19 @@ public class AboutAppActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        textVersion.setText("ver " + version);
+        textVersion.setText(getString(R.string.version_text) + version);
 
 
         btnBack.setOnClickListener(view1 -> {
             finish();
+        });
+
+        textPrivacy.setOnClickListener(view1 -> {
+            String url = "https://edi.md/privacy/privacy_policy.html";
+
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
     }
 }

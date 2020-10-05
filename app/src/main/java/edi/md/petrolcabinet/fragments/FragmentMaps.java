@@ -73,7 +73,6 @@ public class FragmentMaps extends Fragment {
             googleMap.setMyLocationEnabled(true);
 
             if (mapView != null && mapView.getView().findViewById(Integer.parseInt("1")) != null) {
-                RelativeLayout rl = mapView.getView().findViewById(R.id.bottom_sheet);
                 // Get the button view
                 ImageView locationButton = ((ImageView) mapView.getView().findViewById(Integer.parseInt("2")));
                 // and next place it, on bottom right (as Google Maps app)

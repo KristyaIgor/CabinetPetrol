@@ -36,7 +36,6 @@ public class Accounts extends RealmObject {
     //forCard
     private byte[] pin;
     private String code;
-    private String cardId;
 
     public Double getAmount() {
         return amount;
@@ -220,9 +219,5 @@ public class Accounts extends RealmObject {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getCardId() {
-        return cardId;
     }
 }
