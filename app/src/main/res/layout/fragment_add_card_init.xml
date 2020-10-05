@@ -117,7 +117,7 @@
         android:focusable="true"
         android:text="@string/sign_in"
         android:textAllCaps="true"
-        android:textColor="#00C569"
+        android:textColor="@color/green"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

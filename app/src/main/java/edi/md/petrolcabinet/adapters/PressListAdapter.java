@@ -1,13 +1,12 @@
 package edi.md.petrolcabinet.adapters;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
-import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,11 +58,9 @@ public class PressListAdapter extends RealmRecyclerViewAdapter<PressObjects, Pre
                 holder.companyLogo.setImageBitmap(decodedByte);
             }
             holder.pressTitle.setText(item.getHeader());
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                holder.pressContent.setText(Html.fromHtml(item.getContent(),Html.FROM_HTML_MODE_COMPACT));
-            }
-            else
-                holder.pressContent.setText(Html.fromHtml(item.getContent()));
+            String content = item.getContent();
+            holder.contentView.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
+
             holder.pressDate.setText(simpleDateFormat.format(item.getDateTime()));
 
             if(item.getImage() != null && item.getImage().length > 0){
@@ -90,8 +87,9 @@ public class PressListAdapter extends RealmRecyclerViewAdapter<PressObjects, Pre
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView companyName, pressDate, pressTitle, pressContent;
+        TextView companyName, pressDate, pressTitle;
         ImageView companyLogo, pressImage;
+        WebView contentView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,7 +97,7 @@ public class PressListAdapter extends RealmRecyclerViewAdapter<PressObjects, Pre
             companyLogo  = itemView.findViewById(R.id.image_logo_press_company);
             pressDate = itemView.findViewById(R.id.text_date_press);
             pressTitle = itemView.findViewById(R.id.text_title_press);
-            pressContent = itemView.findViewById(R.id.text_press_content);
+            contentView = itemView.findViewById(R.id.web_view_press_item);
             pressImage = itemView.findViewById(R.id.image_press);
         }
     }

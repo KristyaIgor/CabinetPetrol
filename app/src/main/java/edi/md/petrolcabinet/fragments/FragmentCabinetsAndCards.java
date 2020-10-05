@@ -222,7 +222,7 @@ public class FragmentCabinetsAndCards extends Fragment {
         authenticateCard.setPassword(decrypt(client.getPin(), BaseApp.getAppInstance().getHuyYou()));
 
         String sid = client.getSid();
-        String id = client.getCardId();
+        String id = client.getId();
 
         CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());
         Call<GetCardDetailInfoResponse> cardCall = commandServices.getCardDetailInfo(BaseApp.getAppInstance().getCompanyClicked().getServiceName(), sid, id,"0");

@@ -83,32 +83,6 @@ public class DetailCompanyActivity extends AppCompatActivity {
     }
 
     private void enqueueCall(Call<GetPetrolStationResult> call) {
-//        Log.d("TAG", "enqueueCall company ip: " + companySelected.getIp());
-//        Log.d("TAG", "enqueueCall company ip: " + companySelected.getServiceName());
-//
-//        CommandServices commandServices = ApiUtils.getCommandServices(companySelected.getIp());
-//        commandServices.getPetrolStation(companySelected.getServiceName())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Subscriber<GetPetrolStationResult>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        Log.d("TAG","onCompleted");
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.d("TAG","onError get petrol Stations: " + e.getMessage() );
-//                    }
-//
-//                    @Override
-//                    public void onNext(GetPetrolStationResult getPetrolStationResult) {
-//                        if(getPetrolStationResult != null && getPetrolStationResult.getErrorCode() == 0 ){
-//                            BaseApp.getAppInstance().setPetrolStations(getPetrolStationResult.getPetrolStations());
-//                        }
-//                    }
-//                });
-
-
         call.enqueue(new Callback<GetPetrolStationResult>() {
             @Override
             public void onResponse(Call<GetPetrolStationResult> call, Response<GetPetrolStationResult> response) {

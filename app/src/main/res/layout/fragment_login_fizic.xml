@@ -105,7 +105,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:text="@string/sign_up"
-        android:textColor="#00C569"
+        android:textColor="@color/green"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

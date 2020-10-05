@@ -1,95 +1,100 @@
 package edi.md.petrolcabinet.remoteSettings;
 
 
+import android.content.Context;
+
+import edi.md.petrolcabinet.BaseApp;
+import edi.md.petrolcabinet.R;
 /**
  * Created by Igor on 10.08.2020
  */
 
 public class RemoteException {
+    static Context context = BaseApp.getAppInstance().getBaseContext();
 
     public static String getServiceException(int errorCode) {
 
         switch (errorCode){
             case -1:
-                return "Eroare internă";
+                return context.getString(R.string.remote_exception__1);
             case 1:
-                return "Sesiunea nu este valabilă!";
+                return context.getString(R.string.remote_exception_1);
             case 2:
-                return "Nu ați specificat identificatorul!";
+                return context.getString(R.string.remote_exception_2); 
             case 3:
-                return "Nu ați specificat numărul dvs. de telefon sau parola!";
+                return context.getString(R.string.remote_exception_3);  
             case 4:
-                return "Client cu un astfel de identificator nu a fost găsit!";
+                return context.getString(R.string.remote_exception_4); 
             case 5:
-                return "Sesiunea nu există!";
+                return context.getString(R.string.remote_exception_5); 
             case 6:
-                return "Sesiunea nu este validă, PIN co nevalid!";
+                return context.getString(R.string.remote_exception_6); 
             case 7:
-                return "ID-ul contractului nu este valabil!";
+                return context.getString(R.string.remote_exception_7);
             case 8:
-                return "Contractul nu există!";
+                return context.getString(R.string.remote_exception_8);  
             case 9:
-                return "Cardul cu un astfel de identificator nu a fost găsit!";
+                return context.getString(R.string.remote_exception_9);
             case 10:
-                return "ID-ul cardului nu este valabil!";
+                return context.getString(R.string.remote_exception_10);  
             case 11:
-                return "Cardul clientului nu are un cont propriu!";
+                return context.getString(R.string.remote_exception_11);
             case 12:
-                return "Bani insuficienți pe contul de client!";
+                return context.getString(R.string.remote_exception_12); 
             case 13:
-                return "Raportul nu există!";
+                return context.getString(R.string.remote_exception_13); 
             case 14:
-                return "Întreprinderea nu există!";
+                return context.getString(R.string.remote_exception_14);  
             case 15:
-                return "Tip de autentificare necunoscut!";
+                return context.getString(R.string.remote_exception_15); 
             case 16:
-                return "Clientul a fost dezactivat!";
+                return context.getString(R.string.remote_exception_16); 
             case 17:
-                return "Parolă veche nu este corectă!";
+                return context.getString(R.string.remote_exception_17); 
             case 18:
-                return "Contul clientului nu există!";
+                return context.getString(R.string.remote_exception_18);
             case 19:
-                return "Grupul de sortiment duplicat!";
+                return context.getString(R.string.remote_exception_19);  
             case 20:
-                return "Identificarea cardului nu este valabil Clientul nu este determinat!";
+                return context.getString(R.string.remote_exception_20);
             case 21:
-                return "Clientul cu un astfel de e-mail nu a fost găsit!";
+                return context.getString(R.string.remote_exception_21); 
             case 22:
-                return "PIN nevalid!";
+                return context.getString(R.string.remote_exception_22); 
             case 23:
-                return "ID-ul de asortiment nu a fost găsit!";
+                return context.getString(R.string.remote_exception_23);  
             case 24:
-                return "ID de asortiment nevalid!";
+                return context.getString(R.string.remote_exception_24); 
             case 25:
-                return "Numărul de telefon pe care l-ați introdus este deja atribuit unui cont de utilizator existent!";
+                return context.getString(R.string.remote_exception_25); 
             case 26:
-                return "Asortiment duplicat!";
+                return context.getString(R.string.remote_exception_26);
             case 27:
-                return "ID-ul de asortiment nu a fost găsit în contract!";
+                return context.getString(R.string.remote_exception_27); 
             case 28:
-                return "Grup de asortiment nevalid!";
+                return context.getString(R.string.remote_exception_28); 
             case 29:
-                return "ID-ul de asortiment nu a fost găsit în card!";
+                return context.getString(R.string.remote_exception_29);  
             case 30:
-                return "Factura nu există!";
+                return context.getString(R.string.remote_exception_30); 
             case 31:
-                return "Modelul de raport nu există!";
+                return context.getString(R.string.remote_exception_31);
             case 32:
-                return "Factura după acest ID nu există!";
+                return context.getString(R.string.remote_exception_32); 
             case 33:
-                return "Interzis să schimbi sortimentul de pe Internet!";
+                return context.getString(R.string.remote_exception_33); 
             case 34:
-                return "Cardul este dezactivat!";
+                return context.getString(R.string.remote_exception_34); 
             case 35:
-                return "Înregistrarea există deja!";
+                return context.getString(R.string.remote_exception_35); 
             case 36:
-                return "Contract pentru cardul dat nu există!";
+                return context.getString(R.string.remote_exception_36); 
             case 37:
-                return "PIN codul nu este valabil!";
+                return context.getString(R.string.remote_exception_37); 
             case 38:
-                return "Contul cardului dat este inactiv!";
+                return context.getString(R.string.remote_exception_38); 
             default:
-                return "Eroare necunoscută";
+                return context.getString(R.string.remote_exception_unknow); 
         }
     }
 }

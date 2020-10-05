@@ -1,34 +1,48 @@
 package edi.md.petrolcabinet.fragments;
 
 
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.text.Layout;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import edi.md.petrolcabinet.DetailNewsActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.adapters.PressListAdapter;
 import edi.md.petrolcabinet.realm.objects.Company;
 import edi.md.petrolcabinet.realm.objects.PressObjects;
-import edi.md.petrolcabinet.remoteSettings.ApiUtils;
-import edi.md.petrolcabinet.remoteSettings.CommandServices;
-import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.remote.press.PressList;
 import edi.md.petrolcabinet.remote.press.PressResponse;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
+import edi.md.petrolcabinet.utils.RecyclerItemClickListener;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -44,7 +58,7 @@ import retrofit2.Response;
 public class FragmentNews extends Fragment {
 
     RecyclerView recyclerView;
-    Spinner companySpinner;
+//    Spinner companySpinner;
     List<Company> companyList = new ArrayList<>();
     Realm mRealm;
 
@@ -52,20 +66,44 @@ public class FragmentNews extends Fragment {
 
     PressListAdapter adapter;
 
+    ImageView imgArrow;
+    TextView textCompanyName;
+    ConstraintLayout layoutMenu;
+
+    boolean menuShow = false;
+
+    View backgroundDim;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootViewAdmin = inflater.inflate(R.layout.fragment_news, container, false);
+        View rootViewAdmin = inflater.inflate(R.layout.fragment_news_v1, container, false);
 
         recyclerView = rootViewAdmin.findViewById(R.id.list_news);
-        companySpinner = rootViewAdmin.findViewById(R.id.spinner_news);
+//        companySpinner = rootViewAdmin.findViewById(R.id.spinner_news);
+
+        layoutMenu = rootViewAdmin.findViewById(R.id.csl_filtering);
+        textCompanyName = rootViewAdmin.findViewById(R.id.text_selected_menu_item);
+        imgArrow = rootViewAdmin.findViewById(R.id.image_arrow_menu);
+        backgroundDim = rootViewAdmin.findViewById(R.id.view_background_news);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mRealm = Realm.getDefaultInstance();
 
+        Context wrapper = new ContextThemeWrapper(getContext(), R.style.PopupMenuTheme);
+        PopupMenu popup = new PopupMenu(wrapper, layoutMenu, Gravity.CENTER);
+        SpannableString s = new SpannableString(getString(R.string.all_company_news));
 
+        s.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s.length(), 0);
+        s.setSpan(new RelativeSizeSpan(1.4f), 0, s.length(), 0);
+        s.setSpan(new StyleSpan(Typeface.BOLD), 0, s.length(), 0);
+        popup.getMenu().add(s).setNumericShortcut((char) 0);
+
+        textCompanyName.setText(getString(R.string.all_company_news));
+
+        TransitionDrawable transition = (TransitionDrawable) backgroundDim.getBackground();
 
         RealmResults<Company> companyRealmResults = mRealm.where(Company.class).equalTo("active",true).findAll();
         if(!companyRealmResults.isEmpty()){
@@ -76,84 +114,129 @@ public class FragmentNews extends Fragment {
 
             for(Company company : companyList){
                 companyName.add(company.getName());
+
+                SpannableString s2 = new SpannableString(company.getName());
+
+                s2.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s2.length(), 0);
+                s2.setSpan(new RelativeSizeSpan(1.4f), 0, s2.length(), 0);
+                s2.setSpan(new StyleSpan(Typeface.BOLD), 0, s2.length(), 0);
+
+                popup.getMenu().add(s2);
             }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_custom, R.id.text_spiner_item, companyName);
-            adapter.setDropDownViewResource(R.layout.spinner_dropdown_custom);
-
-            companySpinner.setAdapter(adapter);
-            companySpinner.setSelection(0);
         }
 
-        companySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i == 0){
-                    if(!companyList.isEmpty()){
-
-                        results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).findAll();
-                        adapter = new PressListAdapter(results,true);
-                        recyclerView.setAdapter(adapter);
+        results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).findAll();
+        adapter = new PressListAdapter(results,true);
+        recyclerView.setAdapter(adapter);
 
 
-//                        for(Company company: companyList){
+        for(Company company: companyList){
+
+            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
+            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
+
+            enqueueCall(call, company);
+        }
+
+        layoutMenu.setOnClickListener(view -> {
+            if(!menuShow){
+                backgroundDim.setVisibility(View.VISIBLE);
+
+                transition.startTransition(300);
+
+                ObjectAnimator rotate = ObjectAnimator.ofFloat(imgArrow, "rotation", 0f, 180f);
+                rotate.setDuration(300);
+                rotate.start();
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        String itemName = String.valueOf(item.getTitle());
+
+                        textCompanyName.setText(itemName);
+
+                        for(Company cpny : companyList){
+                            String cmpnyName = cpny.getName();
+
+                            if(itemName.equals(cmpnyName)){
+                                results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).equalTo("companyId", cpny.getId()).findAll();
+                                adapter = new PressListAdapter(results,true);
+                                recyclerView.setAdapter(adapter);
+
+//                                CommandServices commandServices = ApiUtils.getCommandServices(cpny.getIp());
+//                                Call<PressResponse> call = commandServices.getPress(cpny.getServiceName(),cpny.getIdPress(),0);
 //
-//                            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
-//                            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
-//
-//                            enqueueCall(call, company);
-//                        }
+//                                enqueueCall(call, cpny);
+                                break;
+                            }
+                            else if(itemName.equals(getString(R.string.all_company_news))){
+                                results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).findAll();
+                                adapter = new PressListAdapter(results,true);
+                                recyclerView.setAdapter(adapter);
+
+
+                                for(Company company: companyList){
+
+                                    CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
+                                    Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
+
+                                    enqueueCall(call, company);
+                                }
+
+                                Toast.makeText(getContext(), "Selected company: " + itemName, Toast.LENGTH_SHORT).show();
+
+                                break;
+                            }
+                        }
+                        Toast.makeText(getContext(), "Selected company: " + itemName, Toast.LENGTH_SHORT).show();
+                        return true;
                     }
-                }
-                else{
-                    int position = i - 1;
+                });
+                popup.show();
 
-                    Company company =  companyList.get(position);
-
-                    results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).equalTo("companyId", company.getId()).findAll();
-                    adapter = new PressListAdapter(results,true);
-                    recyclerView.setAdapter(adapter);
-
-                    CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
-                    Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
-
-                    enqueueCall(call, company);
-                }
+                menuShow = true;
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            else{
+                popup.dismiss();
             }
         });
 
+        popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                backgroundDim.setVisibility(View.GONE);
+
+                transition.reverseTransition(300);
+
+                ObjectAnimator rotate = ObjectAnimator.ofFloat(imgArrow, "rotation", 180f, 0f);
+                rotate.setDuration(300);
+                rotate.start();
+
+                menuShow = false;
+            }
+        });
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                PressObjects press = adapter.getItem(position);
+                String comId = press.getCompanyId();
+                int idPress = press.getId();
+
+                Intent intent = new Intent(getContext(), DetailNewsActivity.class);
+                intent.putExtra("id",idPress);
+                intent.putExtra("companyId",comId);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+            }
+        }));
+
         return rootViewAdmin;
     }
-
-//    private void fetchData(String serviceName) {
-//        compositeDisposable.add(commandServices.getPressRx(serviceName, -1, 0)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<PressResponse>() {
-//                    @Override
-//                    public void accept(PressResponse posts) throws OnErrorNotImplementedException {
-//                        displayData(posts.getPressList());
-//                    }
-//
-//
-//                }));
-//    }
-
-//    private void displayData(List<PressList> posts) {
-//        NewsViewAdapter adapter = new NewsViewAdapter(getContext(),posts);
-//        recyclerView.setAdapter(adapter);
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        compositeDisposable.clear();
-//        super.onStop();
-//    }
 
     private void enqueueCall(Call<PressResponse> call, Company company) {
         call.enqueue(new Callback<PressResponse>() {
@@ -210,16 +293,16 @@ public class FragmentNews extends Fragment {
 //                        recyclerView.setAdapter(adapter);
                     }
                     else{
-                        String msg = RemoteException.getServiceException(pressResponse.getErrorCode());
-
-                        new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
-                                .setTitle(getString(R.string.oops_text)      )
-                                .setMessage(msg)
-                                .setCancelable(false)
-                                .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
-                                    dialogInterface.dismiss();
-                                })
-                                .show();
+//                        String msg = RemoteException.getServiceException(pressResponse.getErrorCode());
+//
+//                        new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+//                                .setTitle(getString(R.string.oops_text))
+//                                .setMessage(company.getName() + " : " + msg)
+//                                .setCancelable(false)
+//                                .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
+//                                    dialogInterface.dismiss();
+//                                })
+//                                .show();
                     }
                 }
                 else{
@@ -229,14 +312,14 @@ public class FragmentNews extends Fragment {
 
             @Override
             public void onFailure(Call<PressResponse> call, Throwable t) {
-                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
-                        .setTitle(getString(R.string.oops_text)      )
-                        .setMessage(getString(R.string.dialog_failure_service) + t.getMessage())
-                        .setCancelable(false)
-                        .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
-                            dialogInterface.dismiss();
-                        })
-                        .show();
+//                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
+//                        .setTitle(getString(R.string.oops_text)      )
+//                        .setMessage(getString(R.string.dialog_failure_service) + t.getMessage())
+//                        .setCancelable(false)
+//                        .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
+//                            dialogInterface.dismiss();
+//                        })
+//                        .show();
             }
         });
     }

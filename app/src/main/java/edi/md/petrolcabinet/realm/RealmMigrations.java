@@ -65,5 +65,9 @@ public class RealmMigrations implements RealmMigration {
 
             oldVersion++;
         }
+        if(oldVersion == 6){
+            schema.get("Accounts").removeField("cardId");
+            oldVersion++;
+        }
     }
 }

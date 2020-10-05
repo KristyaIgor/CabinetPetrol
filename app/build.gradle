@@ -88,4 +88,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:19.2.0'
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+
+    //Add html text view
+    implementation 'org.sufficientlysecure:html-textview:4.0'
 }

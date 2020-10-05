@@ -66,7 +66,8 @@ public class SignInBottomSheetDialog extends BottomSheetDialogFragment {
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
         logo.setImageBitmap(decodedByte);
-        title.setText(getString(R.string.welcome_message_comapny) + company.getName());
+        title.setText(getString(R.string.authentificate_cabinet_title) + company.getName());
+//        title.setText(getString(R.string.welcome_message_comapny) + company.getName());
 
         fgManager.beginTransaction().replace(R.id.container_login,new FragmentLoginFizic()).commit();
 

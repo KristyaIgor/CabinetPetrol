@@ -110,7 +110,8 @@ public class SignUpBottomSheetDialog extends BottomSheetDialogFragment {
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
         logo.setImageBitmap(decodedByte);
-        title.setText(getString(R.string.welcome_message_comapny) + company.getName());
+        title.setText(getString(R.string.first_registration_title)+ company.getName());
+//        title.setText(getString(R.string.welcome_message_comapny) + company.getName());
 
         btn_signUp.setOnClickListener(view -> {
             String card = cardCodeET.getText().toString();

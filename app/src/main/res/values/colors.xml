@@ -17,4 +17,6 @@
 
     <color name="remain_chart">#79D2DE</color>
     <color name="consum_chart">#1940D9</color>
+
+    <color name="view_news_background">#99000000</color>
 </resources>

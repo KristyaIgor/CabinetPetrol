@@ -50,7 +50,7 @@ public class BaseApp extends Application {
 
         Realm.init(this);
 
-        final RealmConfiguration configuration = new RealmConfiguration.Builder().name("cabinet.realm").schemaVersion(6).migration(new RealmMigrations()).build();
+        final RealmConfiguration configuration = new RealmConfiguration.Builder().name("cabinet.realm").schemaVersion(7).migration(new RealmMigrations()).build();
         Realm.setDefaultConfiguration(configuration);
         Realm.getInstance(configuration);
 
