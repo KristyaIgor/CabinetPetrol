@@ -20,16 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <TextView
             android:id="@+id/image_contract_item"
             android:layout_width="71dp"
             android:layout_height="70dp"
             android:layout_marginStart="15dp"
+            android:background="@drawable/ic_circle_switch_selected"
+            android:gravity="center"
             android:scaleType="fitCenter"
+            android:text="RV"
+            android:textColor="@android:color/white"
+            android:textSize="34dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/persoana_fizica" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_clientname_contract"

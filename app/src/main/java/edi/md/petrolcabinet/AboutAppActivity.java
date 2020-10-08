@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 public class AboutAppActivity extends AppCompatActivity {
 
     ImageButton btnBack;
-    TextView textVersion, textPrivacy;
+    TextView textVersion, textPrivacy, textInfo;
     Context context;
 
     @Override
@@ -36,6 +36,7 @@ public class AboutAppActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.image_back_from_about);
         textVersion = findViewById(R.id.text_version_cabinet);
         textPrivacy = findViewById(R.id.privacy_policy_app);
+        textInfo = findViewById(R.id.text_info_app);
 
         context = this;
 
@@ -47,7 +48,7 @@ public class AboutAppActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         textVersion.setText(getString(R.string.version_text) + version);
-
+        textInfo.setText(getString(R.string.app_name) + getString(R.string.cabinet_petrol_aplicatie_info));
 
         btnBack.setOnClickListener(view1 -> {
             finish();

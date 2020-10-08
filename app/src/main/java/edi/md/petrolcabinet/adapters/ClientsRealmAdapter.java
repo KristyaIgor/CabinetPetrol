@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -29,7 +28,7 @@ public class ClientsRealmAdapter extends RealmBaseAdapter<Accounts> implements L
     private static class ViewHolder {
         TextView txtName;
         TextView txtNr;
-        ImageView icon;
+        TextView icon;
     }
 
     public ClientsRealmAdapter(Context context, @Nullable OrderedRealmCollection<Accounts> data) {
@@ -50,7 +49,7 @@ public class ClientsRealmAdapter extends RealmBaseAdapter<Accounts> implements L
             convertView = inflater.inflate(R.layout.item_list_user, parent, false);
             viewHolder.txtName = (TextView) convertView.findViewById(R.id.text_clientname_contract);
             viewHolder.txtNr = (TextView) convertView.findViewById(R.id.nr_item_contract);
-            viewHolder.icon = (ImageView) convertView.findViewById(R.id.image_contract_item);
+            viewHolder.icon = (TextView) convertView.findViewById(R.id.image_contract_item);
             convertView.setTag(viewHolder);
 
         } else {
@@ -59,15 +58,23 @@ public class ClientsRealmAdapter extends RealmBaseAdapter<Accounts> implements L
 
         if (dataModel.getTypeClient() == BaseEnum.PerCard){
             viewHolder.txtName.setText(dataModel.getCode() + " / " + dataModel.getName());
-            viewHolder.icon.setImageResource(R.drawable.ic_credit_card);
+//            viewHolder.icon.setImageResource(R.drawable.ic_credit_card);
         }else if (dataModel.getTypeClient() == BaseEnum.PersoanaFizica){
+            String s = dataModel.getName();
+            s = s.replaceAll("^\\s*([a-zA-Z]).*\\s+([a-zA-Z])\\S+$", "$1$2");
+
             viewHolder.txtName.setText(dataModel.getName());
-            viewHolder.icon.setImageResource(R.drawable.persoana_fizica);
+            viewHolder.icon.setText(s);
+//            viewHolder.icon.setImageResource(R.drawable.persoana_fizica);
         }
         else{
+            String s = dataModel.getName();
+            s = s.substring(0,2);
             viewHolder.txtName.setText(dataModel.getName());
-            viewHolder.icon.setImageResource(R.drawable.persoana_juridica);
+            viewHolder.icon.setText(s);
+//            viewHolder.icon.setImageResource(R.drawable.persoana_juridica);
         }
+
         viewHolder.txtNr.setText(context.getString(R.string.disponibil_client_in_list) + dataModel.getBalance());
 
 //        viewHolder.btnSettings.setOnClickListener(view -> {

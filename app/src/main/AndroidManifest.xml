@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailNewsActivity"></activity>
+
+        <activity android:name=".DetailNewsActivity"/>
         <activity android:name=".AboutAppActivity" />
         <activity android:name=".SettingsCardAccountActivity" />
         <activity android:name=".InfoAccountActivity" />
@@ -73,6 +74,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_provider_paths" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

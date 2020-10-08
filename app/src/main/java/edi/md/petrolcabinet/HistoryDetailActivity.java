@@ -1,6 +1,9 @@
 package edi.md.petrolcabinet;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
@@ -130,13 +133,22 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
         PdfDocument document = new PdfDocument();
 
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300,600,1).create();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder( 2481,3507,1).create();
         PdfDocument.Page myPage = document.startPage(myPageInfo);
+        Canvas canvas = myPage.getCanvas();
+
+        Paint paint = new Paint();
+        canvas.drawPaint(paint);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 220, 43, true);
+
+        canvas.drawBitmap(bitmap, 75, 50 , null);
 
         Paint myPaint = new Paint();
-        int x = 10, y=25;
+        int x = 100, y=150;
 
-        myPage.getCanvas().drawText(transaction.getAmount() + " MDL", x, y, myPaint);
+        canvas.drawText(transaction.getAmount() + " MDL", x, y, myPaint);
 
         document.finishPage(myPage);
 
@@ -166,23 +178,35 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     private void shareTransaction(Transaction transaction) {
         String directoryDownload = "";
+        String typeTr = "";
         if(transaction.getAmount() > 0){
+            typeTr = getString(R.string.type_transaction_suplinire);
             directoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + getString(R.string.type_transaction_suplinire) + "-" + transaction.getDocumentDate() + "-" + transaction.getDocumentTime() + ".pdf";
         }
         else{
+            typeTr = getString(R.string.alimentare_type_transaction);
             directoryDownload = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + getString(R.string.alimentare_type_transaction) + "-" + transaction.getDocumentDate() + "-" + transaction.getDocumentTime() + ".pdf";
         }
 
 
         PdfDocument document = new PdfDocument();
 
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(300,600,1).create();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder( 580,820,1).create();
         PdfDocument.Page myPage = document.startPage(myPageInfo);
+        Canvas canvas = myPage.getCanvas();
 
         Paint myPaint = new Paint();
-        int x = 10, y=25;
 
-        myPage.getCanvas().drawText(transaction.getAmount() + " MDL", x, y, myPaint);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark);
+        bitmap = Bitmap.createScaledBitmap(bitmap, 220, 43, true);
+
+        canvas.drawBitmap(bitmap, 180, 50 , myPaint);
+
+        canvas.drawText(typeTr + " " + transaction.getStation(), 80, 110, myPaint);
+
+        canvas.drawLine(50,120,535,121,myPaint);
+
+        canvas.drawText(transaction.getAmount() + " MDL", 80, 140, myPaint);
 
         document.finishPage(myPage);
 
@@ -195,6 +219,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         }
 
         document.close();
+
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());

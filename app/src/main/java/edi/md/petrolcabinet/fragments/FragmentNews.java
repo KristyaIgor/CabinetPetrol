@@ -130,13 +130,13 @@ public class FragmentNews extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        for(Company company: companyList){
-
-            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
-            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
-
-            enqueueCall(call, company);
-        }
+//        for(Company company: companyList){
+//
+//            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
+//            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
+//
+//            enqueueCall(call, company);
+//        }
 
         layoutMenu.setOnClickListener(view -> {
             if(!menuShow){
@@ -232,10 +232,26 @@ public class FragmentNews extends Fragment {
 
             @Override
             public void onLongItemClick(View view, int position) {
+                PressObjects item = adapter.getItem(position);
+                mRealm.executeTransaction(realm ->{
+                    item.deleteFromRealm();
+                });
             }
         }));
 
         return rootViewAdmin;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        for(Company company: companyList){
+
+            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
+            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
+
+            enqueueCall(call, company);
+        }
     }
 
     private void enqueueCall(Call<PressResponse> call, Company company) {

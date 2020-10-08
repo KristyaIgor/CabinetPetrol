@@ -14,14 +14,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import edi.md.petrolcabinet.realm.objects.Accounts;
 import edi.md.petrolcabinet.utils.LocaleHelper;
-import io.realm.Realm;
 
 public class SettingsApplicationActivity extends AppCompatActivity {
-    TextView selectedLanguage;
-    Accounts client;
-    Realm mRealm;
+    TextView selectedLanguage, textItemAboutApp, textItemAboutAppInfo;
     ImageButton btnBack;
     ConstraintLayout layoutLang, layoutWriteUs, layoutAbout;
     Context context;
@@ -35,6 +31,8 @@ public class SettingsApplicationActivity extends AppCompatActivity {
         layoutWriteUs = findViewById(R.id.layout_feeback);
         layoutAbout = findViewById(R.id.layout_about);
         selectedLanguage = findViewById(R.id.text_selected_langauge);
+        textItemAboutApp = findViewById(R.id.text_item_about_app);
+        textItemAboutAppInfo = findViewById(R.id.text_item_about_app_info);
 
         context = this;
 
@@ -47,6 +45,9 @@ public class SettingsApplicationActivity extends AppCompatActivity {
             selectedLanguage.setText("Limba selectată: Română");
         else if(lang.equals("en"))
             selectedLanguage.setText("Selected language: English");
+
+        textItemAboutApp.setText(getString(R.string.despre_program_item_settings) + getString(R.string.app_name));
+        textItemAboutAppInfo.setText(getString(R.string.informatii_cabinet_petrol_settings) + getString(R.string.app_name));
 
         layoutLang.setOnClickListener(view -> {
             new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)

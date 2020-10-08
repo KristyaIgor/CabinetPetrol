@@ -13,7 +13,7 @@
     <string name="juridic_tab">L.entity</string>
     <string name="welcome_message_comapny">Welcome to&#160;</string>
     <string name="title_add_card">Add card&#160;</string>
-    <string name="am_cabinet_personal">You have a cabinet?</string>
+    <string name="am_cabinet_personal">Do you already have a personal cabinet?</string>
     <string name="urm_torul_pas_add_card">NEXT STEP</string>
     <string name="todo">TODO</string>
     <string name="numarul_cardului_add_card">Card number</string>
@@ -21,8 +21,8 @@
     <string name="pin_info_messages">A PIN code message was sent to your phone.\nEnter it below to continue.</string>
 
     <string name="info_card_detail_account">This card belongs to customer <b>%1$s.</b> with the contract number:%2$s valid for the period:%3$s.\nThis card,%4$s, can be used for refueling at any PECO station of the company <b>%5$s</b> according to the terms of the contract.</string>
-    <string name="despre_program">About the program</string>
-    <string name="cabinet_petrol_aplicatie_info">Cabinet Petrol - mobile application for monitoring the accounts/cards of PECO companies.</string>
+    <string name="despre_program">About the application</string>
+    <string name="cabinet_petrol_aplicatie_info">" - easily check your account balance at various CEEC companies. Change the limits, view the fueling history and consumption on each separate card daily, weekly or monthly."</string>
     <string name="reducere_la_produse_activity">Discount on products</string>
     <string name="limit_text">Limit</string>
     <string name="today_limit_time">Today</string>
@@ -35,7 +35,7 @@
     <string name="modificare_parola_activity">Change password</string>
     <string name="change_password_hint_old_pass">Old password</string>
     <string name="change_password_new_pass">New password</string>
-    <string name="change_pass_confirm_pass">Confirm password</string>
+    <string name="change_pass_confirm_pass">Confirm new password</string>
     <string name="change_pass_button">Change</string>
     <string name="menu_company_1_cont">Accounts</string>
     <string name="menu_company_2_prices">Prices</string>
@@ -74,19 +74,19 @@
     <string name="main_menu_news">News</string>
     <string name="notify_activity_title">Notifications</string>
     <string name="suplinire_cont_notify">Filling account</string>
-    <string name="suply_notify_info">Receive notifications of latest refillings</string>
-    <string name="alimentare_notify_info">Receive notifications about the latest fillings</string>
+    <string name="suply_notify_info">Notification of latest refillings</string>
+    <string name="alimentare_notify_info">Notification about the latest fillings</string>
     <string name="news_notify">News</string>
-    <string name="news_notify_info">Receive notifications about the latest news</string>
+    <string name="news_notify_info">Notification about the latest news</string>
     <string name="promo_notify">Promotions</string>
-    <string name="promo_notify_info">Receive notifications about the latest promotions</string>
+    <string name="promo_notify_info">Notification about the latest promotions</string>
     <string name="notification_list_activity_title">List of notifications</string>
     <string name="general_settings_activity_title">General settings</string>
     <string name="lang_item_settings">Language</string>
     <string name="feedback_item_settings">Contact Us</string>
     <string name="feedback_item_settings_info">Leave a message with a review!</string>
-    <string name="despre_program_item_settings">About the program</string>
-    <string name="informatii_cabinet_petrol_settings">Information of application</string>
+    <string name="despre_program_item_settings">"About the "</string>
+    <string name="informatii_cabinet_petrol_settings">"Information of "</string>
     <string name="despre_cont_profil">About the account</string>
     <string name="despre_cont_profil_info">Status, account information</string>
     <string name="notify_profil">Notifications</string>
@@ -94,7 +94,7 @@
     <string name="pass_profil">Password</string>
     <string name="pass_profil_info">Change the password</string>
     <string name="exit_profil">Log-out</string>
-    <string name="exit_profil_info">Delete account</string>
+    <string name="exit_profil_info">Exit from current account</string>
     <string name="despre_card_profil">About the card</string>
     <string name="despre_card_profil_info">Status, card information</string>
     <string name="meniu_card">MENU</string>
@@ -104,7 +104,7 @@
     <string name="limita_pe_zi_edit_card">Limit per day</string>
     <string name="limita_pe_week_edit_card">Weekly limit</string>
     <string name="limita_pe_month_edit_card">Monthly limit</string>
-    <string name="empty_field_set_limit_0">* For empty fields the limit 0 will be assigned</string>
+    <string name="empty_field_set_limit_0">* For blank fields, the limit will be assigned  zero</string>
     <string name="salveaza_btn_edit_card">Save</string>
     <string name="recuperare_parola">Password recovery</string>
     <string name="adresa_e_mail">Email adress</string>
@@ -119,14 +119,14 @@
     <string name="year_limit_time">2020</string>
     <string name="toat_perioada_filter">All period</string>
     <string name="sterge_toate_filtrele">Clear all filters</string>
-    <string name="un_serviciu_dedicat_oamenilor_pentru_oameni">A service dedicated to people for people.</string>
+    <string name="un_serviciu_dedicat_oamenilor_pentru_oameni">Select the button required to connect a <b>Fuel Card</b> or <b>Personal Cabinet</b>.</string>
     <string name="confirm_input_pin">Confirm</string>
     <string name="pasul_precedent_add_card">Previous step</string>
     <string name="verifica_card_data_login">Check</string>
     <string name="renunt_btn">Cancel</string>
     <string name="telefon_sau_e_mail">Phone or email</string>
     <string name="nume_de_utilizator_telefon_sau_e_mail">Username, phone or email</string>
-    <string name="adaug_un_alt_cont_main">Add another account</string>
+    <string name="adaug_un_alt_cont_main">Add new account</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="limit_aditional">Additional limit:</string>
     <string name="zi_limit">Day</string>
@@ -217,10 +217,10 @@
     <string name="msg_notification_disable_promo">Notification for new discount disabled!</string>
     <string name="notification_settings_not_load">Notification not load :(</string>
     <string name="title_exit_msg_rapid">So fast !?</string>
-    <string name="msg_exit_dialog">Are you sure you want to log-out?</string>
+    <string name="msg_exit_dialog">Are you sure you want to log out?</string>
     <string name="btn_yes_dialog">Yes</string>
     <string name="btn_no_dialog">No</string>
-    <string name="dialog_title_select_your_lang">" Hey! Choose your language:"</string>
+    <string name="dialog_title_select_your_lang">Select language</string>
     <string name="send_feedback_msg">Send feedback...</string>
     <string name="title_mail_send_feedback">About Cabinet Petrol!</string>
     <string name="type_notification_received_filling">Refilling</string>
@@ -266,7 +266,7 @@
     <string name="remote_exception_37">PIN code is invalid!</string>
     <string name="remote_exception_38">The given card account is inactive!</string>
     <string name="remote_exception_unknow">Unknown error!</string>
-    <string name="first_registration_title">"Prima înregistrare la "</string>
-    <string name="authentificate_cabinet_title">"Autentificare cabinet "</string>
+    <string name="first_registration_title">"First registration to "</string>
+    <string name="authentificate_cabinet_title">"Login to "</string>
     <string name="version_text">"ver. "</string>
 </resources>

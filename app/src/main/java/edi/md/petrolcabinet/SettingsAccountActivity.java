@@ -45,6 +45,7 @@ public class SettingsAccountActivity extends AppCompatActivity {
         mRealm = Realm.getDefaultInstance();
         clientRealm = BaseApp.getAppInstance().getClientClicked();
 
+
         layoutInfo.setOnClickListener(view -> {
             Intent hist = new Intent(this, InfoAccountActivity.class);
             startActivity(hist);
@@ -59,7 +60,7 @@ public class SettingsAccountActivity extends AppCompatActivity {
         });
         layoutLogout.setOnClickListener(view -> {
             new MaterialAlertDialogBuilder(this,R.style.MaterialAlertDialogCustom)
-                    .setTitle(getString(R.string.title_exit_msg_rapid))
+//                    .setTitle(getString(R.string.title_exit_msg_rapid))
                     .setMessage(getString(R.string.msg_exit_dialog))
                     .setCancelable(false)
                     .setPositiveButton(getString(R.string.btn_yes_dialog), (dialogInterface, i) -> {

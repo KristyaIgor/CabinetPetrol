@@ -40,32 +40,31 @@
                 app:srcCompat="@drawable/ic_info_24px" />
 
             <TextView
-                android:id="@+id/textView511"
+                android:id="@+id/text_item_about_app"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/despre_program_item_settings"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="18dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView521"
+                app:layout_constraintBottom_toTopOf="@+id/text_item_about_app_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewd6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/textView521"
+                android:id="@+id/text_item_about_app_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/informatii_cabinet_petrol_settings"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewd6"
-                app:layout_constraintTop_toBottomOf="@+id/textView511" />
+                app:layout_constraintTop_toBottomOf="@+id/text_item_about_app" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
