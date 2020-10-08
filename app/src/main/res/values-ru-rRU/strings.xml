@@ -14,7 +14,7 @@
     <string name="juridic_tab">Юр. лицо</string>
     <string name="welcome_message_comapny">Добро пожаловать в&#160;</string>
     <string name="title_add_card">Добавить карту&#160;</string>
-    <string name="am_cabinet_personal">У вас есть личный кабинет?</string>
+    <string name="am_cabinet_personal">У вас уже есть личный кабинет?</string>
     <string name="urm_torul_pas_add_card">СЛЕДУЮЩИЙ ШАГ</string>
     <string name="todo">TODO</string>
     <string name="numarul_cardului_add_card">Номер кары</string>
@@ -23,8 +23,8 @@
 
     <string name="info_card_detail_account">Эта карта принадлежит клиенту <b>%1$s.</b> с номером контракта: %2$s, действительным в течение периода :%3$s.
 Эта карта,%4$s, может быть использована для заправки на любой станции PECO компании <b>%5$s</b> в соответствии с условиями контракта.</string>
-    <string name="despre_program">О программе</string>
-    <string name="cabinet_petrol_aplicatie_info">Cabinet Petrol - мобильное приложение для мониторинга счетов/карт компаний PECO.</string>
+    <string name="despre_program">О приложение</string>
+    <string name="cabinet_petrol_aplicatie_info">" - мобильное приложение для мониторинга счетов/карт компаний PECO.\n - легко проверяйте баланс своего счета в различных компаниях PECO. Измените лимиты, просматривайте историю  и потребление по каждой отдельной карте ежедневно, еженедельно или ежемесячно."</string>
     <string name="reducere_la_produse_activity">Скидка на товары</string>
     <string name="limit_text">Лимит</string>
     <string name="today_limit_time">Сегодня</string>
@@ -37,7 +37,7 @@
     <string name="modificare_parola_activity">Изменить пароль</string>
     <string name="change_password_hint_old_pass">Старый пароль</string>
     <string name="change_password_new_pass">Новый пароль</string>
-    <string name="change_pass_confirm_pass">Подтвердите пароль</string>
+    <string name="change_pass_confirm_pass">Подтвердите новый пароль</string>
     <string name="change_pass_button">Изменить</string>
     <string name="menu_company_1_cont">Уч. записи</string>
     <string name="menu_company_2_prices">Цены</string>
@@ -76,20 +76,20 @@
     <string name="main_menu_news">Новости</string>
     <string name="notify_activity_title">Уведомления</string>
     <string name="suplinire_cont_notify">Пополнение</string>
-    <string name="suply_notify_info">Получать уведомления о последних пополнений</string>
+    <string name="suply_notify_info">Уведомления о последних пополнений</string>
     <string name="alimentare_cont_notify">Заправка</string>
-    <string name="alimentare_notify_info">Получать уведомления о последних заправок</string>
+    <string name="alimentare_notify_info">Уведомления о последних заправок</string>
     <string name="news_notify">Новости</string>
-    <string name="news_notify_info">Получать уведомления о последних новостях</string>
+    <string name="news_notify_info">Уведомления о последних новостях</string>
     <string name="promo_notify">Акции</string>
-    <string name="promo_notify_info">Получать уведомления о последних акциях</string>
+    <string name="promo_notify_info">Уведомления о последних акциях</string>
     <string name="notification_list_activity_title">Список уведомлений</string>
     <string name="general_settings_activity_title">Общие настройки</string>
     <string name="lang_item_settings">Язык</string>
     <string name="feedback_item_settings">Напишите нам</string>
     <string name="feedback_item_settings_info">Оставьте сообщение с отзывом!</string>
-    <string name="despre_program_item_settings">О программе</string>
-    <string name="informatii_cabinet_petrol_settings">Информация о масляном кабинете</string>
+    <string name="despre_program_item_settings">"Про "</string>
+    <string name="informatii_cabinet_petrol_settings">"Информация о "</string>
     <string name="despre_cont_profil">Об аккаунте</string>
     <string name="despre_cont_profil_info">Статус, информация об аккаунте</string>
     <string name="notify_profil">Уведомления</string>
@@ -97,7 +97,7 @@
     <string name="pass_profil">Пароль</string>
     <string name="pass_profil_info">Изменить пароль</string>
     <string name="exit_profil">Выход</string>
-    <string name="exit_profil_info">Удалить аккаунт</string>
+    <string name="exit_profil_info">Выйти из текущего аккаунта</string>
     <string name="despre_card_profil">О карте</string>
     <string name="despre_card_profil_info">Статус, информация о карте</string>
     <string name="meniu_card">МЕНЮ</string>
@@ -107,7 +107,7 @@
     <string name="limita_pe_zi_edit_card">Дневной лимит</string>
     <string name="limita_pe_week_edit_card">Недельный лимит</string>
     <string name="limita_pe_month_edit_card">Месячный лимит</string>
-    <string name="empty_field_set_limit_0">* Для пустых полей будет назначен лимит 0</string>
+    <string name="empty_field_set_limit_0">* Для пустых полей будет назначен нулевой лимит</string>
     <string name="salveaza_btn_edit_card">Сохранить</string>
     <string name="recuperare_parola">Восстановление пароля</string>
     <string name="adresa_e_mail">Электронный адрес</string>
@@ -123,14 +123,14 @@
     <string name="year_limit_time">2020</string>
     <string name="toat_perioada_filter">Весь период</string>
     <string name="sterge_toate_filtrele">Очистить все фильтры</string>
-    <string name="un_serviciu_dedicat_oamenilor_pentru_oameni">Служба, посвященная людям для людей.</string>
+    <string name="un_serviciu_dedicat_oamenilor_pentru_oameni">Выберите кнопку, необходимую для подключения <b>Топливной карты</b> или <b>Личного кабинета</b>.</string>
     <string name="confirm_input_pin">Подтвердить</string>
     <string name="pasul_precedent_add_card">Предыдущий шаг</string>
     <string name="verifica_card_data_login">Проверить</string>
     <string name="renunt_btn">Отмена</string>
     <string name="telefon_sau_e_mail">Телефон или электронная почта</string>
     <string name="nume_de_utilizator_telefon_sau_e_mail">Имя пользователя, телефон или электронная почта</string>
-    <string name="adaug_un_alt_cont_main">Добавить другую учетную запись</string>
+    <string name="adaug_un_alt_cont_main">Добавить новую уч. запись</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="limit_aditional">Дополнительный лимит:</string>
     <string name="zi_limit">День</string>
@@ -218,13 +218,13 @@
     <string name="msg_notification_disable_filling">Уведомление об пополнение счета отключены!</string>
     <string name="msg_notification_disable_pay_account">Уведомление об заправках отключены!</string>
     <string name="msg_notification_disable_news">Уведомление о новостях отключены!</string>
-    <string name="msg_notification_disable_promo">Уведомление о новой сакций отключены!</string>
+    <string name="msg_notification_disable_promo">Уведомление о новой акций отключены!</string>
     <string name="notification_settings_not_load">Уведомление не загружается :(</string>
     <string name="title_exit_msg_rapid">Так быстро !?</string>
-    <string name="msg_exit_dialog">Вы уверены, что хотите выйти?</string>
+    <string name="msg_exit_dialog">Вы действительно хотите выйти?</string>
     <string name="btn_yes_dialog">Да</string>
     <string name="btn_no_dialog">Нет</string>
-    <string name="dialog_title_select_your_lang">Привет! Выберите ваш язык:</string>
+    <string name="dialog_title_select_your_lang">Выберите язык</string>
     <string name="send_feedback_msg">Отправить отзыв...</string>
     <string name="title_mail_send_feedback">О приложение Cabinet Petrol!</string>
     <string name="remote_exception__1">Внутренняя ошибка!</string>
@@ -267,7 +267,7 @@
     <string name="remote_exception_37">ПИН-код недействителен!</string>
     <string name="remote_exception_38">Данный карточный счет неактивен!</string>
     <string name="remote_exception_unknow">Неизвестная ошибка!</string>
-    <string name="first_registration_title">"Prima înregistrare la "</string>
-    <string name="authentificate_cabinet_title">"Autentificare cabinet "</string>
+    <string name="first_registration_title">"Первая регистрация в "</string>
+    <string name="authentificate_cabinet_title">"Войти в "</string>
     <string name="version_text">"вер. "</string>
 </resources>
