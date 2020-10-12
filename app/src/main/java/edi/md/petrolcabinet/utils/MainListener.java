@@ -91,7 +91,7 @@ public class MainListener implements View.OnClickListener {
         ImageView image = layout.findViewById(idImg);
 
         text.setTypeface(Typeface.DEFAULT);
-        image.setColorFilter(Color.rgb(0, 197, 105));
+        image.setColorFilter(context.getColor(R.color.green));
     }
 
     public static void setActiveMainLayout(View layout){

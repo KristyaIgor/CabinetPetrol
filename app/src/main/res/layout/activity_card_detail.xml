@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     tools:context=".CardDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_toolbar60"
-        android:background="@drawable/round_toolbar_green"
+        android:background="@drawable/round_toolbar"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,6 @@
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +52,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="Title account"
-            android:textColor="@color/white"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_20_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +167,7 @@
                 android:orientation="vertical"
                 android:visibility="visible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_list_product">
+                tools:listitem="@layout/item_carditem_product_list">
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

@@ -3,8 +3,6 @@ package edi.md.petrolcabinet;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -32,15 +29,15 @@ import edi.md.petrolcabinet.bottomsheet.EditCardLimitBottomSheetDialog;
 import edi.md.petrolcabinet.customindicator.MyPageChartIndicator;
 import edi.md.petrolcabinet.fragments.slidePage.FragmentCardLimitsInfo;
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remoteSettings.ApiUtils;
-import edi.md.petrolcabinet.remoteSettings.CommandServices;
-import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.cardInfo.CardInfo;
 import edi.md.petrolcabinet.remote.cardInfo.CardInfoAssortment;
 import edi.md.petrolcabinet.remote.cardInfo.GetCardInfo;
 import edi.md.petrolcabinet.remote.contract.CardsList;
 import edi.md.petrolcabinet.remote.response.SIDResponse;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.utils.BaseEnum;
 import io.realm.Realm;
 import retrofit2.Call;
@@ -81,13 +78,6 @@ public class CardDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View view = getWindow().getDecorView();
-        Window window = getWindow();
-        view.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        view.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
-
         setContentView(R.layout.activity_card_detail);
 
         title = findViewById(R.id.title_card_name);
@@ -151,6 +141,9 @@ public class CardDetailActivity extends AppCompatActivity {
                 if(cardInfo != null){
                     if(cardInfo.getErrorCode() == 0){
                         CardInfo card = cardInfo.getCard();
+
+                        if(mIndicator != null)
+                            mIndicator.cleanup();
 
                         fragments.add(FragmentCardLimitsInfo.newInstance(card.getDailyLimit(), card.getDailyLimitUsed(),card.getDailyLimitRemain(),card.getLimitType()));
                         fragments.add(FragmentCardLimitsInfo.newInstance(card.getWeeklyLimit(), card.getWeeklyLimitUsed(),card.getWeeklyLimitRemain(),card.getLimitType()));
@@ -274,17 +267,6 @@ public class CardDetailActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 3;
-        }
-    }
-
-    public static void setButtonsTint(int index){
-        if(index == 2)
-            btnRightSwipe.setColorFilter(ContextCompat.getColor(context, R.color.indicator_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
-        else if(index == 0)
-            btnLeftSwipe.setColorFilter(ContextCompat.getColor(context, R.color.indicator_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
-        else{
-            btnRightSwipe.setColorFilter(ContextCompat.getColor(context, R.color.indicator_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
-            btnLeftSwipe.setColorFilter(ContextCompat.getColor(context, R.color.indicator_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
         }
     }
 

@@ -6,23 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".AboutAppActivity">
 
+
+
+
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:tint="#EBFFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/about_app_back2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/FoneColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/about_app_back2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_toolbar60"
-        android:background="@drawable/round_toolbar_green"
+        android:background="@drawable/round_toolbar"
         android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +49,6 @@
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +64,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="@string/despre_program"
-            android:textColor="@android:color/white"
+            android:textColor="?attr/textColor"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="ver 3.0.1"
-        android:textColor="#80000000"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +115,7 @@
         android:layout_marginEnd="32dp"
         android:text="@string/cabinet_petrol_aplicatie_info"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/text_version_cabinet"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,10 +131,12 @@
         android:linksClickable="true"
         android:text="PrivacyPolicy"
         android:textAllCaps="false"
-        android:textColor="#CC000000"
+        android:textColor="?attr/textColor"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,7 +67,7 @@ public class EditCardLimitBottomSheetDialog extends BottomSheetDialogFragment {
         weeklyLimit = root.findViewById(R.id.week_limit);
         monthLayout = root.findViewById(R.id.monthLayout);
         monthLimit = root.findViewById(R.id.month_limit);
-        progressDialog = new ProgressDialog(getContext(), R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(getContext(), R.style.Theme_Material_Dialog_Alert);
         apply = root.findViewById(R.id.button_set_limit_for_card);
 
         CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());

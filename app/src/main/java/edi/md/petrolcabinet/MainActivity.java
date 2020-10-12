@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         fgManager = getSupportFragmentManager();
         context = this;
         activity = this;
-        progressDialog = new ProgressDialog(context,R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(context);
 
         checkCompaniesList ();
 

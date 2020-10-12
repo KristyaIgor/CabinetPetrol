@@ -24,7 +24,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/logo_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTHeme"
         android:usesCleartextTraffic="true">
 
         <activity android:name=".DetailNewsActivity"/>
@@ -33,7 +33,8 @@
         <activity android:name=".InfoAccountActivity" />
         <activity android:name=".NotificationListActivity" />
         <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".SettingsApplicationActivity" />
+        <activity android:name=".SettingsApplicationActivity"
+            android:configChanges="uiMode"/>
         <activity android:name=".NotificationActivity" />
         <activity android:name=".HistoryDetailActivity" />
         <activity android:name=".InformationCardAccountActivity" />
@@ -46,7 +47,7 @@
         <activity android:name=".FizicAccountActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:configChanges="uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,7 +56,8 @@
         </activity>
         <activity android:name=".DetailCompanyActivity" />
         <activity android:name=".JuridicAccountActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:configChanges="uiMode"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -5,7 +5,7 @@
     android:viewportHeight="61">
   <path
       android:pathData="M30.5,30.5m-30.5,0a30.5,30.5 0,1 1,61 0a30.5,30.5 0,1 1,-61 0"
-      android:fillColor="#2ec76c"/>
+      android:fillColor="@color/green"/>
   <path
       android:pathData="M31.91,22.367l8.452,8.453 -8.452,8.452"
       android:strokeLineJoin="round"

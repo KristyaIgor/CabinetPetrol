@@ -52,7 +52,7 @@ public class NotificationActivity extends AppCompatActivity {
         alimSwitch = findViewById(R.id.switch_notification_alimentare);
         newsSwitch = findViewById(R.id.switch_notification_news_person);
         newDiscSwitch = findViewById(R.id.switch_notification_new_discount_person);
-        progressDialog = new ProgressDialog(this, R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(this, R.style.Theme_Material_Dialog_Alert);
 
         String tokenF = getSharedPreferences("firebase",MODE_PRIVATE).getString("token",null);
         clientRealm = BaseApp.getAppInstance().getClientClicked();

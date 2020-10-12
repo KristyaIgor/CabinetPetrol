@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import edi.md.petrolcabinet.realm.objects.PressObjects;
 import io.realm.Realm;
@@ -29,12 +25,6 @@ public class DetailNewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View view = getWindow().getDecorView();
-        Window window = getWindow();
-        view.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        view.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
 
         setContentView(R.layout.activity_detail_news);
 
@@ -56,7 +46,6 @@ public class DetailNewsActivity extends AppCompatActivity {
             textNamePress.setText(press.getHeader());
 
             String presCont = press.getContent();
-
             contentView.loadDataWithBaseURL(null, presCont, "text/html", "utf-8", null);
 
             if (press.getImage() != null && press.getImage().length > 0) {

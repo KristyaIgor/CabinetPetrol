@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECF4E4"
+    android:background="?attr/bgColor"
     tools:context=".JuridicAccountActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/todo"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:rotation="180"
@@ -80,8 +81,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_icon_arrow_left"
-                    tools:srcCompat="@drawable/ic_icon_arrow_left"
-                    android:contentDescription="@string/todo" />
+                    tools:srcCompat="@drawable/ic_icon_arrow_left" />
 
                 <ImageButton
                     android:id="@+id/btn_left_swipe_fizic"
@@ -89,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/todo"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:tint="#B49A00"
@@ -96,8 +97,7 @@
                     app:layout_constraintStart_toStartOf="@+id/screen_slide_fizic_contracts"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_icon_arrow_left"
-                    tools:srcCompat="@drawable/ic_icon_arrow_left"
-                    android:contentDescription="@string/todo" />
+                    tools:srcCompat="@drawable/ic_icon_arrow_left" />
 
                 <LinearLayout
                     android:id="@+id/pagesContainer_fizic"
@@ -136,7 +136,7 @@
                     android:insetBottom="1dp"
                     android:text="@string/account_menu_btn_cards"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_open_history_list"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizic_open_assortment_list"
@@ -159,7 +159,7 @@
                     android:singleLine="true"
                     android:text="@string/account_menu_btn_products"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizicsuplinire"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -182,7 +182,7 @@
                     android:singleLine="true"
                     android:text="@string/account_menu_btn_suply"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_information"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +206,7 @@
                     android:singleLine="true"
                     android:text="@string/account_menu_btn_profil"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +231,7 @@
                     android:singleLine="true"
                     android:text="@string/account_menu_btn_history"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toTopOf="@+id/btn_fizic_notification"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizicsuplinire"
@@ -255,7 +255,7 @@
                     android:singleLine="true"
                     android:text="@string/account_menu_btn_notify"
                     android:textAllCaps="false"
-                    android:textColor="#000000"
+                    android:textColor="?attr/textColor"
                     android:textSize="@dimen/text_18_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_fizic_information"
@@ -313,7 +313,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text=""
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_20_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IS.Petrol</string>
+    <string name="app_name">MyPeco</string>
     <string name="are_you_new_user">Sunteți utilizator nou?</string>
     <string name="sign_up">ÎNSCRIE-TE</string>
     <string name="sign_in">CONECTAȚI-VĂ</string>
@@ -269,4 +269,9 @@
     <string name="first_registration_title">"Prima înregistrare la "</string>
     <string name="authentificate_cabinet_title">"Autentificare la "</string>
     <string name="version_text">"ver. "</string>
+    <string name="theme_title_item_settings">Tema aplicației</string>
+    <string name="light_theme_selected">Temă luminoasă</string>
+    <string name="dark_theme_selected">Temă întunecată</string>
+    <string name="system_theme_selected">Implicit de sistem</string>
+    <string name="msg_dialog_selected_theme">Alege tema aplicației</string>
 </resources>

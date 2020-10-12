@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/bgColor"
     tools:context=".AssortmentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_fizic"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_toolbar60"
-        android:background="@drawable/round_toolbar_green"
+        android:background="@drawable/round_toolbar"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="@string/reducere_la_produse_activity"
-            android:textColor="@android:color/white"
+            android:textColor="?attr/textColor"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +42,6 @@
             android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
-            android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

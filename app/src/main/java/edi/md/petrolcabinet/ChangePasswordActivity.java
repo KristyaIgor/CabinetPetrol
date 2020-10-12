@@ -79,7 +79,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         etOldPass = findViewById(R.id.editTextOldPass);
         etNewPass = findViewById(R.id.editTextNewPassword);
         etConfirmNewPass = findViewById(R.id.editTextConfirmNewPassword);
-        progressDialog = new ProgressDialog(this, R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(this, R.style.Theme_Material_Dialog_Alert);
 
         clientRealm = BaseApp.getAppInstance().getClientClicked();
         mRealm = Realm.getDefaultInstance();

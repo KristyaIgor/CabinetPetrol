@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">IS.Petrol</string>
+<resources><string name="app_name">MyPeco</string>
     <string name="are_you_new_user">You are a new user?</string>
     <string name="sign_up">REGISTER</string>
     <string name="sign_in">CONNECT</string>
@@ -269,4 +269,9 @@
     <string name="first_registration_title">"First registration to "</string>
     <string name="authentificate_cabinet_title">"Login to "</string>
     <string name="version_text">"ver. "</string>
+    <string name="theme_title_item_settings">Application theme</string>
+    <string name="light_theme_selected">Light theme</string>
+    <string name="dark_theme_selected">Dark theme</string>
+    <string name="system_theme_selected">System default</string>
+    <string name="msg_dialog_selected_theme">Choose the theme of the application</string>
 </resources>

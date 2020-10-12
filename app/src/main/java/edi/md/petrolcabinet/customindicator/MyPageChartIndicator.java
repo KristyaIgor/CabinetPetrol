@@ -1,7 +1,10 @@
 package edi.md.petrolcabinet.customindicator;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,7 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
-import edi.md.petrolcabinet.CardDetailActivity;
 import edi.md.petrolcabinet.R;
 
 /**
@@ -82,15 +84,23 @@ public class MyPageChartIndicator implements ViewPager.OnPageChangeListener {
             if (i == index){
                 view.setSelected(true);
                 view.setTypeface(Typeface.DEFAULT_BOLD);
-                view.setTextColor(mContext.getResources().getColor(R.color.indicator_selected));
+                view.setTextColor(mContext.getResources().getColor(R.color.green));
             }
             else{
+                // Get the primary text color of the theme
+                TypedValue typedValue = new TypedValue();
+                Resources.Theme theme = mContext.getTheme();
+                theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+                TypedArray arr =
+                        mContext.obtainStyledAttributes(typedValue.data, new int[]{
+                                R.attr.textColor});
+                int primaryColor = arr.getColor(0, -1);
+
                 view.setSelected(false);
                 view.setTypeface(Typeface.DEFAULT);
-                view.setTextColor(mContext.getResources().getColor(R.color.indicator_unselected));
+                view.setTextColor(primaryColor);
             }
         }
-        CardDetailActivity.setButtonsTint(index);
     }
 
     @Override

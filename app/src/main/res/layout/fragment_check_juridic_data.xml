@@ -18,7 +18,7 @@
         app:errorTextColor="@color/red"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
+        app:hintTextColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,7 +30,7 @@
             android:ems="10"
             android:inputType="text|textEmailAddress"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textCursorDrawable="@drawable/cursor_color"
             android:textSize="16dp" />
 
@@ -50,7 +50,7 @@
         app:errorTextColor="@color/red"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
+        app:hintTextColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUserNameLayout">
@@ -62,7 +62,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textCursorDrawable="@drawable/cursor_color"
             android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>

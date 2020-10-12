@@ -6,14 +6,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 public class AboutAppActivity extends AppCompatActivity {
 
@@ -25,11 +21,11 @@ public class AboutAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = getWindow().getDecorView();
-        Window window = getWindow();
-        view.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        view.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
+//        View view = getWindow().getDecorView();
+//        Window window = getWindow();
+//        view.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        view.setFitsSystemWindows(true);
+//        window.setStatusBarColor(ContextCompat.getColor(this,R.color.itemBgDark));
 
         setContentView(R.layout.activity_about_app);
 

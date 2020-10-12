@@ -1,5 +1,6 @@
 package edi.md.petrolcabinet;
 
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -9,6 +10,7 @@ import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -19,8 +21,22 @@ import edi.md.petrolcabinet.utils.LocaleHelper;
 public class SplashActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {Application app  = getApplication();
+        int theme = getSharedPreferences("Theme", MODE_PRIVATE).getInt("theme_mode",2);
+        switch (theme){
+            case 0:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }break;
+            case 1:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }break;
+            case 2:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            }break;
+        }
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
 
         String lang = LocaleHelper.getLanguage(this);

@@ -119,7 +119,7 @@ public class FragmentCabinetsAndCards extends Fragment {
 
         mRealm = Realm.getDefaultInstance();
         context = getActivity();
-        progressDialog = new ProgressDialog(context, R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(context);
         company = BaseApp.getAppInstance().getCompanyClicked();
 
         commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());

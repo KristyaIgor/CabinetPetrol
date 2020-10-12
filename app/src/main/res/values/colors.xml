@@ -8,9 +8,10 @@
     <color name="radio_button_selected_color">#ff33b5e5</color>
     <color name="radio_button_unselected_color">#e0e0e0</color>
 
-    <color name="green" >#00C569</color>
+    <color name="green" >#2FBCA1</color>
     <color name="red" >#ed0909</color>
     <color name="white" >#ffffff</color>
+    <color name="black" >#000000</color>
 
     <color name="indicator_selected">#000000</color>
     <color name="indicator_unselected">#80000000</color>
@@ -19,4 +20,14 @@
     <color name="consum_chart">#1940D9</color>
 
     <color name="view_news_background">#99000000</color>
+
+    <color name="bgColorDark">#121212</color>
+    <color name="itemBgDark">#2A2A2B</color>
+    <color name="imgColorLight">#121212</color>.
+
+    <color name="item_pin_backgroundLight">#0F000000</color>
+    <color name="item_pin_backgroundDark">#A8FFFFFF</color>
+
+    <color name="foneColorLight">#DAFFFFFF</color>
+    <color name="foneColorDark">#AB222222</color>
 </resources>

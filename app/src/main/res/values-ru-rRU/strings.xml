@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">IS.Petrol</string>
+<resources><string name="app_name">MyPeco</string>
     <string name="are_you_new_user">Вы новый пользователь?</string>
     <string name="sign_up">ЗАРЕГИСТРИРОВАТЬСЯ</string>
     <string name="sign_in">ПОДКЛЮЧИТЬСЯ</string>
@@ -270,4 +270,9 @@
     <string name="first_registration_title">"Первая регистрация в "</string>
     <string name="authentificate_cabinet_title">"Войти в "</string>
     <string name="version_text">"вер. "</string>
+    <string name="theme_title_item_settings">Тема приложения</string>
+    <string name="light_theme_selected">Светлая тема</string>
+    <string name="dark_theme_selected">Тёмная тема</string>
+    <string name="system_theme_selected">Системные установки</string>
+    <string name="msg_dialog_selected_theme">Выберите тему приложения</string>
 </resources>

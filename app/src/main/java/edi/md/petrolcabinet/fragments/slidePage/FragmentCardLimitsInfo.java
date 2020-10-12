@@ -1,11 +1,14 @@
 package edi.md.petrolcabinet.fragments.slidePage;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +92,14 @@ public class FragmentCardLimitsInfo extends Fragment {
     }
 
     private void setPieChart(PieChart chart) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getContext().getTheme();
+        theme.resolveAttribute(R.attr.itemsBg, typedValue, true);
+        TypedArray arr = getContext().obtainStyledAttributes(typedValue.data, new int[]{R.attr.itemsBg});
+        int primaryColor = arr.getColor(0, -1);
+
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(primaryColor);
         chart.setCenterTextSize(18);
         chart.setDrawCenterText(true);
         chart.getDescription().setEnabled(false);
@@ -104,6 +115,12 @@ public class FragmentCardLimitsInfo extends Fragment {
     private void setDataToChard(PieChart chart, int limitUsed, int limitRemain, int limit, String limitType) {
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getContext().getTheme();
+        theme.resolveAttribute(R.attr.textColor, typedValue, true);
+        TypedArray arr = getContext().obtainStyledAttributes(typedValue.data, new int[]{R.attr.textColor});
+        int primaryColor = arr.getColor(0, -1);
 
         colors.add(getResources().getColor(R.color.consum_chart)); //gray
         colors.add(getResources().getColor(R.color.remain_chart)); //blue
@@ -121,20 +138,21 @@ public class FragmentCardLimitsInfo extends Fragment {
         dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
-        chart.setCenterText(generateCenterSpannableText(limit ,limitType));
+        chart.setCenterText(generateCenterSpannableText(limit ,limitType, primaryColor));
+        chart.setCenterTextColor(primaryColor);
 
         chart.setData(data);
 
     }
 
-    private SpannableString generateCenterSpannableText(int limit, String limitType) {
+    private SpannableString generateCenterSpannableText(int limit, String limitType, int color) {
 
         SpannableString s = new SpannableString(getString(R.string.limit_text) + "\n" + limit + limitType);
         s.setSpan(new RelativeSizeSpan(.7f), 0, 6, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 6, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.indicator_selected)), 6, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(color), 6, s.length(), 0);
         s.setSpan(new RelativeSizeSpan(1.2f), 6, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.indicator_unselected)), s.length(), s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(color), s.length(), s.length(), 0);
         return s;
     }
 }

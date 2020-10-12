@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -17,9 +18,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import edi.md.petrolcabinet.utils.LocaleHelper;
 
 public class SettingsApplicationActivity extends AppCompatActivity {
-    TextView selectedLanguage, textItemAboutApp, textItemAboutAppInfo;
+    TextView selectedLanguage, textItemAboutApp, textItemAboutAppInfo , selectedTheme;
     ImageButton btnBack;
-    ConstraintLayout layoutLang, layoutWriteUs, layoutAbout;
+    ConstraintLayout layoutLang, layoutWriteUs, layoutAbout, layoutTheme;
     Context context;
 
     @Override
@@ -30,6 +31,8 @@ public class SettingsApplicationActivity extends AppCompatActivity {
         layoutLang = findViewById(R.id.layout_language);
         layoutWriteUs = findViewById(R.id.layout_feeback);
         layoutAbout = findViewById(R.id.layout_about);
+        layoutTheme = findViewById(R.id.layout_theme);
+        selectedTheme = findViewById(R.id.text_selected_theme);
         selectedLanguage = findViewById(R.id.text_selected_langauge);
         textItemAboutApp = findViewById(R.id.text_item_about_app);
         textItemAboutAppInfo = findViewById(R.id.text_item_about_app_info);
@@ -37,6 +40,7 @@ public class SettingsApplicationActivity extends AppCompatActivity {
         context = this;
 
         String[] languageList = {"English","Русский","Română"};
+        String[] themeList = {getString(R.string.light_theme_selected),getString(R.string.dark_theme_selected),getString(R.string.system_theme_selected)};
         String lang = LocaleHelper.getLanguage(context);
 
         if(lang.equals("ru"))
@@ -46,11 +50,24 @@ public class SettingsApplicationActivity extends AppCompatActivity {
         else if(lang.equals("en"))
             selectedLanguage.setText("Selected language: English");
 
+        int theme = getSharedPreferences("Theme", MODE_PRIVATE).getInt("theme_mode",2);
+        switch (theme){
+            case 0:{
+                selectedTheme.setText(getString(R.string.light_theme_selected));
+            }break;
+            case 1:{
+                selectedTheme.setText(getString(R.string.dark_theme_selected));
+            }break;
+            case 2:{
+                selectedTheme.setText(getString(R.string.system_theme_selected));
+            }break;
+        }
+
         textItemAboutApp.setText(getString(R.string.despre_program_item_settings) + getString(R.string.app_name));
         textItemAboutAppInfo.setText(getString(R.string.informatii_cabinet_petrol_settings) + getString(R.string.app_name));
 
         layoutLang.setOnClickListener(view -> {
-            new MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+            new MaterialAlertDialogBuilder(context)
                     .setTitle(getString(R.string.dialog_title_select_your_lang))
                     .setItems(languageList, new DialogInterface.OnClickListener() {
                         @Override
@@ -86,6 +103,43 @@ public class SettingsApplicationActivity extends AppCompatActivity {
                     })
                     .show();
         });
+        layoutTheme.setOnClickListener(view -> {
+            new MaterialAlertDialogBuilder(context)
+                    .setTitle(getString(R.string.msg_dialog_selected_theme))
+                    .setItems(themeList, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            switch (i){
+                                case 0:{
+                                    selectedTheme.setText(getString(R.string.light_theme_selected));
+                                    dialogInterface.dismiss();
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                                    getSharedPreferences("Theme", MODE_PRIVATE).edit().putInt("theme_mode",0).apply();
+                                }break;
+                                case 1:{
+                                    selectedTheme.setText(getString(R.string.dark_theme_selected));
+                                    dialogInterface.dismiss();
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                                    getSharedPreferences("Theme", MODE_PRIVATE).edit().putInt("theme_mode",1).apply();
+                                }break;
+                                case 2:{
+                                    selectedTheme.setText(getString(R.string.system_theme_selected));
+                                    dialogInterface.dismiss();
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                                    getSharedPreferences("Theme", MODE_PRIVATE).edit().putInt("theme_mode",2).apply();
+                                }break;
+                            }
+                            Activity activity = MainActivity.getActivity();
+                            Intent start = new Intent(context, SplashActivity.class);
+                            activity.finish();
+                            activity.startActivity(start);
+                        }
+                    })
+                    .setPositiveButton(getString(R.string.renunt_btn), (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .show();
+        });
 
         layoutWriteUs.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -104,5 +158,14 @@ public class SettingsApplicationActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view -> {
             finish();
         });
+    }
+    public void restartActivity() {
+        Intent i = getIntent();
+        this.overridePendingTransition(0, 0);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        this.finish();
+        //restart the activity without animation
+        this.overridePendingTransition(0, 0);
+        this.startActivity(i);
     }
 }
