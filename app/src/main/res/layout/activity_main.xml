@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "?attr/bgColor"
-    tools:context=".MainActivity">
+    android:background="?attr/bgColor"
+    tools:context=".MainActivityV1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -41,7 +41,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_qr_code_black_24dp" />
 
-
         <ImageButton
             android:id="@+id/btn_open_app_settings"
             android:layout_width="39dp"
@@ -74,12 +73,12 @@
                 android:background="@drawable/item_nav_selector"
                 android:clickable="false"
                 android:scaleType="center"
-                android:tint="@color/green"
                 app:layout_constraintBottom_toTopOf="@+id/textView_news"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_newspaper" />
+                app:srcCompat="@drawable/ic_newspaper"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/textView_news"
@@ -113,12 +112,12 @@
                 android:background="@drawable/item_nav_selector"
                 android:clickable="false"
                 android:scaleType="center"
-                android:tint="@color/green"
                 app:layout_constraintBottom_toTopOf="@+id/textView_contracts"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_apartment_black_24dp" />
+                app:srcCompat="@drawable/ic_apartment_black_24dp"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/textView_contracts"

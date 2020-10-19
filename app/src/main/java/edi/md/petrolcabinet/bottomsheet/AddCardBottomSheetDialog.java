@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edi.md.petrolcabinet.BaseApp;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.fragments.FragmentAddCardFinal;
 import edi.md.petrolcabinet.fragments.FragmentAddCardInit;
@@ -105,7 +105,7 @@ public class AddCardBottomSheetDialog extends BottomSheetDialogFragment {
 
         if (dialog != null) {
             bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.75f);
             bottomSheet.getLayoutParams().height = dialogWindowHeight;
         }

@@ -1,6 +1,7 @@
 package edi.md.petrolcabinet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,6 +29,8 @@ import edi.md.petrolcabinet.adapters.CardInfoAssortmentListAdapter;
 import edi.md.petrolcabinet.bottomsheet.EditCardLimitBottomSheetDialog;
 import edi.md.petrolcabinet.customindicator.MyPageChartIndicator;
 import edi.md.petrolcabinet.fragments.slidePage.FragmentCardLimitsInfo;
+import edi.md.petrolcabinet.fragments.slidePage.FragmentCardLimitsInfoMonth;
+import edi.md.petrolcabinet.fragments.slidePage.FragmentCardLimitsInfoWeek;
 import edi.md.petrolcabinet.realm.objects.Accounts;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.cardInfo.CardInfo;
@@ -75,6 +78,12 @@ public class CardDetailActivity extends AppCompatActivity {
 
     static RecyclerView recyclerView2;
 
+    public static boolean isChangedLimits = false;
+
+    static CardInfo cardInfoResponse;
+
+    int positionCardInList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +108,8 @@ public class CardDetailActivity extends AppCompatActivity {
         card = BaseApp.getAppInstance().getClickedCard();
         client = BaseApp.getAppInstance().getClientClicked();
 
+        positionCardInList = getIntent().getIntExtra("Position", 1110);
+
         title.setText(card.getName() + " / " + card.getCode());
 
         titles.add(getString(R.string.today_limit_time));
@@ -107,7 +118,7 @@ public class CardDetailActivity extends AppCompatActivity {
 
         getCardInfo();
 
-        btnBack.setOnClickListener(view1 -> finish());
+        btnBack.setOnClickListener(view1 -> closeCardDetail());
 
         btnLeftSwipe.setOnClickListener(view1 -> {
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
@@ -140,16 +151,16 @@ public class CardDetailActivity extends AppCompatActivity {
                 GetCardInfo cardInfo = response.body();
                 if(cardInfo != null){
                     if(cardInfo.getErrorCode() == 0){
-                        CardInfo card = cardInfo.getCard();
+                        cardInfoResponse = cardInfo.getCard();
 
                         if(mIndicator != null)
                             mIndicator.cleanup();
 
-                        fragments.add(FragmentCardLimitsInfo.newInstance(card.getDailyLimit(), card.getDailyLimitUsed(),card.getDailyLimitRemain(),card.getLimitType()));
-                        fragments.add(FragmentCardLimitsInfo.newInstance(card.getWeeklyLimit(), card.getWeeklyLimitUsed(),card.getWeeklyLimitRemain(),card.getLimitType()));
-                        fragments.add(FragmentCardLimitsInfo.newInstance(card.getMonthlyLimit(), card.getMonthlyLimitUsed(),card.getMonthlyLimitRemain(),card.getLimitType()));
+                        mAdapter = new CustomPagerAdapter2(fragmentManager);
+                        mAdapter.addFrag(FragmentCardLimitsInfo.newInstance(cardInfoResponse.getDailyLimit(), cardInfoResponse.getDailyLimitUsed(),cardInfoResponse.getDailyLimitRemain(),cardInfoResponse.getLimitType()));
+                        mAdapter.addFrag(FragmentCardLimitsInfoWeek.newInstance(cardInfoResponse.getWeeklyLimit(), cardInfoResponse.getWeeklyLimitUsed(),cardInfoResponse.getWeeklyLimitRemain(),cardInfoResponse.getLimitType()));
+                        mAdapter.addFrag(FragmentCardLimitsInfoMonth.newInstance(cardInfoResponse.getMonthlyLimit(), cardInfoResponse.getMonthlyLimitUsed(),cardInfoResponse.getMonthlyLimitRemain(),cardInfoResponse.getLimitType()));
 
-                        mAdapter = new CustomPagerAdapter2(fragmentManager, fragments);
                         viewPager.setAdapter(mAdapter);
                         mIndicator = new MyPageChartIndicator(context, mLinearLayout, viewPager);
                         mIndicator.setPageTitles(titles);
@@ -162,7 +173,7 @@ public class CardDetailActivity extends AppCompatActivity {
                         viewPager.setVisibility(View.VISIBLE);
                         mLinearLayout.setVisibility(View.VISIBLE);
 
-                        List<CardInfoAssortment>  cardInfoAssortmentsList = card.getCardAssortments();
+                        List<CardInfoAssortment>  cardInfoAssortmentsList = cardInfoResponse.getCardAssortments();
                         CardInfoAssortmentListAdapter adapter = new CardInfoAssortmentListAdapter(context, cardInfoAssortmentsList);
                         recyclerView2.setAdapter(adapter);
 
@@ -242,21 +253,42 @@ public class CardDetailActivity extends AppCompatActivity {
             fragments.clear();
     }
 
+    @Override
+    public void onBackPressed() {
+        closeCardDetail();
+    }
+
     public static void onDismissDialog (){
         if(editForm != null && editForm.getShowsDialog()){
             editForm.dismiss();
+            getCardInfo();
+        }
+    }
+    public void closeCardDetail(){
+        if(isChangedLimits) {
+            Intent onDestroyIntent = new Intent();
+
+            onDestroyIntent.putExtra("limitType", cardInfoResponse.getLimitType());
+            onDestroyIntent.putExtra("limitDay", cardInfoResponse.getDailyLimit());
+            onDestroyIntent.putExtra("limitWeek", cardInfoResponse.getWeeklyLimit());
+            onDestroyIntent.putExtra("limitMonth", cardInfoResponse.getMonthlyLimit());
+            onDestroyIntent.putExtra("Position", positionCardInList);
+
+            setResult(RESULT_OK, onDestroyIntent);
+        }
+        else {
+            setResult(RESULT_CANCELED);
         }
 
-        getCardInfo();
+        finish();
     }
 
     static class CustomPagerAdapter2 extends FragmentStatePagerAdapter {
 
         List<Fragment> mFrags = new ArrayList<>();
 
-        public CustomPagerAdapter2(FragmentManager fm, List<Fragment> frags) {
+        public CustomPagerAdapter2(FragmentManager fm) {
             super(fm);
-            mFrags = frags;
         }
 
         @Override
@@ -266,7 +298,11 @@ public class CardDetailActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return mFrags.size();
+        }
+
+        public void addFrag (Fragment fragment){
+            mFrags.add(fragment);
         }
     }
 

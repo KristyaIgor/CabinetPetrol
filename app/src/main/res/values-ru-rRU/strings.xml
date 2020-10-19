@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">MyPeco</string>
+<resources><string name="app_name">MyPetrol</string>
     <string name="are_you_new_user">Вы новый пользователь?</string>
     <string name="sign_up">ЗАРЕГИСТРИРОВАТЬСЯ</string>
     <string name="sign_in">ПОДКЛЮЧИТЬСЯ</string>
@@ -24,7 +24,7 @@
     <string name="info_card_detail_account">Эта карта принадлежит клиенту <b>%1$s.</b> с номером контракта: %2$s, действительным в течение периода :%3$s.
 Эта карта,%4$s, может быть использована для заправки на любой станции PECO компании <b>%5$s</b> в соответствии с условиями контракта.</string>
     <string name="despre_program">О приложение</string>
-    <string name="cabinet_petrol_aplicatie_info">" - мобильное приложение для мониторинга счетов/карт компаний PECO.\n - легко проверяйте баланс своего счета в различных компаниях PECO. Измените лимиты, просматривайте историю  и потребление по каждой отдельной карте ежедневно, еженедельно или ежемесячно."</string>
+    <string name="cabinet_petrol_aplicatie_info">" - легко проверяйте баланс своего счета в различных компаниях PECO. Измените лимиты, просматривайте историю  и потребление по каждой отдельной карте ежедневно, еженедельно или ежемесячно."</string>
     <string name="reducere_la_produse_activity">Скидка на товары</string>
     <string name="limit_text">Лимит</string>
     <string name="today_limit_time">Сегодня</string>
@@ -275,4 +275,6 @@
     <string name="dark_theme_selected">Тёмная тема</string>
     <string name="system_theme_selected">Системные установки</string>
     <string name="msg_dialog_selected_theme">Выберите тему приложения</string>
+    <string name="list_of_prices_is_empty">Список цен пуст!</string>
+    <string name="retry_load">ПОВТОРИТЬ</string>
 </resources>

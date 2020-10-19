@@ -12,8 +12,6 @@ import java.util.List;
 
 import edi.md.petrolcabinet.MainActivity;
 import edi.md.petrolcabinet.R;
-import edi.md.petrolcabinet.fragments.FragmentCompanies;
-import edi.md.petrolcabinet.fragments.FragmentNews;
 
 
 /**
@@ -54,11 +52,11 @@ public class MainListener implements View.OnClickListener {
                 switch (view1.getId()){
                     case id_News : {
                         setActiveLayout(view1,idNews, idNewsImg, context.getString(R.string.main_menu_news));
-                        MainActivity.replaceFragment(new FragmentNews());
+                        MainActivity.replaceFragment(1);
                     }break;
                     case id_Contracts: {
                         setActiveLayout(view1,idContracts, idContractsImg, context.getString(R.string.main_menu_companii));
-                        MainActivity.replaceFragment(new FragmentCompanies());
+                        MainActivity.replaceFragment(0);
                     }break;
                 }
             }
@@ -103,6 +101,6 @@ public class MainListener implements View.OnClickListener {
         image.setColorFilter(Color.rgb(255, 255, 255));
         title.setText(context.getString(R.string.main_menu_companii));
 
-        MainActivity.replaceFragment(new FragmentCompanies());
+        MainActivity.replaceFragment(0);
     }
 }

@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.utils.BaseEnum;
 
@@ -139,7 +139,7 @@ public class FilterTransactionBottomSheetDialog extends BottomSheetDialogFragmen
 
         if (dialog != null) {
             bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.47f);
             int dialogWrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
             bottomSheet.getLayoutParams().height = dialogWrapContent;

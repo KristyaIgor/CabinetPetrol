@@ -64,7 +64,7 @@ public class FragmentAddCardFinal extends Fragment {
         pinCod = rootView.findViewById(R.id.editTextPinCod);
         signInCabinet = rootView.findViewById(R.id.buttonSignInCabinetForCardInFInal);
         textBackInit = rootView.findViewById(R.id.text_view_back_initial);
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
 
         mRealm = Realm.getDefaultInstance();
 

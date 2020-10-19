@@ -66,7 +66,7 @@ public class FragmentAddCardInit extends Fragment {
         phoneLayout = rootView.findViewById(R.id.editTextnumberPoneLayout);
         numberLayout = rootView.findViewById(R.id.editTextpasswordsLayout);
         signInCabinet = rootView.findViewById(R.id.buttonSignInCabinetForCard);
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
 
         mRealm = Realm.getDefaultInstance();
 

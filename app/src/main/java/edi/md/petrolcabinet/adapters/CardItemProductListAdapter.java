@@ -151,6 +151,8 @@ public class CardItemProductListAdapter extends RecyclerView.Adapter<CardItemPro
         TypedArray arr = mContext.obtainStyledAttributes(typedValue.data, new int[]{R.attr.itemsBg});
         int primaryColor = arr.getColor(0, -1);
 
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(primaryColor);
         chart.setCenterTextSize(12);
         chart.setBackgroundColor(primaryColor);
         chart.setDrawCenterText(true);

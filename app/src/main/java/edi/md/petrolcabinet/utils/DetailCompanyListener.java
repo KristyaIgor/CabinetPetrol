@@ -13,8 +13,8 @@ import java.util.List;
 import edi.md.petrolcabinet.DetailCompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.fragments.FragmentCabinetsAndCards;
-import edi.md.petrolcabinet.fragments.FragmentPrices;
 import edi.md.petrolcabinet.fragments.FragmentMaps;
+import edi.md.petrolcabinet.fragments.FragmentPrices;
 
 
 /**

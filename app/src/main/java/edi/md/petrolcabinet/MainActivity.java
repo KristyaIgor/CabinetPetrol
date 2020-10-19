@@ -20,13 +20,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -42,16 +41,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import edi.md.petrolcabinet.fragments.FragmentCompanies;
+import edi.md.petrolcabinet.fragments.FragmentNews;
 import edi.md.petrolcabinet.realm.objects.Company;
 import edi.md.petrolcabinet.utils.CompaniesHelper;
-import edi.md.petrolcabinet.utils.LocaleHelper;
 import edi.md.petrolcabinet.utils.MainListener;
 import edi.md.petrolcabinet.utils.RemoteCompanies;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LocalizationActivity {
 
     ConstraintLayout layoutCompanies, layoutNews;
     TextView title;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -177,11 +177,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void replaceFragment(Fragment fragment){
-        fgManager.beginTransaction().replace(R.id.container_main,fragment).commit();
-        String lang = LocaleHelper.getLanguage(activity);
-
-        setAppLocale(lang);
+    public static void replaceFragment(int fragment){
+        if(fragment == 0){
+            fgManager.beginTransaction().replace(R.id.container_main,FragmentCompanies.getInstance()).commit();
+        }
+        else{
+            fgManager.beginTransaction().replace(R.id.container_main,FragmentNews.getInstance()).commit();
+        }
+//        String lang = LocaleHelper.getLanguage(activity);
+//
+//        setAppLocale(lang);
     }
 
     void openPlayMarket(String appPackageName){
@@ -299,9 +304,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-
-
-//        BaseApp.getAppInstance().setCompanyList(remoteCompany);
 
         MainListener.setActiveMainLayout(layoutCompanies);
         progressDialog.dismiss();

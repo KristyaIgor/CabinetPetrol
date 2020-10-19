@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -138,7 +139,10 @@ public class CardListActivity extends AppCompatActivity {
                         CardsList item = adapterList.getItem(position);
                         BaseApp.getAppInstance().setClickedCard(item);
 
-                        startActivity(new Intent(CardListActivity.this , CardDetailActivity.class));
+                        Intent openCardInten = new Intent(CardListActivity.this , CardDetailActivity.class);
+                        openCardInten.putExtra("Position",position);
+
+                        startActivityForResult(openCardInten,2273);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -204,6 +208,26 @@ public class CardListActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 2273){
+            if(resultCode == RESULT_OK){
+                int position = data.getIntExtra("Position", 1110);
+
+                if(position != 1110){
+                    CardsList  cardReturn =  adapterList.getItem(position);
+                    cardReturn.setDailyLimit(data.getIntExtra("limitDay",0));
+                    cardReturn.setWeeklyLimit(data.getIntExtra("limitWeek",0));
+                    cardReturn.setMonthlyLimit(data.getIntExtra("limitMonth",0));
+                    cardReturn.setLimitType(data.getIntExtra("limitType",0));
+
+                    adapterList.notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     private void searchCard(String text ){

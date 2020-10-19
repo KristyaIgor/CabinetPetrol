@@ -68,7 +68,7 @@ public class MyPageChartIndicator implements ViewPager.OnPageChangeListener {
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,1);
             view.setLayoutParams(lp);
-            view.setTextSize(22);
+            view.setTextSize(14);
             view.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             view.setSelected(i == 1);
             mContainer.addView(view);

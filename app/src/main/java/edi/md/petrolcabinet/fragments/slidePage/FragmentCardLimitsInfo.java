@@ -45,19 +45,22 @@ public class FragmentCardLimitsInfo extends Fragment {
     private static int mRemain; //remain
     private static int mTypeLimit; //limit type
 
+    private static FragmentCardLimitsInfo sameInstanceFragment;
+
     public FragmentCardLimitsInfo() {
         // Required empty public constructor
     }
 
     public static FragmentCardLimitsInfo newInstance(int limit, int used, int remain, int limitType) {
-        FragmentCardLimitsInfo fragment = new FragmentCardLimitsInfo();
+        sameInstanceFragment = new FragmentCardLimitsInfo();
         Bundle args = new Bundle();
         args.putInt(ARG_LIMIT, limit);
         args.putInt(ARG_USED, used);
         args.putInt(ARG_REMAIN, remain);
         args.putInt(ARG_TYPE, limitType);
-        fragment.setArguments(args);
-        return fragment;
+        sameInstanceFragment.setArguments(args);
+
+        return sameInstanceFragment;
     }
 
     @Override

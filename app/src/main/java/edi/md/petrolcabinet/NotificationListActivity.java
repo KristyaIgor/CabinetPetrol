@@ -2,14 +2,10 @@ package edi.md.petrolcabinet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import edi.md.petrolcabinet.adapters.NotificationsAdapter;
 import edi.md.petrolcabinet.realm.objects.Accounts;
@@ -28,12 +24,6 @@ public class NotificationListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
 
         setContentView(R.layout.activity_notification_list);
         listNotification = findViewById(R.id.list_notification);

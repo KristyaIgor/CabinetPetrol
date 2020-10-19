@@ -29,7 +29,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.petrolcabinet.BaseApp;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.fragments.FragmentCabinetsAndCards;
 import edi.md.petrolcabinet.realm.objects.Company;
@@ -103,7 +103,7 @@ public class SignUpBottomSheetDialog extends BottomSheetDialogFragment {
 
         company = BaseApp.getAppInstance().getCompanyClicked();
 
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
         commandServices = ApiUtils.getCommandServices(company.getIp());
 
         byte[] decodedString = Base64.decode(company.getLogo(), Base64.DEFAULT);
@@ -562,7 +562,7 @@ public class SignUpBottomSheetDialog extends BottomSheetDialogFragment {
 
         if (dialog != null) {
             View bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.9f);
             bottomSheet.getLayoutParams().height = dialogWindowHeight;
         }

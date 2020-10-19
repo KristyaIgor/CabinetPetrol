@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
-import edi.md.petrolcabinet.MainActivity;
+import edi.md.petrolcabinet.MainActivityV1;
 import edi.md.petrolcabinet.NotificationListActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.realm.objects.Accounts;
@@ -148,11 +148,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationChanel)
-                .setSmallIcon(R.drawable.notify_icon)
+                .setSmallIcon(R.drawable.round_icon)
                 .setContentTitle(messageTitle)
                 .setShowWhen(true)
                 .setWhen(System.currentTimeMillis())
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody + " | Category: " + category))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setSound(defaultSoundUri);
@@ -166,7 +166,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         if(dataType == 1){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivityV1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 545 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -174,7 +174,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationBuilder.setContentIntent(pendingIntent);
         }
         else if (dataType == 2){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivityV1.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 545 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT);

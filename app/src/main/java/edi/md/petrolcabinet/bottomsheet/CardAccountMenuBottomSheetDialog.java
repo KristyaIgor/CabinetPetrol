@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import edi.md.petrolcabinet.AssortmentActivity;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.HistoryActivity;
 import edi.md.petrolcabinet.NotificationListActivity;
 import edi.md.petrolcabinet.R;
@@ -112,7 +112,7 @@ public class CardAccountMenuBottomSheetDialog extends BottomSheetDialogFragment 
 
         if (dialog != null) {
             bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.4f);
             int dialogWrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
             bottomSheet.getLayoutParams().height = dialogWrapContent;

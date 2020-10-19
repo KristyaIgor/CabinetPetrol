@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import edi.md.petrolcabinet.BaseApp;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.realm.objects.Company;
 import edi.md.petrolcabinet.remoteSettings.ApiUtils;
@@ -69,7 +69,7 @@ public class ResetPasswordJuridicBottomSheetDialog extends BottomSheetDialogFrag
         emailLayout = root.findViewById(R.id.emailLayout);
         idnpLayout = root.findViewById(R.id.editTextIDNPLayoutReset);
         recuperareBtn = root.findViewById(R.id.btn_reset_password_juridic);
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
 
         company = BaseApp.getAppInstance().getCompanyClicked();
 
@@ -153,7 +153,7 @@ public class ResetPasswordJuridicBottomSheetDialog extends BottomSheetDialogFrag
 
         if (dialog != null) {
             View bottomSheet = dialog.findViewById(R.id.bottom_sheet_reset_juridic);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.7f);
             int dialogWrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
             bottomSheet.getLayoutParams().height = dialogWindowHeight;

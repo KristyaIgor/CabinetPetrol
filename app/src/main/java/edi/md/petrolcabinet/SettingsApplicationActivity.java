@@ -1,6 +1,5 @@
 package edi.md.petrolcabinet;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,22 +8,22 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import edi.md.petrolcabinet.utils.LocaleHelper;
-
-public class SettingsApplicationActivity extends AppCompatActivity {
+public class SettingsApplicationActivity extends LocalizationActivity {
     TextView selectedLanguage, textItemAboutApp, textItemAboutAppInfo , selectedTheme;
     ImageButton btnBack;
     ConstraintLayout layoutLang, layoutWriteUs, layoutAbout, layoutTheme;
     Context context;
 
+    LocalizationActivity localizationActivity = this;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_application);
         btnBack = findViewById(R.id.image_back_from_settings);
@@ -41,7 +40,7 @@ public class SettingsApplicationActivity extends AppCompatActivity {
 
         String[] languageList = {"English","Русский","Română"};
         String[] themeList = {getString(R.string.light_theme_selected),getString(R.string.dark_theme_selected),getString(R.string.system_theme_selected)};
-        String lang = LocaleHelper.getLanguage(context);
+        String lang = localizationActivity.getCurrentLanguage().getLanguage();
 
         if(lang.equals("ru"))
             selectedLanguage.setText("Выбран язык: Русский");
@@ -76,26 +75,21 @@ public class SettingsApplicationActivity extends AppCompatActivity {
                                 case 0:{
                                     selectedLanguage.setText("Selected language: English");
                                     dialogInterface.dismiss();
-                                    LocaleHelper.setLocale(context,"en");
+//                                    LocaleHelper.setLocale(context,"en");
+                                    localizationActivity.setLanguage("en");
                                 }break;
                                 case 1:{
                                     selectedLanguage.setText("Выбран язык: Русский");
                                     dialogInterface.dismiss();
-                                    LocaleHelper.setLocale(context,"ru");
+//                                    LocaleHelper.setLocale(context,"ru");
+                                    localizationActivity.setLanguage("ru");
                                 }break;
                                 case 2:{
                                     selectedLanguage.setText("Limba selectată: Română");
                                     dialogInterface.dismiss();
-                                    LocaleHelper.setLocale(context,"ro");
-
+                                    localizationActivity.setLanguage("ro");
                                 }break;
                             }
-
-                            Activity activity = MainActivity.getActivity();
-                            Intent start = new Intent(context, SplashActivity.class);
-                            activity.finish();
-                            activity.startActivity(start);
-
                         }
                     })
                     .setPositiveButton(getString(R.string.renunt_btn), (dialogInterface, i) -> {
@@ -129,10 +123,7 @@ public class SettingsApplicationActivity extends AppCompatActivity {
                                     getSharedPreferences("Theme", MODE_PRIVATE).edit().putInt("theme_mode",2).apply();
                                 }break;
                             }
-                            Activity activity = MainActivity.getActivity();
-                            Intent start = new Intent(context, SplashActivity.class);
-                            activity.finish();
-                            activity.startActivity(start);
+                            restartActivity();
                         }
                     })
                     .setPositiveButton(getString(R.string.renunt_btn), (dialogInterface, i) -> {

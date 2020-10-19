@@ -2,14 +2,10 @@ package edi.md.petrolcabinet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -21,7 +17,7 @@ import io.realm.RealmList;
 
 public class SettingsAccountActivity extends AppCompatActivity {
     ImageButton btnBack;
-    ConstraintLayout layoutInfo, layoutNotification, layoutPassword, layoutLogout;
+    ConstraintLayout layoutNotification, layoutPassword, layoutLogout;
     Accounts clientRealm;
     Realm mRealm;
 
@@ -29,14 +25,8 @@ public class SettingsAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
-
         setContentView(R.layout.activity_settings_account);
-        layoutInfo = findViewById(R.id.layout_legal_information);
+//        layoutInfo = findViewById(R.id.layout_legal_information);
         layoutNotification = findViewById(R.id.layout_notification);
         layoutPassword = findViewById(R.id.layout_password);
         layoutLogout = findViewById(R.id.layout_iesire);
@@ -46,10 +36,10 @@ public class SettingsAccountActivity extends AppCompatActivity {
         clientRealm = BaseApp.getAppInstance().getClientClicked();
 
 
-        layoutInfo.setOnClickListener(view -> {
-            Intent hist = new Intent(this, InfoAccountActivity.class);
-            startActivity(hist);
-        });
+//        layoutInfo.setOnClickListener(view -> {
+//            Intent hist = new Intent(this, InfoAccountActivity.class);
+//            startActivity(hist);
+//        });
         layoutNotification.setOnClickListener(view -> {
             Intent hist = new Intent(this, NotificationActivity.class);
             startActivity(hist);
@@ -62,7 +52,6 @@ public class SettingsAccountActivity extends AppCompatActivity {
             new MaterialAlertDialogBuilder(this,R.style.MaterialAlertDialogCustom)
 //                    .setTitle(getString(R.string.title_exit_msg_rapid))
                     .setMessage(getString(R.string.msg_exit_dialog))
-                    .setCancelable(false)
                     .setPositiveButton(getString(R.string.btn_yes_dialog), (dialogInterface, i) -> {
                        logOutClient();
                     })

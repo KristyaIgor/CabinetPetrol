@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,6 +74,17 @@ public class FragmentNews extends Fragment {
 
     View backgroundDim;
 
+    private static FragmentNews sameInstanceFragment;
+
+    List<PressList> pressList = new ArrayList<>();
+
+    int indexCompanyDownloadNews = 0;
+
+    public static FragmentNews getInstance() {
+        sameInstanceFragment = sameInstanceFragment == null ? new FragmentNews() : sameInstanceFragment;
+        return sameInstanceFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -105,41 +116,38 @@ public class FragmentNews extends Fragment {
 
         TransitionDrawable transition = (TransitionDrawable) backgroundDim.getBackground();
 
-        RealmResults<Company> companyRealmResults = mRealm.where(Company.class).equalTo("active",true).findAll();
-        if(!companyRealmResults.isEmpty()){
-            companyList.addAll(mRealm.copyFromRealm(companyRealmResults));
-
-            List<String> companyName = new ArrayList<>();
-            companyName.add(getString(R.string.all_company_news));
-
-            for(Company company : companyList){
-                companyName.add(company.getName());
-
-                SpannableString s2 = new SpannableString(company.getName());
-
-                s2.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s2.length(), 0);
-                s2.setSpan(new RelativeSizeSpan(1.4f), 0, s2.length(), 0);
-                s2.setSpan(new StyleSpan(Typeface.BOLD), 0, s2.length(), 0);
-
-                popup.getMenu().add(s2);
-            }
-        }
-
         results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).findAll();
         adapter = new PressListAdapter(results,true);
         recyclerView.setAdapter(adapter);
 
-
-//        for(Company company: companyList){
-//
-//            CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
-//            Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
-//
-//            enqueueCall(call, company);
-//        }
-
         layoutMenu.setOnClickListener(view -> {
             if(!menuShow){
+                RealmResults<Company> companyRealmResults = mRealm.where(Company.class).equalTo("active",true).findAll();
+                if(!companyRealmResults.isEmpty()){
+                    companyList.clear();
+
+                    popup.getMenu().clear();
+
+                    companyList.addAll(mRealm.copyFromRealm(companyRealmResults));
+
+                    List<String> companyName = new ArrayList<>();
+                    companyName.add(getString(R.string.all_company_news));
+
+                    for(Company company : companyList){
+                        companyName.add(company.getName());
+                    }
+
+                    for(int i = 0; i< companyName.size(); i++){
+                        SpannableString s2 = new SpannableString(companyName.get(i));
+
+                        s2.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s2.length(), 0);
+                        s2.setSpan(new RelativeSizeSpan(1.4f), 0, s2.length(), 0);
+                        s2.setSpan(new StyleSpan(Typeface.BOLD), 0, s2.length(), 0);
+                        popup.getMenu().add(s2);
+
+                    }
+                }
+
                 backgroundDim.setVisibility(View.VISIBLE);
 
                 transition.startTransition(300);
@@ -163,10 +171,6 @@ public class FragmentNews extends Fragment {
                                 adapter = new PressListAdapter(results,true);
                                 recyclerView.setAdapter(adapter);
 
-//                                CommandServices commandServices = ApiUtils.getCommandServices(cpny.getIp());
-//                                Call<PressResponse> call = commandServices.getPress(cpny.getServiceName(),cpny.getIdPress(),0);
-//
-//                                enqueueCall(call, cpny);
                                 break;
                             }
                             else if(itemName.equals(getString(R.string.all_company_news))){
@@ -174,21 +178,9 @@ public class FragmentNews extends Fragment {
                                 adapter = new PressListAdapter(results,true);
                                 recyclerView.setAdapter(adapter);
 
-
-                                for(Company company: companyList){
-
-                                    CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
-                                    Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
-
-                                    enqueueCall(call, company);
-                                }
-
-                                Toast.makeText(getContext(), "Selected company: " + itemName, Toast.LENGTH_SHORT).show();
-
                                 break;
                             }
                         }
-                        Toast.makeText(getContext(), "Selected company: " + itemName, Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });
@@ -243,25 +235,28 @@ public class FragmentNews extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        for(Company company: companyList){
-
+    public void onResume() {
+        super.onResume();
+        RealmResults<Company> companyRealmResults = mRealm.where(Company.class).equalTo("active",true).findAll();
+        for(int i = 0; i < companyRealmResults.size(); i++){
+            Company company = mRealm.copyFromRealm(companyRealmResults.get(i));
+            
             CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
             Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
 
-            enqueueCall(call, company);
+            enqueueCall(call, company, companyRealmResults.size());
         }
     }
 
-    private void enqueueCall(Call<PressResponse> call, Company company) {
+    private void enqueueCall(Call<PressResponse> call, Company company, int size) {
         call.enqueue(new Callback<PressResponse>() {
             @Override
             public void onResponse(Call<PressResponse> call, Response<PressResponse> response) {
                 PressResponse pressResponse = response.body();
+                indexCompanyDownloadNews += 1;
                 if(pressResponse != null){
                     if(pressResponse.getErrorCode() == 0){
-                        List<PressList> pressList = pressResponse.getPressList();
+                        pressList.addAll(pressResponse.getPressList());
 
                         if(pressList.size() > 0){
                             int idPress = company.getIdPress();
@@ -298,44 +293,19 @@ public class FragmentNews extends Fragment {
                                 if(com != null)
                                     com.setIdPress(finalIdPress);
                             });
-
-
-//                            PressList item = pressList.get(0);
-//                            for (int i = 0; i < 10; i++){
-//                                pressList.add(item);
-//                            }
                         }
-//                        NewsViewAdapter adapter = new NewsViewAdapter(getContext(),pressList);
-//                        recyclerView.setAdapter(adapter);
-                    }
-                    else{
-//                        String msg = RemoteException.getServiceException(pressResponse.getErrorCode());
-//
-//                        new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
-//                                .setTitle(getString(R.string.oops_text))
-//                                .setMessage(company.getName() + " : " + msg)
-//                                .setCancelable(false)
-//                                .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
-//                                    dialogInterface.dismiss();
-//                                })
-//                                .show();
                     }
                 }
-                else{
-
+                if(indexCompanyDownloadNews == size){
+                    results = mRealm.where(PressObjects.class).sort("dateTime", Sort.DESCENDING).findAll();
+                    adapter = new PressListAdapter(results,true);
+                    recyclerView.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<PressResponse> call, Throwable t) {
-//                new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom)
-//                        .setTitle(getString(R.string.oops_text)      )
-//                        .setMessage(getString(R.string.dialog_failure_service) + t.getMessage())
-//                        .setCancelable(false)
-//                        .setPositiveButton(getString(R.string.dialog_button_understand) , (dialogInterface, i) -> {
-//                            dialogInterface.dismiss();
-//                        })
-//                        .show();
+                Log.d("TAG", "onFailure: " + company.getName() + " - " + t.getMessage());
             }
         });
     }

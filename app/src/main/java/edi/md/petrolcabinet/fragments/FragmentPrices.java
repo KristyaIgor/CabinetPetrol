@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,9 +37,7 @@ public class FragmentPrices extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     SwipeRefreshLayout swipeRefreshLayout;
-    TextView imageRetry;
-    ConstraintLayout layoutError;
-    ImageButton imageRetryLoadList;
+    TextView imageRetryLoadList;
     ConstraintLayout layoutListEmpty;
 
     @Nullable
@@ -51,9 +48,7 @@ public class FragmentPrices extends Fragment {
         listView = rootViewAdmin.findViewById(R.id.list_prices);
         swipeRefreshLayout = rootViewAdmin.findViewById(R.id.swiperefresh);
         progressBar = rootViewAdmin.findViewById(R.id.progressBar_prices);
-        imageRetry = rootViewAdmin.findViewById(R.id.text_retry_prices);
-        layoutError = rootViewAdmin.findViewById(R.id.cl_error_image);
-        imageRetryLoadList = rootViewAdmin.findViewById(R.id.img_retry_load_list);
+        imageRetryLoadList = rootViewAdmin.findViewById(R.id.textxcvxcView9);
         layoutListEmpty = rootViewAdmin.findViewById(R.id.cl_empty_image);
 
         String baseUrl = BaseApp.getAppInstance().getCompanyClicked().getIp();
@@ -77,64 +72,10 @@ public class FragmentPrices extends Fragment {
             getPrices(commandServices,false);
         });
 
-        imageRetry.setOnClickListener(view -> {
-            swipeRefreshLayout.setVisibility(View.GONE);
-            layoutError.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
-
-            getPrices(commandServices,false);
-        });
-
-
         return rootViewAdmin;
     }
 
     private void getPrices(CommandServices commandServices,boolean onRefresh){
-//        commandServices.getPrices(BaseApp.getAppInstance().getCompanyClicked().getServiceName())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Subscriber<GetPriceResult>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        progressBar.setVisibility(View.GONE);
-//                        swipeRefreshLayout.setVisibility(View.GONE);
-//                        layoutError.setVisibility(View.VISIBLE);
-//                    }
-//
-//                    @Override
-//                    public void onNext(GetPriceResult priceResult) {
-//                        if (priceResult != null && priceResult.getErrorCode() == 0) {
-//                            List<Price> prices = priceResult.getPrices();
-//                            if(prices.size() > 0){
-//                                PricesAdapter adapter = new PricesAdapter(getContext(), prices);
-//
-//                                if(onRefresh)
-//                                    swipeRefreshLayout.setRefreshing(false);
-//                                else{
-//                                    progressBar.setVisibility(View.GONE);
-//                                }
-//
-//                                swipeRefreshLayout.setVisibility(View.VISIBLE);
-//                                listView.setAdapter(adapter);
-//                            }
-//                            else{
-//                                progressBar.setVisibility(View.GONE);
-//                                swipeRefreshLayout.setVisibility(View.GONE);
-//                                layoutListEmpty.setVisibility(View.VISIBLE);
-//                            }
-//                        }
-//                        else{
-//                            progressBar.setVisibility(View.GONE);
-//                            swipeRefreshLayout.setVisibility(View.GONE);
-//                            layoutError.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                });
-
         Call<GetPriceResult> call = commandServices.getPrices(BaseApp.getAppInstance().getCompanyClicked().getServiceName());
 
         call.enqueue(new Callback<GetPriceResult>() {
@@ -164,7 +105,7 @@ public class FragmentPrices extends Fragment {
                 else{
                     progressBar.setVisibility(View.GONE);
                     swipeRefreshLayout.setVisibility(View.GONE);
-                    layoutError.setVisibility(View.VISIBLE);
+                    layoutListEmpty.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -172,7 +113,7 @@ public class FragmentPrices extends Fragment {
             public void onFailure(Call<GetPriceResult> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 swipeRefreshLayout.setVisibility(View.GONE);
-                layoutError.setVisibility(View.VISIBLE);
+                layoutListEmpty.setVisibility(View.VISIBLE);
             }
         });
     }
