@@ -8,24 +8,34 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import edi.md.petrolcabinet.utils.LocaleHelper;
-
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends LocalizationActivity {
+    LocalizationActivity localizationActivity = this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        int theme = getSharedPreferences("Theme", MODE_PRIVATE).getInt("theme_mode",2);
+        switch (theme){
+            case 0:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }break;
+            case 1:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }break;
+            case 2:{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            }break;
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        String lang = LocaleHelper.getLanguage(this);
-
-        setAppLocale(lang);
 
         ActionBar var10000 = this.getSupportActionBar();
         if (var10000 != null) {
@@ -33,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         new Timer().schedule(new TimerTask() {
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivityV1.class));
                 finish();
             }
         }, 1000);

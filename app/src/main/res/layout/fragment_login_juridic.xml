@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:paddingRight="2dp"
         android:text="@string/are_you_new_user"
-        android:textColor="#3B3B3B"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSignUpJuridic"
         app:layout_constraintEnd_toStartOf="@id/buttonSignUpJuridic"
@@ -94,7 +94,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextIDNP"
@@ -103,7 +103,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +120,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextUserName"
@@ -129,7 +129,7 @@
                     android:ems="10"
                     android:inputType="text|textEmailAddress"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="16dp" />
 
@@ -149,7 +149,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTextPassword"
@@ -158,7 +158,7 @@
                     android:ems="10"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>

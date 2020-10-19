@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import edi.md.petrolcabinet.BaseApp;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.fragments.FragmentLoginFizic;
 import edi.md.petrolcabinet.fragments.FragmentLoginJuridic;
@@ -100,7 +100,7 @@ public class SignInBottomSheetDialog extends BottomSheetDialogFragment {
 
         if (dialog != null) {
             bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.9f);
             bottomSheet.getLayoutParams().height = dialogWindowHeight;
         }

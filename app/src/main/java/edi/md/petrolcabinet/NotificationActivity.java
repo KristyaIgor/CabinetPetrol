@@ -2,23 +2,19 @@ package edi.md.petrolcabinet;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.SwitchCompat;
 
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remoteSettings.ApiUtils;
-import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.notification.GetNotificationSettings;
 import edi.md.petrolcabinet.remote.notification.NotificationSettings;
 import edi.md.petrolcabinet.remote.notification.UpdateNotificationSettingsBody;
 import edi.md.petrolcabinet.remote.response.SimpleResponse;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +23,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     ImageButton btnBack;
 
-    Switch supSwitch, alimSwitch, newsSwitch, newDiscSwitch;
+    SwitchCompat supSwitch, alimSwitch, newsSwitch, newDiscSwitch;
 
     boolean startSettings = false;
     Accounts clientRealm;
@@ -39,12 +35,6 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
-
         setContentView(R.layout.activity_notification);
 
         btnBack = findViewById(R.id.image_back_notification);
@@ -52,7 +42,7 @@ public class NotificationActivity extends AppCompatActivity {
         alimSwitch = findViewById(R.id.switch_notification_alimentare);
         newsSwitch = findViewById(R.id.switch_notification_news_person);
         newDiscSwitch = findViewById(R.id.switch_notification_new_discount_person);
-        progressDialog = new ProgressDialog(this, R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(this);
 
         String tokenF = getSharedPreferences("firebase",MODE_PRIVATE).getString("token",null);
         clientRealm = BaseApp.getAppInstance().getClientClicked();

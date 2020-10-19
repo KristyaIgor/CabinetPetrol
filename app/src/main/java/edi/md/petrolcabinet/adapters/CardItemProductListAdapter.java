@@ -2,7 +2,10 @@ package edi.md.petrolcabinet.adapters;
 
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +94,12 @@ public class CardItemProductListAdapter extends RecyclerView.Adapter<CardItemPro
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
 
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = mContext.getTheme();
+        theme.resolveAttribute(R.attr.textColor, typedValue, true);
+        TypedArray arr = mContext.obtainStyledAttributes(typedValue.data, new int[]{R.attr.textColor});
+        int primaryColor = arr.getColor(0, -1);
+
         if(limitUsed == 0 && limitRemain == 0){
             colors.add( Color.rgb(225, 229, 235)); //gray
 
@@ -104,6 +113,7 @@ public class CardItemProductListAdapter extends RecyclerView.Adapter<CardItemPro
             PieData data = new PieData(dataSet);
 
             chart.setCenterText(limit + limitType);
+            chart.setCenterTextColor(primaryColor);
 
             chart.setData(data);
         }
@@ -126,6 +136,7 @@ public class CardItemProductListAdapter extends RecyclerView.Adapter<CardItemPro
             PieData data = new PieData(dataSet);
 
             chart.setCenterText(limitUsed + limitType);
+            chart.setCenterTextColor(primaryColor);
 
             chart.setData(data);
         }
@@ -134,7 +145,16 @@ public class CardItemProductListAdapter extends RecyclerView.Adapter<CardItemPro
     }
 
     private void setPieChart(PieChart chart) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = mContext.getTheme();
+        theme.resolveAttribute(R.attr.itemsBg, typedValue, true);
+        TypedArray arr = mContext.obtainStyledAttributes(typedValue.data, new int[]{R.attr.itemsBg});
+        int primaryColor = arr.getColor(0, -1);
+
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(primaryColor);
         chart.setCenterTextSize(12);
+        chart.setBackgroundColor(primaryColor);
         chart.setDrawCenterText(true);
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);

@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="#000000"
+        android:textColor="?attr/textColor"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_card_code_sign_up"
@@ -81,7 +81,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +96,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_email_sign_up"
@@ -105,7 +105,7 @@
                     android:ems="10"
                     android:inputType="textEmailAddress"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +120,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_firts_name_sign_up"
@@ -129,7 +129,7 @@
                     android:ems="10"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,7 +144,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_last_name_sign_up"
@@ -153,7 +153,7 @@
                     android:ems="10"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -168,7 +168,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_idnp_sign_up"
@@ -177,7 +177,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,7 +192,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_phone_sign_up"
@@ -201,7 +201,7 @@
                     android:ems="10"
                     android:inputType="phone"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -217,7 +217,7 @@
                 app:errorTextColor="@color/red"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextColor="@android:color/black">
+                app:hintTextColor="?attr/textColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password_sign_up"
@@ -226,7 +226,7 @@
                     android:ems="10"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="?attr/textColor"
                     android:textSize="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 

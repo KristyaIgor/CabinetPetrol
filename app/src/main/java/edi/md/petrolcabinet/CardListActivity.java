@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -23,9 +21,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,14 +36,14 @@ import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.petrolcabinet.adapters.CardsInContractClientAdapter;
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remoteSettings.ApiUtils;
-import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.client.ContractInClient;
 import edi.md.petrolcabinet.remote.contract.CardsList;
 import edi.md.petrolcabinet.remote.contract.Contract;
 import edi.md.petrolcabinet.remote.contract.GetContractInfoResponse;
 import edi.md.petrolcabinet.remote.response.SIDResponse;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.utils.BaseEnum;
 import edi.md.petrolcabinet.utils.RecyclerItemClickListener;
 import io.realm.Realm;
@@ -79,12 +77,6 @@ public class CardListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View view = getWindow().getDecorView();
-        Window window = getWindow();
-        view.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        view.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
 
         setContentView(R.layout.activity_card_list);
 
@@ -147,7 +139,10 @@ public class CardListActivity extends AppCompatActivity {
                         CardsList item = adapterList.getItem(position);
                         BaseApp.getAppInstance().setClickedCard(item);
 
-                        startActivity(new Intent(CardListActivity.this , CardDetailActivity.class));
+                        Intent openCardInten = new Intent(CardListActivity.this , CardDetailActivity.class);
+                        openCardInten.putExtra("Position",position);
+
+                        startActivityForResult(openCardInten,2273);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -213,6 +208,26 @@ public class CardListActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 2273){
+            if(resultCode == RESULT_OK){
+                int position = data.getIntExtra("Position", 1110);
+
+                if(position != 1110){
+                    CardsList  cardReturn =  adapterList.getItem(position);
+                    cardReturn.setDailyLimit(data.getIntExtra("limitDay",0));
+                    cardReturn.setWeeklyLimit(data.getIntExtra("limitWeek",0));
+                    cardReturn.setMonthlyLimit(data.getIntExtra("limitMonth",0));
+                    cardReturn.setLimitType(data.getIntExtra("limitType",0));
+
+                    adapterList.notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     private void searchCard(String text ){

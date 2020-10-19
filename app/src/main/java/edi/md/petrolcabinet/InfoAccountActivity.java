@@ -1,40 +1,31 @@
 package edi.md.petrolcabinet;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import edi.md.petrolcabinet.realm.objects.Accounts;
 import edi.md.petrolcabinet.realm.objects.Company;
 import edi.md.petrolcabinet.remote.client.ContractInClient;
 
 public class InfoAccountActivity extends AppCompatActivity {
     Accounts client;
-    TextView textClientName, textOtherInfo;
-    ImageButton btnBack;
+    @BindView(R.id.text_client_name) TextView textClientName;
+    @BindView(R.id.text_other_info) TextView textOtherInfo;
+    @BindView(R.id.image_back_information_activity) ImageButton btnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
-
         setContentView(R.layout.activity_info_account);
-
-        textClientName = findViewById(R.id.text_client_name);
-        textOtherInfo = findViewById(R.id.text_other_info);
-        btnBack = findViewById(R.id.image_back_information_activity);
+        ButterKnife.bind(this);
 
         Company company = BaseApp.getAppInstance().getCompanyClicked();
         client = BaseApp.getAppInstance().getClientClicked();

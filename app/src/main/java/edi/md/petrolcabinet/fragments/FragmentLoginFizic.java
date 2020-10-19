@@ -71,7 +71,7 @@ public class FragmentLoginFizic extends Fragment {
         resetPassword = rootViewAdmin.findViewById(R.id.text_forgot_password_fizic);
 
         mRealm = Realm.getDefaultInstance();
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

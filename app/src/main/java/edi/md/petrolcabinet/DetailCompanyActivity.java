@@ -2,7 +2,6 @@ package edi.md.petrolcabinet;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,7 +37,7 @@ public class DetailCompanyActivity extends AppCompatActivity {
 
     Company companySelected;
 
-    public static DisplayMetrics displayMetrics;
+//    public static DisplayMetrics displayMetrics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,8 @@ public class DetailCompanyActivity extends AppCompatActivity {
         fgManager = getSupportFragmentManager();
         context = this;
 
-        displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         companySelected = BaseApp.getAppInstance().getCompanyClicked();
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F4F3"
-    tools:context=".MainActivity">
+    android:background="?attr/bgColor"
+    tools:context=".MainActivityV1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="12dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/btn_open_app_settings"
@@ -40,7 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_qr_code_black_24dp" />
-
 
         <ImageButton
             android:id="@+id/btn_open_app_settings"
@@ -74,19 +73,19 @@
                 android:background="@drawable/item_nav_selector"
                 android:clickable="false"
                 android:scaleType="center"
-                android:tint="@color/green"
                 app:layout_constraintBottom_toTopOf="@+id/textView_news"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_newspaper" />
+                app:srcCompat="@drawable/ic_newspaper"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/textView_news"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/main_menu_news"
-                android:textColor="#9F1C1C1C"
+                android:textColor="?attr/textColor"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,19 +112,19 @@
                 android:background="@drawable/item_nav_selector"
                 android:clickable="false"
                 android:scaleType="center"
-                android:tint="@color/green"
                 app:layout_constraintBottom_toTopOf="@+id/textView_contracts"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_apartment_black_24dp" />
+                app:srcCompat="@drawable/ic_apartment_black_24dp"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/textView_contracts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/main_menu_companii"
-                android:textColor="#9F1C1C1C"
+                android:textColor="?attr/textColor"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

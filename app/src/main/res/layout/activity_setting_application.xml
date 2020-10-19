@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F4F3"
+    android:background="?attr/bgColor"
     tools:context=".SettingsApplicationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +18,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_theme"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_language">
+
+            <ImageView
+                android:id="@+id/imageView5fdasff"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_brightness_6_black_36dp" />
+
+            <TextView
+                android:id="@+id/textView4fsdfsd9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/theme_title_item_settings"
+                android:textColor="?attr/textColor"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/text_selected_theme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView5fdasff"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/text_selected_theme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView5fdasff"
+                app:layout_constraintTop_toBottomOf="@+id/textView4fsdfsd9" />
+
+            <View
+                android:id="@+id/divider2561"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:background="#DDDDDD"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView5fdasff" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_about"
@@ -46,7 +105,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
                 android:text=""
-                android:textColor="@android:color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toTopOf="@+id/text_item_about_app_info"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +154,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/lang_item_settings"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toTopOf="@+id/text_selected_langauge"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +194,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_language">
+            app:layout_constraintTop_toBottomOf="@+id/layout_theme">
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -154,7 +213,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/feedback_item_settings"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView52"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +279,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="@string/general_settings_activity_title"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

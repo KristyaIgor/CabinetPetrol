@@ -74,7 +74,7 @@ public class FragmentLoginJuridic extends Fragment {
         layoutIndp = rootViewAdmin.findViewById(R.id.editTextIDNPLayout);
 
         mRealm = Realm.getDefaultInstance();
-        progressDialog = new ProgressDialog(getContext(),  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+        progressDialog = new ProgressDialog(getContext());
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

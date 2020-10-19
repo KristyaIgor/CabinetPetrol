@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import edi.md.petrolcabinet.BaseApp;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.adapters.CompaniesAdapter;
 import edi.md.petrolcabinet.realm.objects.Accounts;
@@ -30,10 +30,17 @@ import io.realm.Sort;
 
 public class FragmentCompanies extends Fragment {
 
-    ListView listCompanies;
+    static ListView listCompanies;
 
-    Realm mRealm;
-    CompaniesAdapter adapter;
+    static Realm mRealm;
+    static CompaniesAdapter adapter;
+
+    private static FragmentCompanies sameInstanceFragment;
+
+    public static FragmentCompanies getInstance() {
+        sameInstanceFragment = sameInstanceFragment == null ? new FragmentCompanies() : sameInstanceFragment;
+        return sameInstanceFragment;
+    }
 
     @Nullable
     @Override
@@ -52,7 +59,7 @@ public class FragmentCompanies extends Fragment {
                 if(item.isActive()){
                     BaseApp.getAppInstance().setCompanyClicked(item);
 
-                    Intent detail = new Intent(getContext(), DetailCompanyActivity.class);
+                    Intent detail = new Intent(getContext(), CompanyActivity.class);
                     startActivity(detail);
                 }
                 else{
@@ -60,17 +67,12 @@ public class FragmentCompanies extends Fragment {
                 }
             }
         });
+        updateListCompanies();
 
         return rootViewAdmin;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateListCompanies();
-    }
-
-    private void updateListCompanies() {
+    public static void updateListCompanies() {
         RealmResults<Company> result = mRealm.where(Company.class).findAll();
         if(!result.isEmpty()){
             for(Company item: result){
@@ -88,6 +90,7 @@ public class FragmentCompanies extends Fragment {
                     });
                 }
             }
+            result = result.sort("name", Sort.ASCENDING);
             result = result.sort("numberContracts", Sort.DESCENDING);
             result = result.sort("active", Sort.DESCENDING);
             adapter = new CompaniesAdapter(result);

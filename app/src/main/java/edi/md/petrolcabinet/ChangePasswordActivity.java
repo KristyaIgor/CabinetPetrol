@@ -7,8 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +14,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,13 +31,13 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import edi.md.petrolcabinet.realm.objects.Accounts;
-import edi.md.petrolcabinet.remoteSettings.ApiUtils;
-import edi.md.petrolcabinet.remoteSettings.CommandServices;
-import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.remote.authenticate.AuthenticateUserBody;
 import edi.md.petrolcabinet.remote.changePassword.ChangePasswordBody;
 import edi.md.petrolcabinet.remote.response.SIDResponse;
 import edi.md.petrolcabinet.remote.response.SimpleResponse;
+import edi.md.petrolcabinet.remoteSettings.ApiUtils;
+import edi.md.petrolcabinet.remoteSettings.CommandServices;
+import edi.md.petrolcabinet.remoteSettings.RemoteException;
 import edi.md.petrolcabinet.utils.BaseEnum;
 import io.realm.Realm;
 import retrofit2.Call;
@@ -63,12 +60,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
-
         setContentView(R.layout.activity_change_password);
 
         btnBack = findViewById(R.id.image_back_change_password);
@@ -79,7 +70,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         etOldPass = findViewById(R.id.editTextOldPass);
         etNewPass = findViewById(R.id.editTextNewPassword);
         etConfirmNewPass = findViewById(R.id.editTextConfirmNewPassword);
-        progressDialog = new ProgressDialog(this, R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(this);
 
         clientRealm = BaseApp.getAppInstance().getClientClicked();
         mRealm = Realm.getDefaultInstance();

@@ -11,15 +11,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -42,12 +39,6 @@ public class HistoryDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View decorView = getWindow().getDecorView();
-        Window window = getWindow();
-        decorView.setSystemUiVisibility(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        decorView.setFitsSystemWindows(true);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.green));
 
         setContentView(R.layout.activity_history_detail);
 
@@ -140,7 +131,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         Paint paint = new Paint();
         canvas.drawPaint(paint);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark_crop);
         bitmap = Bitmap.createScaledBitmap(bitmap, 220, 43, true);
 
         canvas.drawBitmap(bitmap, 75, 50 , null);
@@ -197,7 +188,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
         Paint myPaint = new Paint();
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.is_logo_dark_crop);
         bitmap = Bitmap.createScaledBitmap(bitmap, 220, 43, true);
 
         canvas.drawBitmap(bitmap, 180, 50 , myPaint);

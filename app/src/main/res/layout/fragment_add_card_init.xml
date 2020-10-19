@@ -19,7 +19,7 @@
         app:errorTextColor="@color/red"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
+        app:hintTextColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,7 +31,7 @@
             android:ems="10"
             android:inputType="phone"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,7 +48,7 @@
         app:errorTextColor="@color/red"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:hintTextColor="@android:color/black"
+        app:hintTextColor="?attr/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextnumberPoneLayout">
@@ -60,7 +60,7 @@
             android:ems="10"
             android:inputType="number"
             android:paddingStart="16dp"
-            android:textColor="@android:color/black"
+            android:textColor="?attr/textColor"
             android:textSize="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:text="@string/am_cabinet_personal"
-        android:textColor="#3B3B3B"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSignInCabinetForCard"
         app:layout_constraintEnd_toStartOf="@+id/buttonSignInCabinetForCard"

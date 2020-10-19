@@ -20,13 +20,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import edi.md.petrolcabinet.BaseApp;
 import edi.md.petrolcabinet.CardDetailActivity;
-import edi.md.petrolcabinet.DetailCompanyActivity;
+import edi.md.petrolcabinet.CompanyActivity;
 import edi.md.petrolcabinet.R;
+import edi.md.petrolcabinet.remote.response.SimpleResponse;
+import edi.md.petrolcabinet.remote.updateLimitsCard.UpdateLimitsCardBody;
 import edi.md.petrolcabinet.remoteSettings.ApiUtils;
 import edi.md.petrolcabinet.remoteSettings.CommandServices;
 import edi.md.petrolcabinet.remoteSettings.RemoteException;
-import edi.md.petrolcabinet.remote.response.SimpleResponse;
-import edi.md.petrolcabinet.remote.updateLimitsCard.UpdateLimitsCardBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +67,7 @@ public class EditCardLimitBottomSheetDialog extends BottomSheetDialogFragment {
         weeklyLimit = root.findViewById(R.id.week_limit);
         monthLayout = root.findViewById(R.id.monthLayout);
         monthLimit = root.findViewById(R.id.month_limit);
-        progressDialog = new ProgressDialog(getContext(), R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme);
+        progressDialog = new ProgressDialog(getContext());
         apply = root.findViewById(R.id.button_set_limit_for_card);
 
         CommandServices commandServices = ApiUtils.getCommandServices(BaseApp.getAppInstance().getCompanyClicked().getIp());
@@ -111,6 +111,7 @@ public class EditCardLimitBottomSheetDialog extends BottomSheetDialogFragment {
                     if(simpleResponse != null){
                         if (simpleResponse.getErrorCode() == 0){
                             progressDialog.dismiss();
+                            CardDetailActivity.isChangedLimits = true;
                             CardDetailActivity.onDismissDialog();
                         }
                         else if (simpleResponse.getErrorCode() == 5){
@@ -177,7 +178,7 @@ public class EditCardLimitBottomSheetDialog extends BottomSheetDialogFragment {
 
         if (dialog != null) {
             bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-            int displayHeight = DetailCompanyActivity.displayMetrics.heightPixels;
+            int displayHeight = CompanyActivity.displayMetrics.heightPixels;
             int dialogWindowHeight = (int) (displayHeight * 0.47f);
             int dialogWrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
             bottomSheet.getLayoutParams().height = dialogWrapContent;

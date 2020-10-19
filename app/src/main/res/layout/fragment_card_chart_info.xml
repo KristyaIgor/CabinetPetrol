@@ -36,7 +36,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
         android:text="@string/consum_limit_text"
-        android:textColor="#607D8B"
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/text_consum_card_chart"
         app:layout_constraintStart_toEndOf="@+id/imageView2" />
@@ -48,7 +47,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="100 MDL"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -70,7 +69,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="555 MDL"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/textColor"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

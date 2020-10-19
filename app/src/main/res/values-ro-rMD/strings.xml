@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IS.Petrol</string>
+    <string name="app_name">MyPetrol</string>
     <string name="are_you_new_user">Sunteți utilizator nou?</string>
     <string name="sign_up">ÎNSCRIE-TE</string>
     <string name="sign_in">CONECTAȚI-VĂ</string>
@@ -23,7 +23,7 @@
 
     <string name="info_card_detail_account">Acest card aparține clientului <b>%1$s.</b> cu numărul contractului:%2$s  valabil pe perioada: %3$s. \nAcest card, %4$s , poate fi folosit pentru alimentare la orice stație PECO al companiei <b> %5$s</b> conform condițiilor contractului. </string>
     <string name="despre_program">Despre aplicație</string>
-    <string name="cabinet_petrol_aplicatie_info">" - verificați cu ușurință bilanțul conturilor Dvs. la diferite companii PECO. Modificați limitele, vizualizați istoria alimentărilor și consumul pe fiecare card aparte zilnic, săptămînal sau lunar."</string>
+    <string name="cabinet_petrol_aplicatie_info"> - verificați cu ușurință bilanțul conturilor Dvs. la diferite companii PECO. Modificați limitele, vizualizați istoria alimentărilor și consumul pe fiecare card aparte zilnic, săptămînal sau lunar."</string>
     <string name="reducere_la_produse_activity">Reducere la produse</string>
     <string name="limit_text">Limită</string>
     <string name="today_limit_time">Astăzi</string>
@@ -79,9 +79,9 @@
     <string name="alimentare_cont_notify">Alimentare cont</string>
     <string name="alimentare_notify_info">Notificări cu privire la ultimele alimentari</string>
     <string name="news_notify">Noutăți</string>
-    <string name="news_notify_info">Notificări despre ultimile noutăți</string>
+    <string name="news_notify_info">Notificări despre ultimele noutăți</string>
     <string name="promo_notify">Promoții</string>
-    <string name="promo_notify_info">Notificări despre ultimile promoții</string>
+    <string name="promo_notify_info">Notificări despre ultimele promoții</string>
     <string name="notification_list_activity_title">Lista de notificări</string>
     <string name="general_settings_activity_title">Setări generale</string>
     <string name="lang_item_settings">Limba</string>
@@ -269,4 +269,11 @@
     <string name="first_registration_title">"Prima înregistrare la "</string>
     <string name="authentificate_cabinet_title">"Autentificare la "</string>
     <string name="version_text">"ver. "</string>
+    <string name="theme_title_item_settings">Tema aplicației</string>
+    <string name="light_theme_selected">Temă luminoasă</string>
+    <string name="dark_theme_selected">Temă întunecată</string>
+    <string name="system_theme_selected">Implicit de sistem</string>
+    <string name="msg_dialog_selected_theme">Alege tema aplicației</string>
+    <string name="list_of_prices_is_empty">Lista de prețuri este goală!</string>
+    <string name="retry_load">REPETA</string>
 </resources>
