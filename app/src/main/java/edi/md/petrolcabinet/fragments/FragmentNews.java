@@ -231,21 +231,17 @@ public class FragmentNews extends Fragment {
             }
         }));
 
-        return rootViewAdmin;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         RealmResults<Company> companyRealmResults = mRealm.where(Company.class).equalTo("active",true).findAll();
         for(int i = 0; i < companyRealmResults.size(); i++){
             Company company = mRealm.copyFromRealm(companyRealmResults.get(i));
-            
+
             CommandServices commandServices = ApiUtils.getCommandServices(company.getIp());
             Call<PressResponse> call = commandServices.getPress(company.getServiceName(),company.getIdPress(),0);
 
             enqueueCall(call, company, companyRealmResults.size());
         }
+
+        return rootViewAdmin;
     }
 
     private void enqueueCall(Call<PressResponse> call, Company company, int size) {

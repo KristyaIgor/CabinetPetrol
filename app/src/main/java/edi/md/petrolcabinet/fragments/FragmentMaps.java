@@ -31,9 +31,9 @@ import edi.md.petrolcabinet.R;
 import edi.md.petrolcabinet.remote.petrolStation.PetrolStation;
 
 public class FragmentMaps extends Fragment {
-//    private BottomSheetBehavior bottomSheetBehavior;
+    //    private BottomSheetBehavior bottomSheetBehavior;
 //    private View bottomSheet;
-
+    GoogleMap googleMap;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -46,7 +46,8 @@ public class FragmentMaps extends Fragment {
          * user has installed Google Play services and returned to the app.
          */
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(GoogleMap map) {
+            googleMap = map;
 
             SupportMapFragment mapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
@@ -54,9 +55,9 @@ public class FragmentMaps extends Fragment {
 
             List<PetrolStation> listStation = BaseApp.getAppInstance().getPetrolStations();
 
-            if(listStation != null) {
-                for(PetrolStation station: listStation){
-                    if(station.getLatitude() != 0 && station.getLongitude() != 0){
+            if (listStation != null) {
+                for (PetrolStation station : listStation) {
+                    if (station.getLatitude() != 0 && station.getLongitude() != 0) {
                         LatLng latLng = new LatLng(station.getLatitude(), station.getLongitude());
                         googleMap.addMarker(new MarkerOptions().position(latLng).title(station.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)));
                     }
@@ -66,11 +67,15 @@ public class FragmentMaps extends Fragment {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(chisnau, 7));
             googleMap.getUiSettings().setCompassEnabled(true);
 
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                     ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 AskForPermissions();
             }
-            googleMap.setMyLocationEnabled(true);
+
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                googleMap.setMyLocationEnabled(true);
+            }
 
             if (mapView != null && mapView.getView().findViewById(Integer.parseInt("1")) != null) {
                 // Get the button view
@@ -134,13 +139,26 @@ public class FragmentMaps extends Fragment {
     private void AskForPermissions() {
         List<String> listPermissionsNeeded = new ArrayList<>();
         int READ_PHONEpermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-
         if (READ_PHONEpermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
 
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(getActivity(), listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        AskForPermissions();
+                    }
+                    googleMap.setMyLocationEnabled(true);
+               }
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ public class CompanyActivity extends LocalizationActivity {
         imgContracts = findViewById(R.id.imageView_contracts);
         imgPrices = findViewById(R.id.imageView_prices);
         imgMaps = findViewById(R.id.imageView_maps);
-        titleCompany = findViewById(R.id.title_company);
+        titleCompany = findViewById(R.id.title_company_selected_from_main);
         backButton = findViewById(R.id.btn_back);
         viewPager = findViewById(R.id.container_company);
 
@@ -70,7 +70,12 @@ public class CompanyActivity extends LocalizationActivity {
 
         companySelected = BaseApp.getAppInstance().getCompanyClicked();
 
-        titleCompany.setText(companySelected.getName());
+        if(companySelected == null){
+            companySelected = BaseApp.getAppInstance().getCompanyClicked();
+        }
+
+        assert companySelected != null;
+        titleCompany.setText(companySelected.getName() != null ? companySelected.getName() : "-" );
 
         backButton.setOnClickListener(view -> finish());
 

@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="@dimen/height_toolbar60"
-        android:background="@drawable/round_toolbar_green"
+        android:background="@drawable/round_toolbar"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
