@@ -139,6 +139,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             realm1.insert(saveNotification);
         });
 
+
         if(clientID != null){
             Accounts acc = realm.where(Accounts.class).equalTo("id",clientID).findFirst();
             if(acc != null)
@@ -148,7 +149,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationChanel)
-                .setSmallIcon(R.drawable.round_icon)
+                .setSmallIcon(R.drawable.app_icon_rounds)
                 .setContentTitle(messageTitle)
                 .setShowWhen(true)
                 .setWhen(System.currentTimeMillis())

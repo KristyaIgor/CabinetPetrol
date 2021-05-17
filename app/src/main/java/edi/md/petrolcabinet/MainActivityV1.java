@@ -94,7 +94,7 @@ public class MainActivityV1 extends LocalizationActivity {
         activity = this;
 //        progressDialog = new ProgressDialog(context);
 
-        checkCompaniesList ();
+        checkCompaniesList();
 
         mRealm = Realm.getDefaultInstance();
         createViewPager(viewPager);
@@ -363,9 +363,7 @@ public class MainActivityV1 extends LocalizationActivity {
             mRealm.executeTransaction(realm -> {
                 companyRealmList.where().equalTo("preparingToDelete",true).findAll().deleteAllFromRealm();
             });
-
         }
-//        progressDialog.dismiss();
     }
 
     private void setAppLocale(String localeCode){

@@ -1,6 +1,8 @@
 package edi.md.petrolcabinet.fragments;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,6 +36,8 @@ public class FragmentCompanies extends Fragment {
 
     static Realm mRealm;
     static CompaniesAdapter adapter;
+    static Context context;
+    static Activity activity;
 
     private static FragmentCompanies sameInstanceFragment;
 
@@ -50,6 +54,8 @@ public class FragmentCompanies extends Fragment {
         listCompanies = rootViewAdmin.findViewById(R.id.list_companies);
 
         mRealm = Realm.getDefaultInstance();
+        context = getContext();
+        activity = getActivity();
 
         listCompanies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,7 +63,8 @@ public class FragmentCompanies extends Fragment {
                 Company item = adapter.getItem(i);
 
                 if(item.isActive()){
-                    BaseApp.getAppInstance().setCompanyClicked(item);
+                    Company fromRealm = mRealm.copyFromRealm(item);
+                    BaseApp.getAppInstance().setCompanyClicked(fromRealm);
 
                     Intent detail = new Intent(getContext(), CompanyActivity.class);
                     startActivity(detail);
@@ -68,6 +75,8 @@ public class FragmentCompanies extends Fragment {
             }
         });
         updateListCompanies();
+
+
 
         return rootViewAdmin;
     }

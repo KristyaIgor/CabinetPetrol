@@ -73,8 +73,7 @@ public class JuridicAccountActivity extends AppCompatActivity {
 
         client = BaseApp.getAppInstance().getClientClicked();
 
-
-        titleContract.setText(client.getName());
+        titleContract.setText(client.getName() != null ? client.getName() : "-");
 
         if(client.getStatus() != 0){
             textState.setVisibility(View.VISIBLE);

@@ -18,11 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -36,7 +38,7 @@
                 tools:layout_editor_absoluteY="6dp" />
 
             <TextView
-                android:id="@+id/title_company"
+                android:id="@+id/title_company_selected_from_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -49,7 +51,6 @@
                 tools:layout_editor_absoluteY="18dp" />
 
         </androidx.appcompat.widget.Toolbar>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_prices"
@@ -149,12 +150,12 @@
                 android:background="@drawable/item_nav_selector"
                 android:clickable="false"
                 android:scaleType="center"
-                android:tint="@color/green"
                 app:layout_constraintBottom_toTopOf="@+id/textView_maps"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_map_black_24dp" />
+                app:srcCompat="@drawable/ic_map_black_24dp"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/textView_maps"

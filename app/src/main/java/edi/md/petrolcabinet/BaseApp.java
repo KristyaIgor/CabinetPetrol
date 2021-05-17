@@ -86,6 +86,10 @@ public class BaseApp extends Application {
 
     }
 
+    public byte[] getHuyYou() {
+        return derfun(matros);
+    }
+
     public static BaseApp getAppInstance() {
         return instance;
     }
@@ -104,10 +108,6 @@ public class BaseApp extends Application {
 
     public void setClientClicked(Accounts clientClicked) {
         this.clientClicked = clientClicked;
-    }
-
-    public byte[] getHuyYou() {
-        return derfun(matros);
     }
 
     public List<PetrolStation> getPetrolStations() {

@@ -59,6 +59,7 @@ public class PressListAdapter extends RealmRecyclerViewAdapter<PressObjects, Pre
             }
             holder.pressTitle.setText(item.getHeader());
             String content = item.getContent();
+            holder.contentView.setBackgroundColor(0x00000000);  // transparent background
             holder.contentView.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
 
             holder.pressDate.setText(simpleDateFormat.format(item.getDateTime()));

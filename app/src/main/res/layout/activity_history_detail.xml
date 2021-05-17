@@ -26,7 +26,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="@string/detalii_history_activity"
-            android:textColor="@android:color/white"
+            android:textColor="?attr/textColor"
             android:textSize="@dimen/text_20_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
